@@ -69,3 +69,7 @@ added a changelog.
 debug mode now also emits .exe to project folder.
 removed rogue SDL2 folder.
 added assert.h to precomp.h.
+
+form here rubens change log
+zc:strictStiring error resolved
+fatal error removed

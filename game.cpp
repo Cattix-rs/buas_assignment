@@ -1,8 +1,11 @@
 #include "game.h"
 #include "surface.h"
 #include <cstdio> //printf
-//#include <windows.h>
-//#include <Player_input.cpp>
+#include <iostream>
+#include <ostream>
+
+
+
 
 
 
@@ -66,7 +69,7 @@ namespace Tmpl8
 	//Sprite theSprite(new Surface("assets/ctankbase.tga"), 16);
 	//Sprite theSprite(new Surface("assets/ctankbase.tga"), 16);
 	//Sprite theSprite(new Surface("assets/ctankbase.tga"), 16);
-	//Sprite theSprite(new Surface("assets/ATTACK_1.PNG"), 6);
+	Sprite theSprite(new Surface("assets/ATTACK_1.PNG"), 6);
 	int px = 0, py = 0;
 	void Game::Tick(float deltaTime)
 	{
@@ -79,12 +82,12 @@ namespace Tmpl8
 				DrawTile(tx, ty, screen, x * 32, y * 32);
 		
 			}
-		
-		/*if (GetAsyncKeyState(VK_LEFT)) { px--; }
+		//std::cout << GetAsyncKeyState('A') << ", " << GetAsyncKeyState('D') << std::endl;
+		if (GetAsyncKeyState(VK_LEFT)) { px--; }
 		if (GetAsyncKeyState(VK_RIGHT)) { px++; }
 		if (GetAsyncKeyState(VK_UP)) { py--; }
-		if (GetAsyncKeyState(VK_DOWN)) { py++; }*/
-		//theSprite.Draw(screen, px, py);
+		if (GetAsyncKeyState(VK_DOWN)) { py++; }
+		theSprite.Draw(screen, px, py);
 	}
 };/// making sure it renders and compiles
 // tile map 
