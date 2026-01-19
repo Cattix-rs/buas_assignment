@@ -1,0 +1,98 @@
+﻿19:47:49:233	'tmpl_2019-08_x64_debug.exe' (Win32): Loaded 'H:\projects\buas assignment\tmpl_2019-08_x64_debug.exe'. Symbols loaded.
+19:47:49:233	'tmpl_2019-08_x64_debug.exe' (Win32): Loaded 'C:\Windows\System32\ntdll.dll'. Symbol loading disabled by Include/Exclude setting.
+19:47:49:233	'tmpl_2019-08_x64_debug.exe' (Win32): Loaded 'C:\Windows\System32\kernel32.dll'. Symbol loading disabled by Include/Exclude setting.
+19:47:49:233	'tmpl_2019-08_x64_debug.exe' (Win32): Loaded 'C:\Windows\System32\KernelBase.dll'. Symbol loading disabled by Include/Exclude setting.
+19:47:49:233	'tmpl_2019-08_x64_debug.exe' (Win32): Loaded 'C:\Windows\System32\user32.dll'. Symbol loading disabled by Include/Exclude setting.
+19:47:49:233	'tmpl_2019-08_x64_debug.exe' (Win32): Loaded 'C:\Windows\System32\win32u.dll'. Symbol loading disabled by Include/Exclude setting.
+19:47:49:233	'tmpl_2019-08_x64_debug.exe' (Win32): Loaded 'C:\Windows\System32\gdi32.dll'. Symbol loading disabled by Include/Exclude setting.
+19:47:49:233	'tmpl_2019-08_x64_debug.exe' (Win32): Loaded 'C:\Windows\System32\gdi32full.dll'. Symbol loading disabled by Include/Exclude setting.
+19:47:49:233	'tmpl_2019-08_x64_debug.exe' (Win32): Loaded 'C:\Windows\System32\msvcp_win.dll'. Symbol loading disabled by Include/Exclude setting.
+19:47:49:233	'tmpl_2019-08_x64_debug.exe' (Win32): Loaded 'C:\Windows\System32\ucrtbase.dll'. Symbol loading disabled by Include/Exclude setting.
+19:47:49:233	'tmpl_2019-08_x64_debug.exe' (Win32): Loaded 'H:\projects\buas assignment\dlls_x64\SDL2.dll'. Symbol loading disabled by Include/Exclude setting.
+19:47:49:233	'tmpl_2019-08_x64_debug.exe' (Win32): Loaded 'H:\projects\buas assignment\dlls_x64\FreeImage.dll'. Symbol loading disabled by Include/Exclude setting.
+19:47:49:233	'tmpl_2019-08_x64_debug.exe' (Win32): Loaded 'C:\Windows\System32\vcruntime140d.dll'. Symbol loading disabled by Include/Exclude setting.
+19:47:49:233	'tmpl_2019-08_x64_debug.exe' (Win32): Loaded 'C:\Windows\System32\msvcp140d.dll'. Symbol loading disabled by Include/Exclude setting.
+19:47:49:233	'tmpl_2019-08_x64_debug.exe' (Win32): Loaded 'C:\Windows\System32\vcruntime140_1d.dll'. Symbol loading disabled by Include/Exclude setting.
+19:47:49:233	'tmpl_2019-08_x64_debug.exe' (Win32): Loaded 'H:\projects\buas assignment\dlls_x64\ucrtbased.dll'. Symbol loading disabled by Include/Exclude setting.
+19:47:49:233	'tmpl_2019-08_x64_debug.exe' (Win32): Loaded 'C:\Windows\System32\imm32.dll'. Symbol loading disabled by Include/Exclude setting.
+19:47:49:233	'tmpl_2019-08_x64_debug.exe' (Win32): Loaded 'C:\Windows\System32\winmm.dll'. Symbol loading disabled by Include/Exclude setting.
+19:47:49:233	'tmpl_2019-08_x64_debug.exe' (Win32): Loaded 'C:\Windows\System32\shell32.dll'. Symbol loading disabled by Include/Exclude setting.
+19:47:49:233	'tmpl_2019-08_x64_debug.exe' (Win32): Loaded 'C:\Windows\WinSxS\amd64_microsoft.vc90.crt_1fc8b3b9a1e18e3b_9.0.30729.9635_none_08e2c157a83ed5da\msvcp90.dll'. Symbol loading disabled by Include/Exclude setting.
+19:47:49:233	'tmpl_2019-08_x64_debug.exe' (Win32): Loaded 'C:\Windows\System32\WinTypes.dll'. Symbol loading disabled by Include/Exclude setting.
+19:47:49:233	'tmpl_2019-08_x64_debug.exe' (Win32): Loaded 'C:\Windows\WinSxS\amd64_microsoft.vc90.crt_1fc8b3b9a1e18e3b_9.0.30729.9635_none_08e2c157a83ed5da\msvcr90.dll'. Symbol loading disabled by Include/Exclude setting.
+19:47:49:233	'tmpl_2019-08_x64_debug.exe' (Win32): Loaded 'C:\Windows\System32\combase.dll'. Symbol loading disabled by Include/Exclude setting.
+19:47:49:233	'tmpl_2019-08_x64_debug.exe' (Win32): Loaded 'C:\Windows\System32\version.dll'. Symbol loading disabled by Include/Exclude setting.
+19:47:49:233	'tmpl_2019-08_x64_debug.exe' (Win32): Loaded 'C:\Windows\System32\msvcrt.dll'. Symbol loading disabled by Include/Exclude setting.
+19:47:49:233	'tmpl_2019-08_x64_debug.exe' (Win32): Loaded 'C:\Windows\System32\rpcrt4.dll'. Symbol loading disabled by Include/Exclude setting.
+19:47:49:233	'tmpl_2019-08_x64_debug.exe' (Win32): Loaded 'C:\Windows\System32\ole32.dll'. Symbol loading disabled by Include/Exclude setting.
+19:47:49:233	'tmpl_2019-08_x64_debug.exe' (Win32): Loaded 'C:\Windows\System32\oleaut32.dll'. Symbol loading disabled by Include/Exclude setting.
+19:47:49:233	'tmpl_2019-08_x64_debug.exe' (Win32): Loaded 'C:\Windows\System32\uxtheme.dll'. Symbol loading disabled by Include/Exclude setting.
+19:47:49:233	'tmpl_2019-08_x64_debug.exe' (Win32): Loaded 'C:\Windows\System32\msctf.dll'. Symbol loading disabled by Include/Exclude setting.
+19:47:49:233	'tmpl_2019-08_x64_debug.exe' (Win32): Loaded 'C:\Windows\System32\windows.storage.dll'. Symbol loading disabled by Include/Exclude setting.
+19:47:49:233	'tmpl_2019-08_x64_debug.exe' (Win32): Loaded 'C:\Windows\System32\advapi32.dll'. Symbol loading disabled by Include/Exclude setting.
+19:47:49:233	'tmpl_2019-08_x64_debug.exe' (Win32): Loaded 'C:\Windows\System32\sechost.dll'. Symbol loading disabled by Include/Exclude setting.
+19:47:49:233	'tmpl_2019-08_x64_debug.exe' (Win32): Loaded 'C:\Windows\System32\kernel.appcore.dll'. Symbol loading disabled by Include/Exclude setting.
+19:47:49:233	'tmpl_2019-08_x64_debug.exe' (Win32): Loaded 'C:\Windows\System32\bcryptprimitives.dll'. Symbol loading disabled by Include/Exclude setting.
+19:47:49:233	'tmpl_2019-08_x64_debug.exe' (Win32): Loaded 'C:\Windows\System32\clbcatq.dll'. Symbol loading disabled by Include/Exclude setting.
+19:47:49:481	'tmpl_2019-08_x64_debug.exe' (Win32): Loaded 'C:\Windows\System32\TextInputFramework.dll'. Symbol loading disabled by Include/Exclude setting.
+19:47:49:481	'tmpl_2019-08_x64_debug.exe' (Win32): Loaded 'C:\Windows\System32\CoreMessaging.dll'. Symbol loading disabled by Include/Exclude setting.
+19:47:49:481	'tmpl_2019-08_x64_debug.exe' (Win32): Loaded 'C:\Windows\System32\CoreUIComponents.dll'. Symbol loading disabled by Include/Exclude setting.
+19:47:49:481	'tmpl_2019-08_x64_debug.exe' (Win32): Loaded 'C:\Windows\System32\cryptbase.dll'. Symbol loading disabled by Include/Exclude setting.
+19:47:49:481	'tmpl_2019-08_x64_debug.exe' (Win32): Loaded 'C:\Windows\System32\d3d9.dll'. Symbol loading disabled by Include/Exclude setting.
+19:47:49:481	'tmpl_2019-08_x64_debug.exe' (Win32): Loaded 'C:\Windows\System32\dwmapi.dll'. Symbol loading disabled by Include/Exclude setting.
+19:47:49:481	'tmpl_2019-08_x64_debug.exe' (Win32): Loaded 'C:\Windows\System32\DXCore.dll'. Symbol loading disabled by Include/Exclude setting.
+19:47:49:481	'tmpl_2019-08_x64_debug.exe' (Win32): Loaded 'C:\Windows\System32\DriverStore\FileRepository\nvmdi.inf_amd64_7c3f03c5df8f409e\nvldumdx.dll'. Symbol loading disabled by Include/Exclude setting.
+19:47:49:481	'tmpl_2019-08_x64_debug.exe' (Win32): Loaded 'C:\Windows\System32\msasn1.dll'. Symbol loading disabled by Include/Exclude setting.
+19:47:49:481	'tmpl_2019-08_x64_debug.exe' (Win32): Loaded 'C:\Windows\System32\cryptnet.dll'. Symbol loading disabled by Include/Exclude setting.
+19:47:49:481	'tmpl_2019-08_x64_debug.exe' (Win32): Loaded 'C:\Windows\System32\crypt32.dll'. Symbol loading disabled by Include/Exclude setting.
+19:47:49:481	'tmpl_2019-08_x64_debug.exe' (Win32): Loaded 'C:\Windows\System32\wldp.dll'. Symbol loading disabled by Include/Exclude setting.
+19:47:49:481	'tmpl_2019-08_x64_debug.exe' (Win32): Loaded 'C:\Windows\System32\drvstore.dll'. Symbol loading disabled by Include/Exclude setting.
+19:47:49:481	'tmpl_2019-08_x64_debug.exe' (Win32): Loaded 'C:\Windows\System32\devobj.dll'. Symbol loading disabled by Include/Exclude setting.
+19:47:49:481	'tmpl_2019-08_x64_debug.exe' (Win32): Loaded 'C:\Windows\System32\cfgmgr32.dll'. Symbol loading disabled by Include/Exclude setting.
+19:47:49:481	'tmpl_2019-08_x64_debug.exe' (Win32): Loaded 'C:\Windows\System32\cfgmgr32.dll'. Symbol loading disabled by Include/Exclude setting.
+19:47:49:481	'tmpl_2019-08_x64_debug.exe' (Win32): Loaded 'C:\Windows\System32\cfgmgr32.dll'. Symbol loading disabled by Include/Exclude setting.
+19:47:49:481	'tmpl_2019-08_x64_debug.exe' (Win32): Unloaded 'C:\Windows\System32\cfgmgr32.dll'
+19:47:49:481	'tmpl_2019-08_x64_debug.exe' (Win32): Unloaded 'C:\Windows\System32\cfgmgr32.dll'
+19:47:49:481	'tmpl_2019-08_x64_debug.exe' (Win32): Loaded 'C:\Windows\System32\wintrust.dll'. Symbol loading disabled by Include/Exclude setting.
+19:47:49:481	'tmpl_2019-08_x64_debug.exe' (Win32): Loaded 'C:\Windows\System32\imagehlp.dll'. Symbol loading disabled by Include/Exclude setting.
+19:47:49:481	'tmpl_2019-08_x64_debug.exe' (Win32): Loaded 'C:\Windows\System32\cryptsp.dll'. Symbol loading disabled by Include/Exclude setting.
+19:47:49:481	'tmpl_2019-08_x64_debug.exe' (Win32): Loaded 'C:\Windows\System32\rsaenh.dll'. Symbol loading disabled by Include/Exclude setting.
+19:47:49:481	'tmpl_2019-08_x64_debug.exe' (Win32): Loaded 'C:\Windows\System32\bcrypt.dll'. Symbol loading disabled by Include/Exclude setting.
+19:47:49:481	'tmpl_2019-08_x64_debug.exe' (Win32): Loaded 'C:\Windows\System32\DriverStore\FileRepository\nvmdi.inf_amd64_7c3f03c5df8f409e\nvgpucomp64.dll'. Symbol loading disabled by Include/Exclude setting.
+19:47:49:481	'tmpl_2019-08_x64_debug.exe' (Win32): Loaded 'C:\Windows\System32\DriverStore\FileRepository\nvmdi.inf_amd64_7c3f03c5df8f409e\NvMemMapStoragex.dll'. Symbol loading disabled by Include/Exclude setting.
+19:47:49:481	'tmpl_2019-08_x64_debug.exe' (Win32): Loaded 'C:\Windows\System32\powrprof.dll'. Symbol loading disabled by Include/Exclude setting.
+19:47:49:481	'tmpl_2019-08_x64_debug.exe' (Win32): Loaded 'C:\Windows\System32\umpdc.dll'. Symbol loading disabled by Include/Exclude setting.
+19:47:49:481	'tmpl_2019-08_x64_debug.exe' (Win32): Loaded 'C:\Windows\System32\DriverStore\FileRepository\nvmdi.inf_amd64_7c3f03c5df8f409e\nvd3dumx.dll'. Symbol loading disabled by Include/Exclude setting.
+19:47:49:481	'tmpl_2019-08_x64_debug.exe' (Win32): Loaded 'C:\Windows\System32\directxdatabasehelper.dll'. Symbol loading disabled by Include/Exclude setting.
+19:47:49:481	'tmpl_2019-08_x64_debug.exe' (Win32): Loaded 'C:\Windows\System32\ResourcePolicyClient.dll'. Symbol loading disabled by Include/Exclude setting.
+19:47:49:481	'tmpl_2019-08_x64_debug.exe' (Win32): Unloaded 'C:\Windows\System32\ResourcePolicyClient.dll'
+19:47:49:481	The thread 3156 has exited with code 0 (0x0).
+19:47:49:481	'tmpl_2019-08_x64_debug.exe' (Win32): Loaded 'C:\Windows\System32\ResourcePolicyClient.dll'. Symbol loading disabled by Include/Exclude setting.
+19:47:49:481	'tmpl_2019-08_x64_debug.exe' (Win32): Unloaded 'C:\Windows\System32\ResourcePolicyClient.dll'
+19:47:49:481	'tmpl_2019-08_x64_debug.exe' (Win32): Loaded 'C:\Windows\System32\SHCore.dll'. Symbol loading disabled by Include/Exclude setting.
+19:47:49:481	'tmpl_2019-08_x64_debug.exe' (Win32): Loaded 'C:\Windows\System32\shlwapi.dll'. Symbol loading disabled by Include/Exclude setting.
+19:47:49:481	'tmpl_2019-08_x64_debug.exe' (Win32): Loaded 'C:\Windows\System32\nvspcap64.dll'. Symbol loading disabled by Include/Exclude setting.
+19:47:49:481	'tmpl_2019-08_x64_debug.exe' (Win32): Loaded 'C:\Windows\System32\profapi.dll'. Symbol loading disabled by Include/Exclude setting.
+19:47:49:481	'tmpl_2019-08_x64_debug.exe' (Win32): Loaded 'C:\Windows\System32\ntmarta.dll'. Symbol loading disabled by Include/Exclude setting.
+19:47:49:481	'tmpl_2019-08_x64_debug.exe' (Win32): Loaded 'C:\Windows\System32\gpapi.dll'. Symbol loading disabled by Include/Exclude setting.
+19:47:49:481	'tmpl_2019-08_x64_debug.exe' (Win32): Loaded 'C:\Windows\System32\DriverStore\FileRepository\nvmdi.inf_amd64_7c3f03c5df8f409e\nvppex.dll'. Symbol loading disabled by Include/Exclude setting.
+19:47:52:757	The thread 27456 has exited with code 0 (0x0).
+19:47:52:757	The thread 24208 has exited with code 0 (0x0).
+19:47:52:757	The thread 11132 has exited with code 0 (0x0).
+19:47:52:757	The thread 25432 has exited with code 0 (0x0).
+19:47:52:757	The thread 26840 has exited with code 0 (0x0).
+19:47:52:757	The thread 9040 has exited with code 0 (0x0).
+19:47:52:757	The thread 288 has exited with code 0 (0x0).
+19:47:52:757	The thread 25548 has exited with code 0 (0x0).
+19:47:52:757	The thread 28852 has exited with code 0 (0x0).
+19:47:52:757	The thread 29004 has exited with code 0 (0x0).
+19:47:52:757	The thread 23980 has exited with code 0 (0x0).
+19:47:52:757	The thread 11172 has exited with code 0 (0x0).
+19:47:52:757	The thread 3376 has exited with code 0 (0x0).
+19:47:52:757	The thread 18300 has exited with code 0 (0x0).
+19:47:52:757	The thread 12548 has exited with code 0 (0x0).
+19:47:52:757	The thread 4980 has exited with code 0 (0x0).
+19:47:52:757	The thread 25836 has exited with code 0 (0x0).
+19:47:52:757	The thread 29180 has exited with code 0 (0x0).
+19:47:52:757	The thread 29564 has exited with code 0 (0x0).
+19:47:52:757	The program '[16844] tmpl_2019-08_x64_debug.exe' has exited with code 0 (0x0).
