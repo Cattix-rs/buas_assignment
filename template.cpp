@@ -14,7 +14,7 @@
 //#define ADVANCEDGL
 
 #include "game.h"
-
+#include <windows.h>
 #include <fcntl.h>
 #include <io.h>
 #include "template.h"
@@ -24,7 +24,7 @@
 #include <cstdio>
 #include <iostream>
 #define WIN32_LEAN_AND_MEAN
-#include <windows.h>
+
 
 #ifdef ADVANCEDGL
 #define GLEW_BUILD
@@ -144,7 +144,7 @@ mat4 mat4::rotatez( const float a )
 	return M;
 }
 
-void NotifyUser( char* s )
+void NotifyUser( const char* s )
 {
 	HWND hApp = FindWindow(nullptr, TemplateVersion);
 	MessageBox( hApp, s, "ERROR", MB_OK );
