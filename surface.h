@@ -2,6 +2,10 @@
 // IGAD/BUAS(NHTV)/UU - Jacco Bikker - 2006-2020
 
 #pragma once
+#include <cassert>
+#include <FreeImage.h>
+
+#include "template.h"
 
 namespace Tmpl8 {
 
@@ -41,7 +45,7 @@ public:
 	// constructor / destructor
 	Surface( int a_Width, int a_Height, Pixel* a_Buffer, int a_Pitch );
 	Surface( int a_Width, int a_Height );
-	Surface( char* a_File );
+	Surface( const char* a_File );
 	~Surface();
 	// member data access
 	Pixel* GetBuffer() { return m_Buffer; }
@@ -52,13 +56,13 @@ public:
 	void SetPitch( int a_Pitch ) { m_Pitch = a_Pitch; }
 	// Special operations
 	void InitCharset();
-	void SetChar( int c, char* c1, char* c2, char* c3, char* c4, char* c5 );
-	void Centre( char* a_String, int y1, Pixel color );
-	void Print( char* a_String, int x1, int y1, Pixel color );
+	void SetChar( int c, const char* c1, const char* c2, const char* c3, const char* c4, const char* c5 );
+	void Centre(const char* a_String, int y1, Pixel color );
+	void Print(const char* a_String, int x1, int y1, Pixel color );
 	void Clear( Pixel a_Color );
 	void Line( float x1, float y1, float x2, float y2, Pixel color );
 	void Plot( int x, int y, Pixel c );
-	void LoadImage( char* a_File );
+	void LoadImage( const char* a_File );
 	void CopyTo( Surface* a_Dst, int a_X, int a_Y );
 	void BlendCopyTo( Surface* a_Dst, int a_X, int a_Y );
 	void ScaleColor( unsigned int a_Scale );
@@ -125,11 +129,11 @@ class Font
 {
 public:
 	Font();
-	Font( char* a_File, char* a_Chars );
+	Font(const char* a_File, const char* a_Chars );
 	~Font();
-	void Print( Surface* a_Target, char* a_Text, int a_X, int a_Y, bool clip = false );
-	void Centre( Surface* a_Target, char* a_Text, int a_Y );
-	int Width( char* a_Text );
+	void Print( Surface* a_Target, const char* a_Text, int a_X, int a_Y, bool clip = false );
+	void Centre( Surface* a_Target, const char* a_Text, int a_Y );
+	int Width(const char* a_Text );
 	int Height() { return m_Surface->GetHeight(); }
 	void YClip( int y1, int y2 ) { m_CY1 = y1; m_CY2 = y2; }
 private:
@@ -138,3 +142,30 @@ private:
 };
 
 }; // namespace Tmpl8
+
+//void Tmpl8::Surface::LoadImage(const char* a_File)
+//{
+//    FREE_IMAGE_FORMAT fif = FIF_UNKNOWN;
+//    fif = FreeImage_GetFileType(a_File, 0);
+//    if (fif == FIF_UNKNOWN) fif = FreeImage_GetFIFFromFilename(a_File);
+//    FIBITMAP* tmp = FreeImage_Load(fif, a_File);
+//    FIBITMAP* dib = FreeImage_ConvertTo32Bits(tmp);
+//    FreeImage_Unload(tmp);
+//    m_Width = m_Pitch = FreeImage_GetWidth(dib);
+//    m_Height = FreeImage_GetHeight(dib);
+//    m_Buffer = (Pixel*)MALLOC64(m_Width * m_Height * sizeof(Pixel));
+//    if (m_Buffer)
+//    {
+//        m_Flags = OWNER;
+//        assert(m_Pitch != 0);
+//        for (int y = 0; y < m_Height; y++)
+//        {
+//            if (m_Pitch != 0)
+//            {
+//                unsigned char* line = FreeImage_GetScanLine(dib, m_Height - 1 - y);
+//                memcpy(m_Buffer + (y * m_Pitch), line, m_Width * sizeof(Pixel));
+//            }
+//        }
+//    }
+//    FreeImage_Unload(dib);
+//}
