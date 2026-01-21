@@ -69,8 +69,10 @@ namespace Tmpl8
 	//Sprite theSprite(new Surface("assets/ctankbase.tga"), 16);
 	//Sprite theSprite(new Surface("assets/ctankbase.tga"), 16);
 	//Sprite theSprite(new Surface("assets/ctankbase.tga"), 16);
-	Sprite theSprite(new Surface("assets/ATTACK_1.PNG"), 6);
+	Sprite theSprite(new Surface("assets/WALK.PNG"), 8);
 	int px = 0, py = 0;
+	int i;
+	
 	void Game::Tick(float deltaTime)
 	{
 		screen->Clear(0);
@@ -82,11 +84,11 @@ namespace Tmpl8
 				DrawTile(tx, ty, screen, x * 32, y * 32);
 		
 			}
-		//std::cout << GetAsyncKeyState('A') << ", " << GetAsyncKeyState('D') << std::endl;
-		if (GetAsyncKeyState(VK_LEFT)) { px--; }
-		if (GetAsyncKeyState(VK_RIGHT)) { px++; }
-		if (GetAsyncKeyState(VK_UP)) { py--; }
-		if (GetAsyncKeyState(VK_DOWN)) { py++; }
+		switch 
+		 (GetAsyncKeyState(VK_LEFT) & 0x8000) { px -= 1; }
+		if (GetAsyncKeyState(VK_RIGHT) & 0x8000) { px += 2; }
+		if (GetAsyncKeyState(VK_UP) & 0x8000) { py--; }
+		if (GetAsyncKeyState(VK_DOWN) & 0x8000) { py++; }
 		theSprite.Draw(screen, px, py);
 	}
 };/// making sure it renders and compiles
