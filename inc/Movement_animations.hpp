@@ -1,5 +1,6 @@
 #pragma once
 #include <surface.h>
+#include <windows.h>
 
 namespace Tmpl8
 {
@@ -7,6 +8,9 @@ namespace Tmpl8
 	{
 		// Initialize movement/animation system with the sprite and position pointers.
 		void Init(Sprite* sprite, int* px, int* py);
+
+		
+
 		// Called each frame to handle input, movement and animation timing.
 		void Update(float deltaTime);
 	}
