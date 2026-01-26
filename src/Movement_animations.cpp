@@ -1,12 +1,14 @@
 
 
+
 #include "inc/Movement_animations.hpp"
-#include <windows.h>
+#define WIN32_LEAN_AND_MEAN
+#include <Windows.h>
 
 namespace Tmpl8
 {
-	//namespace movement_walkR
-	//{
+	namespace movement_walkR
+	{
 		static Sprite* wR_Sprite = nullptr;
 		static int* wR_px = nullptr;
 		static int* wR_py = nullptr;
@@ -83,5 +85,5 @@ namespace Tmpl8
 
 
 
-	//}
+	}
 }
