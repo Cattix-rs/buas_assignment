@@ -4,11 +4,6 @@
 #include <iostream>
 #include <ostream>
 
-
-
-
-
-
 namespace Tmpl8
 {
 	// -----------------------------------------------------------
