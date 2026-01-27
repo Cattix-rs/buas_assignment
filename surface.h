@@ -3,9 +3,6 @@
 
 #pragma once
 
-
-
-
 namespace Tmpl8 {
 
 constexpr int RedMask = 0xff0000;
