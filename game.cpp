@@ -3,21 +3,33 @@
 #include <cstdio> //printf
 #include <iostream>
 #include <ostream>
+#include <Movement_animations.hpp>
 
 namespace Tmpl8
 {
 	// -----------------------------------------------------------
 	// Initialize the application
 	// -----------------------------------------------------------
+	Sprite theSprite(new Surface("assets/WALK.PNG"), 8);
+	int px = 0, py = 0;
+
+	//Movement instance (onc per controlled entity;
+	Movement movement;
+
 	void Game::Init()
 	{
+		// initialize movement/animation system with sprite and position pointers
+		movement.Init(&theSprite, &px, &py);
 	}
+	
+	
 	
 	// -----------------------------------------------------------
 	// Close down application
 	// -----------------------------------------------------------
 	void Game::Shutdown()
 	{
+		
 	}
 
 	namespace
@@ -64,13 +76,14 @@ namespace Tmpl8
 	//Sprite theSprite(new Surface("assets/ctankbase.tga"), 16);
 	//Sprite theSprite(new Surface("assets/ctankbase.tga"), 16);
 	//Sprite theSprite(new Surface("assets/ctankbase.tga"), 16);
-	Sprite theSprite(new Surface("assets/WALK.PNG"), 8);
-	int px = 0, py = 0;
-	int i;
+	
+	//int i;
 	
 	void Game::Tick(float deltaTime)
 	{
 		screen->Clear(0);
+
+		movement.Update(deltaTime);
 		for (int y = 0; y < 10; y++)
 			for (int x = 0; x < 16; x++)
 			{
@@ -80,10 +93,7 @@ namespace Tmpl8
 		
 			}
 		
-	/*	 if(GetAsyncKeyState(VK_LEFT) & 0x8000) { px -= 1; }
-		if (GetAsyncKeyState(VK_RIGHT) & 0x8000) { px += 2; }
-		if (GetAsyncKeyState(VK_UP) & 0x8000) { py--; }
-		if (GetAsyncKeyState(VK_DOWN) & 0x8000) { py++; }*/
+		
 		theSprite.Draw(screen, px, py);
 	}
 };/// making sure it renders and compiles
