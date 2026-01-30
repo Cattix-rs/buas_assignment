@@ -1,4 +1,4 @@
-#include <Movement_animations.hpp>
+#include <Player.hpp>
 //#include <cstdio>
 #define WIN32_LEAN_AND_MEAN
 #include <Windows.h>
@@ -9,7 +9,7 @@ namespace Tmpl8
     
         
 
-        void Movement::Init(Sprite* sprite, int* px, int* py)
+        void Player::Init(Sprite* sprite, int* px, int* py)
         {
             wR_Sprite = sprite;
             wR_px = px;
@@ -19,7 +19,7 @@ namespace Tmpl8
             if (wR_Sprite) wR_Sprite->SetFrame(0);
         }
 
-        void Movement::Update(float deltaTime)
+        void Player::Update(float deltaTime)
         {
             if (!wR_Sprite || !wR_px || !wR_py) return;
 

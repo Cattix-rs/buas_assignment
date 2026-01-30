@@ -3,7 +3,7 @@
 #include <cstdio> //printf
 #include <iostream>
 #include <ostream>
-#include <Movement_animations.hpp>
+#include <Player.hpp>
 
 namespace Tmpl8
 {
@@ -14,7 +14,7 @@ namespace Tmpl8
 	int px = 0, py = 0;
 
 	//Movement instance (onc per controlled entity;
-	Movement movement;
+	Player movement;
 
 	void Game::Init()
 	{
@@ -101,3 +101,4 @@ namespace Tmpl8
 //gaffer on games 
 //sprisheet 
 //phyiscs 
+// met manon mail sturen naar buas for huidige education verification

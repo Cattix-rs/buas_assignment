@@ -87,14 +87,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="game.cpp" />
-    <ClCompile Include="src\Movement_animations.cpp" />
+    <ClCompile Include="src\Player.cpp" />
     <ClCompile Include="src\Player_input.cpp" />
     <ClCompile Include="surface.cpp" />
     <ClCompile Include="template.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game.h" />
-    <ClInclude Include="inc\Movement_animations.hpp" />
+    <ClInclude Include="inc\Player.hpp" />
     <ClInclude Include="surface.h" />
     <ClInclude Include="template.h" />
   </ItemGroup>

@@ -3,10 +3,10 @@
 
 namespace Tmpl8
 {
-	class Movement
+	class Player
 	{
 	public:
-		Movement() = default;
+		Player() = default;
 		// Initialize movement/animation system with the sprite and position pointers.
 		void Init(Sprite* sprite, int* px, int* py);
 
@@ -23,6 +23,6 @@ namespace Tmpl8
 
 		//tick baseed fields
 		 int tickCounter = 0;
-		 static constexpr int ticksPerFrame = 8;
+		 static constexpr int ticksPerFrame = 7;
 	};
 }

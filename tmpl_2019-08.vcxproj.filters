@@ -24,10 +24,10 @@
     <ClCompile Include="template.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Movement_animations.cpp">
+    <ClCompile Include="src\Player_input.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Player_input.cpp">
+    <ClCompile Include="src\Player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -41,7 +41,7 @@
     <ClInclude Include="template.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="inc\Movement_animations.hpp">
+    <ClInclude Include="inc\Player.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
