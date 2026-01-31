@@ -5,11 +5,7 @@
 
 namespace Tmpl8
 {
-     
-    
-        
-
-        void Player::Init(Sprite* sprite, int* px, int* py)
+        void Player::Init(Sprite* sprite, int px, int py)
         {
             wR_Sprite = sprite;
             wR_px = px;
@@ -21,7 +17,7 @@ namespace Tmpl8
 
         void Player::Update(float deltaTime)
         {
-            if (!wR_Sprite || !wR_px || !wR_py) return;
+            if (!wR_Sprite) return;
 
             ///input: check for high bit meaning key is down
             bool left = (GetAsyncKeyState(VK_LEFT) & 0x8000) != 0;
@@ -30,10 +26,10 @@ namespace Tmpl8
             bool down = (GetAsyncKeyState(VK_DOWN) & 0x8000) != 0;
             
 
-            if (left) (*wR_px) -= 1;
-            if (right) (*wR_px) += 2;
-            if (up) (*wR_py) -= 1;
-            if (down)  (*wR_py) += 1;
+            if (left) (wR_px) -= x_speed ;
+            if (right) (wR_px) += x_speed;
+            if (up) (wR_py) -= y_speed;
+            if (down)  (wR_py) += y_speed;
 
             //animetion advance when moveing right. tichk based animation
             if (right)

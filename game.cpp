@@ -10,16 +10,18 @@ namespace Tmpl8
 	// -----------------------------------------------------------
 	// Initialize the application
 	// -----------------------------------------------------------
-	Sprite theSprite(new Surface("assets/WALK.PNG"), 8);
-	int px = 0, py = 0;
+	namespace
+	{
+		Sprite theSprite(new Surface("assets/WALK.PNG"), 8);
+		int px = 0, py = 0;
 
-	//Movement instance (onc per controlled entity;
-	Player movement;
-
+		//Movement instance (onc per controlled entity;
+		Player player;
+	}
 	void Game::Init()
 	{
 		// initialize movement/animation system with sprite and position pointers
-		movement.Init(&theSprite, &px, &py);
+		player.Init(&theSprite, 0, 0);
 	}
 	
 	
@@ -83,7 +85,7 @@ namespace Tmpl8
 	{
 		screen->Clear(0);
 
-		movement.Update(deltaTime);
+		player.Update(deltaTime);
 		for (int y = 0; y < 10; y++)
 			for (int x = 0; x < 16; x++)
 			{
@@ -94,10 +96,9 @@ namespace Tmpl8
 			}
 		
 		
-		theSprite.Draw(screen, px, py);
+		theSprite.Draw(screen, player.GetX(), player.GetY());
 	}
 };/// making sure it renders and compiles
-// tile map 
 //gaffer on games 
 //sprisheet 
 //phyiscs 
