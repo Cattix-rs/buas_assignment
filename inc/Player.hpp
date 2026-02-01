@@ -20,6 +20,9 @@ namespace Tmpl8
 		// y and x speed definition
 		int x_speed = 2;
 		int y_speed = 1;
+		
+		// current sprite def
+		 
 	private:
 		 Sprite* wR_Sprite = nullptr;
 		 int wR_px = 0;
@@ -32,5 +35,11 @@ namespace Tmpl8
 		//tick based fields
 		 int tickCounter = 0;
 		 static constexpr int ticksPerFrame = 7;
+
+		// movement/animation state changer 
+		enum state {idle = 0, right = 1, left = 2, up = 3, down = 4};
+		state movement = idle;
+
+		state prevmovement = idle;
 	};
 }

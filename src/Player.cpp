@@ -15,6 +15,7 @@ namespace Tmpl8
             if (wR_Sprite) wR_Sprite->SetFrame(0);
         }
 
+
         void Player::Update(float deltaTime)
         {
             if (!wR_Sprite) return;
@@ -26,38 +27,39 @@ namespace Tmpl8
             bool down = (GetAsyncKeyState(VK_DOWN) & 0x8000) != 0;
             
 
-            if (left) (wR_px) -= x_speed ;
+            if (left) (wR_px) -= x_speed;
             if (right) (wR_px) += x_speed;
             if (up) (wR_py) -= y_speed;
             if (down)  (wR_py) += y_speed;
 
-            //animetion advance when moveing right. tichk based animation
-            if (right)
+            state newState = state::idle;
+            if (right) newState = state::right;
+            else if (left) newState = state::left;
+            else if (up) newState = state::up;
+            else if (down) newState = state::down;
+
+            movement = newState;
+
+            //animation advance when moving right. tick based animation
+            switch (movement)
             {
-                tickCounter++;
-                if (tickCounter >= ticksPerFrame)
-                {
-                    tickCounter = 0;
-                    wR_AnimeTimer -= wR_FrameTime;
-                    wR_AnimeFrame = (wR_AnimeFrame + 1) % wR_Sprite->Frames();
-                    wR_Sprite->SetFrame(wR_AnimeFrame);
-                }
-                
-
-                //wR_AnimeTimer += deltaTime;
-
-               
-
-                //while (wR_AnimeTimer >= wR_FrameTime)
-                //{
-                //    wR_AnimeTimer -= wR_FrameTime;
-                //    wR_AnimeFrame = (wR_AnimeFrame + 1) % wR_Sprite->Frames();
-                //    wR_Sprite->SetFrame(wR_AnimeFrame);
-                //}
-            }
-            else
-            {
-                //reset when no movment
+	            case state::right:
+	            {
+	                tickCounter++;
+	                if (tickCounter >= ticksPerFrame)
+	                {
+	                    tickCounter = 0;
+	                    wR_AnimeTimer -= wR_FrameTime;
+	                    wR_AnimeFrame = (wR_AnimeFrame + 1) % wR_Sprite->Frames();
+	                    wR_Sprite->SetFrame(wR_AnimeFrame);
+	                }
+	                break;
+	            }
+            case state::left:
+            case state::up:
+            case state::down:
+            	default:
+                //reset when no movement
                 tickCounter = 0;
                 wR_AnimeFrame = 0;
                 wR_Sprite->SetFrame(0);
