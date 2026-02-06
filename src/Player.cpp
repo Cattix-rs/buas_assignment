@@ -13,6 +13,8 @@ namespace Tmpl8
             wR_AnimeTimer = 0.0f;
             wR_AnimeFrame = 0;
             if (wR_Sprite) wR_Sprite->SetFrame(0);
+            prevMovement = movement = state::idle;
+            tickCounter = 0;
         }
 
 
@@ -39,6 +41,14 @@ namespace Tmpl8
             else if (down) newState = state::down;
 
             movement = newState;
+
+            if (movement != prevMovement)
+            {
+                tickCounter = 0;
+                wR_AnimeFrame = 0;
+                if (wR_Sprite) wR_Sprite->SetFrame(0);
+                prevMovement = movement;
+            }
 
             //animation advance when moving right. tick based animation
             switch (movement)

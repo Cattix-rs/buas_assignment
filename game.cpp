@@ -103,3 +103,6 @@ namespace Tmpl8
 //sprisheet 
 //phyiscs 
 // met manon mail sturen naar buas for huidige education verification
+// sprite animation base class all frames and all using vectors 
+//aabb assing to player and edge of scr4een 
+//tiled https://discord.com/channels/515453022097244160/1407719742541922374/1467979701610877102 https://discord.com/channels/515453022097244160/1407719742541922374/1467979756602527921

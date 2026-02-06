@@ -17,7 +17,7 @@ namespace Tmpl8
 		int GetX() const { return wR_px; }
 		int GetY() const { return wR_py; }
 
-		// y and x speed definition
+		// y and x speed definition place holder for wehn v repleces this 
 		int x_speed = 2;
 		int y_speed = 1;
 		
@@ -40,6 +40,6 @@ namespace Tmpl8
 		enum state {idle = 0, right = 1, left = 2, up = 3, down = 4};
 		state movement = idle;
 
-		state prevmovement = idle;
+		state prevMovement = idle;
 	};
 }
