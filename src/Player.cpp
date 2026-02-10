@@ -1,10 +1,12 @@
 #include <Player.hpp>
+#include <physics.hpp>
 //#include <cstdio>
 #define WIN32_LEAN_AND_MEAN
 #include <Windows.h>
 
 namespace Tmpl8
 {
+    static physics u_physics;
         void Player::Init(Sprite* sprite, int px, int py)
         {
             wR_Sprite = sprite;
@@ -15,6 +17,9 @@ namespace Tmpl8
             if (wR_Sprite) wR_Sprite->SetFrame(0);
             prevMovement = movement = state::idle;
             tickCounter = 0;
+
+            u_physics.Init();
+            v = vec2f{ 0.0f,0.0f };
         }
 
 
@@ -29,10 +34,18 @@ namespace Tmpl8
             bool down = (GetAsyncKeyState(VK_DOWN) & 0x8000) != 0;
             
 
-            if (left) (wR_px) -= x_speed;
-            if (right) (wR_px) += x_speed;
-            if (up) (wR_py) -= y_speed;
-            if (down)  (wR_py) += y_speed;
+            if (left) v.x -= 2.0f;
+            if (right) v.x += 2.0f;
+            if (up) v.y += 1.0f;
+            if (down)  v.y -=1.0f;
+
+            u_physics.Applyg(v, deltaTime);
+
+            vec2f prevPos(static_cast<float>(wR_px), static_cast<float>(wR_py));
+            vec2f newPos = u_physics.IntegratePosition(prevPos, v, deltaTime);
+
+            wR_px = static_cast<int>(newPos.x + 0.5f);
+            wR_py = static_cast<int>(newPos.y + 0.5f);
 
             state newState = state::idle;
             if (right) newState = state::right;

@@ -88,12 +88,16 @@
   <ItemGroup>
     <ClCompile Include="game.cpp" />
     <ClCompile Include="src\Player.cpp" />
+    <ClCompile Include="src\spriteswap.cpp" />
+    <ClCompile Include="src\physics.cpp" />
     <ClCompile Include="surface.cpp" />
     <ClCompile Include="template.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game.h" />
     <ClInclude Include="inc\Player.hpp" />
+    <ClInclude Include="inc\spriteswap.hpp" />
+    <ClInclude Include="inc\physics.hpp" />
     <ClInclude Include="surface.h" />
     <ClInclude Include="template.h" />
   </ItemGroup>
