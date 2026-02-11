@@ -15,13 +15,12 @@ namespace Tmpl8
 		void Update(float deltaTime);
 
 		// access way for other systems to know where the sprite is
-		int GetX() const { return wR_px; }
-		int GetY() const { return wR_py; }
+		float GetX() const { return pos.x; }
+		float GetY() const { return pos.y; }
 		 
 	private:
 		 Sprite* wR_Sprite = nullptr;
-		 int wR_px = 0;
-		 int wR_py = 0;
+		 vec2f pos{ 0.0f, 0.0f };
 
 		 vec2f v{ 0.0f, 0.0f };
 

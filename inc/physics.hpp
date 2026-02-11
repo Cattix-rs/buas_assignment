@@ -17,7 +17,7 @@ namespace Tmpl8
 		vec2f IntegratePosition(const vec2f& prevPos, const vec2f& v, float deltaTime) const;
 
 	private:
-		vec2f g{ 0.0f, 10.0f };
+		vec2f g{ 0.0f, 0.0f };
 		
 	};
 }
