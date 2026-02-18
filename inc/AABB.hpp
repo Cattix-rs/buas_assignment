@@ -1,7 +1,10 @@
 #pragma once
 #include "../template.h"//or for other header files needed form template
 #include <limits>
-//#include <glm/common.hpp>
+#include <optional>
+#include <glm/common.hpp>
+#include <glm/vector_relational.hpp>
+#include <glm/vec2.hpp>
 
 
 namespace Tmpl8
@@ -104,11 +107,39 @@ namespace Tmpl8
 
 		bool intersect(const AABB& aabb) const noexcept
 		{
-			if (max.x < aabb.min.x) return false;
-			if (min.x > aabb.max.x) return false;
-			if (max.y < aabb.min.y) return false;
-			if (min.y > aabb.max.y) return false;
-			return true;
+			return min.x <= aabb.max.x &&
+				max.x >= aabb.min.x &&
+				min.y <= aabb.max.y &&
+				max.y >= aabb.min.y;
+		}
+
+		bool contains(const vec2f p) const noexcept
+		{
+			return p.x >= min.x &&
+				p.y >= min.y &&
+				p.x <= max.x &&
+				p.y <= max.y;
+		}
+		std::optional<vec2f> overlap(const AABB& aabb)const noexcept
+		{
+			vec2f overlap = Min(max, aabb.max) - Max(min, aabb.min);
+			if (overlap.x > 0.0f && overlap.y > 0.0f)
+			{
+				if (overlap.x < overlap.y)
+				{
+					return vec2f
+					{
+						(center().x < aabb.center().x ?
+							min.x - aabb.max.x : max.x - aabb.min.x), 0.0f
+					};
+				}
+				return vec2f
+				{
+					0.0f, (center().y < aabb.center().y ?
+					max.y - aabb.min.y : min.y - aabb.max.y)
+				};
+			}
+			return {};
 		}
 	};
 }
