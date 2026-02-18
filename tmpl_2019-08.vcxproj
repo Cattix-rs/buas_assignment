@@ -16,6 +16,7 @@
     <ProjectGuid>{cb23d029-33fd-485f-a5c5-1bd34e13b4c7}</ProjectGuid>
     <RootNamespace>tmpl201908</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>Ruben Stolwijk</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
@@ -56,7 +57,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard>stdcpp23</LanguageStandard>
       <AdditionalIncludeDirectories>lib\FreeImage\inc;lib\OpenGL;lib\SDL2-2.0.3\include;inc;src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
@@ -87,6 +88,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="game.cpp" />
+    <ClCompile Include="src\AABB.cpp" />
     <ClCompile Include="src\Player.cpp" />
     <ClCompile Include="src\spriteswap.cpp" />
     <ClCompile Include="src\physics.cpp" />
@@ -95,6 +97,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game.h" />
+    <ClInclude Include="inc\AABB.hpp" />
     <ClInclude Include="inc\Player.hpp" />
     <ClInclude Include="inc\spriteswap.hpp" />
     <ClInclude Include="inc\physics.hpp" />

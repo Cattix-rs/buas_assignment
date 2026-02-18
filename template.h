@@ -88,8 +88,8 @@ public:
 	vec2f operator - ( const vec2f& operand ) const { return vec2f( x - operand.x, y - operand.y ); }
 	vec2f operator * ( const vec2f& operand ) const { return vec2f( x * operand.x, y * operand.y ); }
 	vec2f operator * ( float operand ) const { return vec2f( x * operand, y * operand ); }
-	void operator -= ( const vec2f& a ) { x -= a.x; y -= a.y; }
-	void operator += ( const vec2f& a ) { x += a.x; y += a.y; }
+	vec2f& operator -= (const vec2f& a) { x -= a.x; y -= a.y; return *this; }
+	vec2f& operator += ( const vec2f& a ) { x += a.x; y += a.y; return *this; }
 	void operator *= ( const vec2f& a ) { x *= a.x; y *= a.y; }
 	void operator *= ( float a ) { x *= a; y *= a; }
 	float& operator [] ( const int idx ) { return cell[idx]; }
