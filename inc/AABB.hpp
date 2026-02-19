@@ -120,17 +120,18 @@ namespace Tmpl8
 				p.x <= max.x &&
 				p.y <= max.y;
 		}
-		std::optional<vec2f> overlap(const AABB& aabb)const noexcept
+
+		std::optional<vecf> overlap(const AABB& aabb)const noexcept
 		{
-			vec2f overlap = Min(max, aabb.max) - Max(min, aabb.min);
+			glm::vec2 overlap = glm::min(max, aabb.max) - glm::max(min, aabb.min);
 			if (overlap.x > 0.0f && overlap.y > 0.0f)
 			{
 				if (overlap.x < overlap.y)
 				{
-					return vec2f
+					return glm::vec2
 					{
-						(center().x < aabb.center().x ?
-							min.x - aabb.max.x : max.x - aabb.min.x), 0.0f
+						(center().x < (aabb.center().x) ?
+							max.x - aabb.min.x : min.x - aabb.max.x), 0.0f
 					};
 				}
 				return vec2f
