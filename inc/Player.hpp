@@ -1,4 +1,5 @@
 #pragma once
+#include "AABB.hpp"
 #include "../surface.h"
 #include "../template.h"
 
@@ -17,6 +18,8 @@ namespace Tmpl8
 		// access way for other systems to know where the sprite is
 		float GetX() const { return pos.x; }
 		float GetY() const { return pos.y; }
+
+		AABB getAABB() const noexcept;
 		 
 	private:
 		 Sprite* wR_Sprite = nullptr;

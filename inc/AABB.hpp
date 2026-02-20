@@ -34,7 +34,7 @@ namespace Tmpl8
 			max = Max(Max(a, b), Max(c, d));
 		}
 
-		AABB operator+(const vec2f& a) const noexcept
+		AABB operator+(const vec2f& a)  noexcept
 		{
 			return { Min + a,Max + a };
 		}
@@ -121,16 +121,21 @@ namespace Tmpl8
 				p.y <= max.y;
 		}
 
-		std::optional<vecf> overlap(const AABB& aabb)const noexcept
+		vec2f center() const noexcept
 		{
-			glm::vec2 overlap = glm::min(max, aabb.max) - glm::max(min, aabb.min);
+			return (min + max) * 0.5f;
+		}
+
+		std::optional<vec2f> overlap(const AABB& aabb)const noexcept
+		{
+			vec2f overlap = Min(max, aabb.max) - Max(min, aabb.min);
 			if (overlap.x > 0.0f && overlap.y > 0.0f)
 			{
 				if (overlap.x < overlap.y)
 				{
-					return glm::vec2
+					return vec2f
 					{
-						(center().x < (aabb.center().x) ?
+						(center().x < aabb.center().x ?
 							max.x - aabb.min.x : min.x - aabb.max.x), 0.0f
 					};
 				}

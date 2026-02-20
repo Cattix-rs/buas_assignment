@@ -1,4 +1,5 @@
 #include <Player.hpp>
+#include <../surface.h>
 #include <physics.hpp>
 //#include <cstdio>
 #define WIN32_LEAN_AND_MEAN
@@ -23,6 +24,7 @@ namespace Tmpl8
             v = vec2f{ 0.0f,0.0f };
         }
 
+        
 
         void Player::Update(float deltaTime)
         {
@@ -43,6 +45,31 @@ namespace Tmpl8
             u_physics.Applyg(v, deltaTime);
             pos = u_physics.IntegratePosition(pos, v, deltaTime);
 
+             AABB box - getAABB();
+
+            if (box.min.x <0.0f)
+            {
+                pos.x -= box.min.x;
+            }
+
+            if (box.max.x > ScreenWidth)
+            {
+                pos.x -= (box.max.x - ScreenWidth);
+            }
+
+            if (box.min.y < 0.0f)
+            {
+                pos.y -= box.min.y;
+            }
+
+            if (box.max.y > ScreenHeight)
+            {
+                pos.y -= (box.max.y - ScreenHeight);
+                v.y = 0.0f;
+            }
+
+
+            clampToScreen();
 
             state newState = state::idle;
             if (right) newState = state::right;
@@ -86,5 +113,19 @@ namespace Tmpl8
 
             }
         }
-    
+
+        vec2f size()
+        {
+            static_cast<float>(theSprite.GetWidth()),
+                static_cast<float>(theSprite.GetHeight())
+        };
+
+        AABB Player::getAABB() const noexcept
+        {
+            return AABB
+			{
+			pos,
+			pos + size
+			}
+        }
 }
