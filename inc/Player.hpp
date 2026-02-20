@@ -19,7 +19,7 @@ namespace Tmpl8
 		float GetX() const { return pos.x; }
 		float GetY() const { return pos.y; }
 
-		AABB getAABB() const noexcept;
+		AABB getAABB() noexcept;
 		 
 	private:
 		 Sprite* wR_Sprite = nullptr;

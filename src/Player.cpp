@@ -120,12 +120,12 @@ namespace Tmpl8
                 static_cast<float>(theSprite.GetHeight())
         };
 
-        AABB Player::getAABB() const noexcept
+        AABB Player::getAABB() noexcept
         {
             return AABB
-			{
-			pos,
-			pos + size
-			}
+            {
+            pos,
+            pos + size
+            };
         }
 }
