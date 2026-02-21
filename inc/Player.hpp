@@ -1,5 +1,6 @@
 #pragma once
 #include "AABB.hpp"
+
 #include "../surface.h"
 #include "../template.h"
 
@@ -21,6 +22,10 @@ namespace Tmpl8
 
 		AABB getAABB() noexcept;
 		 
+		void clampToScreen() noexcept;
+		
+			
+		
 	private:
 		 Sprite* wR_Sprite = nullptr;
 		 vec2f pos{ 0.0f, 0.0f };

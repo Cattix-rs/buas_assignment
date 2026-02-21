@@ -45,32 +45,6 @@ namespace Tmpl8
             u_physics.Applyg(v, deltaTime);
             pos = u_physics.IntegratePosition(pos, v, deltaTime);
 
-             AABB box - getAABB();
-
-            if (box.min.x <0.0f)
-            {
-                pos.x -= box.min.x;
-            }
-
-            if (box.max.x > ScreenWidth)
-            {
-                pos.x -= (box.max.x - ScreenWidth);
-            }
-
-            if (box.min.y < 0.0f)
-            {
-                pos.y -= box.min.y;
-            }
-
-            if (box.max.y > ScreenHeight)
-            {
-                pos.y -= (box.max.y - ScreenHeight);
-                v.y = 0.0f;
-            }
-
-
-            clampToScreen();
-
             state newState = state::idle;
             if (right) newState = state::right;
             else if (left) newState = state::left;
@@ -86,6 +60,8 @@ namespace Tmpl8
                 if (wR_Sprite) wR_Sprite->SetFrame(0);
                 prevMovement = movement;
             }
+
+            
 
             //animation advance when moving right. tick based animation
             switch (movement)
@@ -113,6 +89,7 @@ namespace Tmpl8
 
             }
         }
+        Sprite* theSprite;
 
         vec2f size()
         {
@@ -128,4 +105,31 @@ namespace Tmpl8
             pos + size
             };
         }
+
+        void Player::clampToScreen() noexcept
+        {
+            AABB box; -getAABB();
+
+            if (box.min.x < 0.0f)
+            {
+                pos.x -= box.min.x;
+            }
+
+            if (box.max.x > ScreenWidth)
+            {
+                pos.x -= (box.max.x - ScreenWidth);
+            }
+
+            if (box.min.y < 0.0f)
+            {
+                pos.y -= box.min.y;
+            }
+
+            if (box.max.y > ScreenHeight)
+            {
+                pos.y -= (box.max.y - ScreenHeight);
+                v.y = 0.0f;
+            }
+        }
+        
 }

@@ -2,6 +2,7 @@
 // IGAD/BUAS(NHTV)/UU - Jacco Bikker - 2006-2020
 
 #pragma once
+#include <glm/detail/type_vec3.hpp>
 #if defined _M_IX86
 #pragma comment(linker, "/manifestdependency:\"name='dlls_x86' version='1.0.0.0' type='win32'\"")
 #elif defined _M_X64
@@ -75,6 +76,8 @@ struct timer
 	static void init();
 };
 
+
+	
 // vectors
 class vec2f // adapted from https://github.com/dcow/RayTracer
 {
@@ -99,7 +102,35 @@ public:
 	void normalize() { float r = 1.0f / length(); x *= r; y *= r; }
 	static vec2f normalize( vec2f v ) { return v.normalized(); }
 	float dot( const vec2f& operand ) const { return x * operand.x + y * operand.y; }
+	
 };
+
+	inline vec2f MinVec(const vec2f& a, const vec2f& b) noexcept
+	{
+		return vec2f
+		{
+		Min(a.x, b.x),
+		Min(a.y, b.y)
+		};
+	}
+
+	inline vec2f MaxVec(const vec2f& a, const vec2f& b) noexcept
+	{
+		return vec2f
+		{
+		Max(a.x, b.x),
+		Max(a.y, b.y)
+		};
+	}
+
+//inline bool operator>(const vec2f& a, const vec2f& b) noexcept
+//{
+//	return (a.x > b.x) && (a.y < b.y);
+//}
+//inline bool operator<(const vec2f& a, const vec2f& b) noexcept
+//{
+//	return (a.x < b.x) && (a.y < b.y);
+//}
 
 class vec3
 {

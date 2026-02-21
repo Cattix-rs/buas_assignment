@@ -48,7 +48,7 @@ namespace Tmpl8
 
 		AABB operator-(const vec2f& a) const noexcept
 		{
-			return { Min - a,Max, - a };
+			return { Min - a, Max - a };
 		}
 
 		AABB operator-=(const vec2f& a) noexcept
