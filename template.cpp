@@ -14,7 +14,7 @@
 //#define ADVANCEDGL
 
 #include "game.h"
-#include <windows.h>
+
 #include <fcntl.h>
 #include <io.h>
 #include "template.h"
@@ -23,7 +23,8 @@
 #include "surface.h"
 #include <cstdio>
 #include <iostream>
-#define WIN32_LEAN_AND_MEAN
+#define WIN32_LEAN_AND_MEAN	
+#include <windows.h>
 
 
 #ifdef ADVANCEDGL

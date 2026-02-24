@@ -1,9 +1,11 @@
 #include "game.h"
 #include "surface.h"
+
+#include <Player.hpp>
+
 #include <cstdio> //printf
 #include <iostream>
 #include <ostream>
-#include <Player.hpp>
 
 namespace Tmpl8
 {
