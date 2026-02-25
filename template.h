@@ -105,21 +105,19 @@ public:
 	
 };
 
-	inline vec2f MinVec(const vec2f& a, const vec2f& b) noexcept
+	inline vec2f Min(const vec2f& a, const vec2f& b) noexcept
 	{
-		return vec2f
-		{
-		Min(a.x, b.x),
-		Min(a.y, b.y)
+		return vec2f {
+		    Min(a.x, b.x),
+		    Min(a.y, b.y)
 		};
 	}
 
-	inline vec2f MaxVec(const vec2f& a, const vec2f& b) noexcept
+	inline vec2f Max(const vec2f& a, const vec2f& b) noexcept
 	{
-		return vec2f
-		{
-		Max(a.x, b.x),
-		Max(a.y, b.y)
+		return {
+		    Max(a.x, b.x),
+		    Max(a.y, b.y)
 		};
 	}
 

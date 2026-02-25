@@ -2,10 +2,6 @@
 #include "../template.h"//or for other header files needed form template
 #include <limits>
 #include <optional>
-#include <glm/common.hpp>
-#include <glm/vector_relational.hpp>
-#include <glm/vec2.hpp>
-
 
 namespace Tmpl8
 {
@@ -13,6 +9,7 @@ namespace Tmpl8
 	{
 	public:
 		AABB() = default;
+
 		vec2f min{ std::numeric_limits<float>::max() };
 		vec2f max{ std::numeric_limits<float>::lowest() };
 
@@ -34,38 +31,40 @@ namespace Tmpl8
 			max = Max(Max(a, b), Max(c, d));
 		}
 
-		AABB operator+(const vec2f& a)  noexcept
+		AABB operator+(const vec2f& a) const noexcept
 		{
-			return { Min + a,Max + a };
+			return { min + a, max + a };
 		}
 
 		AABB operator+=(const vec2f& a ) noexcept
 		{
-			Min += a;
-			Max += a;
-			return *this;
+			min += a;
+			max += a;
+
+		    return *this;
 		}
 
 		AABB operator-(const vec2f& a) const noexcept
 		{
-			return { Min - a, Max - a };
+			return { min - a, max - a };
 		}
 
 		AABB operator-=(const vec2f& a) noexcept
 		{
-			Min -= a;
-			Max -= a;
+			min -= a;
+			max -= a;
+
 			return *this;
 		}
 
 		float Width() const noexcept
 		{
-			return Max.x, Min.x;
+			return max.x - min.x;
 		}
 
 		float Height() const noexcept
 		{
-			return Max.y, Min.y;
+			return max.y - min.y;
 		}
 		
 		float area() const noexcept
@@ -75,7 +74,7 @@ namespace Tmpl8
 
 		vec2f size() const noexcept
 		{
-			return Max - Min;
+			return max - min;
 		}
 
 		vec2f extent() const noexcept
@@ -87,6 +86,7 @@ namespace Tmpl8
 		{
 			min = Min(min, p);
 			max = Max(max, p);
+
 			return *this;
 		}
 
@@ -94,6 +94,7 @@ namespace Tmpl8
 		{
 			min = Min(min, aabb.min);
 			max = Max(max, aabb.max);
+
 			return *this;
 		}
 
@@ -102,6 +103,7 @@ namespace Tmpl8
 		{
 			min = Max(min, aabb.min);
 			max = Min(max, aabb.max);
+
 			return *this;
 		}
 
