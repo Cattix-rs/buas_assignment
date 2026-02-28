@@ -99,6 +99,7 @@ namespace Tmpl8
 		
 		
 		theSprite.Draw(screen, player.GetX(), player.GetY());
+		screen->Box(player.getAABB(), 0xffffffff);
 	}
 };/// making sure it renders and compiles
 //gaffer on games 

@@ -88,6 +88,7 @@ namespace Tmpl8
             wR_Sprite->SetFrame(0);
 
         }
+        clampToScreen();
     }
     Sprite* theSprite;
 
@@ -133,4 +134,9 @@ namespace Tmpl8
         }
     }
 
+    vec2f Player::size() const noexcept
+    {
+        if (!wR_Sprite) return vec2f{ 0.0f, 0.0f };
+        return vec2f{ static_cast<float>(wR_Sprite->GetWidth()), static_cast<float>(wR_Sprite->GetHeight()) };
+    }
 }

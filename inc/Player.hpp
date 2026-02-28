@@ -45,5 +45,7 @@ namespace Tmpl8
 		state movement = idle;
 
 		state prevMovement = idle;
+
+		vec2f size() const noexcept;
 	};
 }

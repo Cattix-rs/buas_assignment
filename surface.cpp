@@ -197,6 +197,11 @@ void Surface::Box( int x1, int y1, int x2, int y2, Pixel c )
 	Line( (float)x1, (float)y1, (float)x1, (float)y2, c );
 }
 
+void Surface::Box(const AABB& a, Pixel c)
+{
+	Box(static_cast<int>(a.min.x), static_cast<int>(a.min.y), static_cast<int>(a.max.x), static_cast<int>(a.max.y), c);
+}
+
 void Surface::Bar( int x1, int y1, int x2, int y2, Pixel c )
 {
 	Pixel* a = x1 + y1 * m_Pitch + m_Buffer;

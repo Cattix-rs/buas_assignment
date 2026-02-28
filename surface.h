@@ -2,6 +2,7 @@
 // IGAD/BUAS(NHTV)/UU - Jacco Bikker - 2006-2020
 
 #pragma once
+#include <AABB.hpp>
 
 namespace Tmpl8 {
 
@@ -64,6 +65,7 @@ public:
 	void ScaleColor( unsigned int a_Scale );
 	void Box( int x1, int y1, int x2, int y2, Pixel color );
 	void Bar( int x1, int y1, int x2, int y2, Pixel color );
+	void Box(const AABB& a, Pixel c);
 	void Resize( Surface* a_Orig );
 private:
 	// Attributes
