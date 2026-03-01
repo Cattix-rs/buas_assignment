@@ -24,6 +24,11 @@ namespace Tmpl8
 	{
 		// initialize movement/animation system with sprite and position pointers
 		player.Init(&theSprite, 0, 0);
+		// Set hitbox insets (smaller values => larger hitbox; zero => full sprite)
+		player.SetHitBoxInsets(22.0f, 18.0f);
+
+		// If sprite may change at runtime, update stored sprite size:
+		player.SetSizeFromSprite();
 	}
 	
 	

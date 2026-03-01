@@ -24,13 +24,23 @@ namespace Tmpl8
 		 
 		void clampToScreen() noexcept;
 		
+		void SetHitBoxInsets(float insetX, float insetY) noexcept 
+		{
+			hitboxInsetX = insetX; hitboxInsetY = insetY;
+		}
+		void SetSizeFromSprite() noexcept;
 			
-		
+		vec2f size() const noexcept;
 	private:
 		 Sprite* wR_Sprite = nullptr;
 		 vec2f pos{ 0.0f, 0.0f };
+		 float width = 0.0f;
+		 float height = 0.0f;
 
 		 vec2f v{ 0.0f, 0.0f };
+
+		 float hitboxInsetX = 8.0f;
+		 float hitboxInsetY = 6.0f;
 
 		 float wR_AnimeTimer = 0.0f;
 		 static constexpr float wR_FrameTime = 0.1f; // seconds per frame
@@ -46,6 +56,7 @@ namespace Tmpl8
 
 		state prevMovement = idle;
 
-		vec2f size() const noexcept;
+		
 	};
 }
+	

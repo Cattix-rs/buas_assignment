@@ -14,9 +14,20 @@ namespace Tmpl8
         pos.x = static_cast<float>(px);
         pos.y = static_cast<float>(py);
 
+        // ensure stored size is taken from the sprite when available
+        if (wR_Sprite)
+        {
+            width = static_cast<float>(wR_Sprite->GetWidth());
+            height = static_cast<float>(wR_Sprite->GetHeight());
+            wR_Sprite->SetFrame(0);
+        }
+        else
+        {
+            width = height = 0.0f;
+        }
+
         wR_AnimeTimer = 0.0f;
         wR_AnimeFrame = 0;
-        if (wR_Sprite) wR_Sprite->SetFrame(0);
         prevMovement = movement = state::idle;
         tickCounter = 0;
 
@@ -90,22 +101,23 @@ namespace Tmpl8
         }
         clampToScreen();
     }
-    Sprite* theSprite;
-
-    vec2f size()
-    {
-        return {
-            static_cast<float>(theSprite->GetWidth()),
-            static_cast<float>(theSprite->GetHeight())
-        };
-    }
 
     AABB Player::getAABB() noexcept
     {
-        return AABB{
-            pos,
-            pos + size()
-        };
+        // Build an AABB for the drawn sprite then use AABB helpers (center/extent)
+        AABB spriteBox{ pos, pos + vec2f{ width, height } };
+
+        // center and half-extents come from AABB utilities
+        vec2f center = spriteBox.center();
+        vec2f halfExtent = spriteBox.extent() - vec2f{ hitboxInsetX, hitboxInsetY };
+
+        // ensure half extents are non-negative
+        if (halfExtent.x < 0.0f) halfExtent.x = 0.0f;
+        if (halfExtent.y < 0.0f) halfExtent.y = 0.0f;
+
+        vec2f min = center - halfExtent;
+        vec2f max = center + halfExtent;
+        return AABB{ min, max };
     }
 
     void Player::clampToScreen() noexcept
@@ -114,11 +126,13 @@ namespace Tmpl8
 
         if (box.min.x < 0.0f)
         {
+            // move sprite right so box.min.x == 0
             pos.x -= box.min.x;
         }
 
         if (box.max.x > ScreenWidth)
         {
+            // move sprite left so box.max.x == ScreenWidth
             pos.x -= (box.max.x - ScreenWidth);
         }
 
@@ -131,6 +145,15 @@ namespace Tmpl8
         {
             pos.y -= (box.max.y - ScreenHeight);
             v.y = 0.0f;
+        }
+    }
+
+    void Player::SetSizeFromSprite() noexcept
+    {
+        if (wR_Sprite)
+        {
+            width = static_cast<float>(wR_Sprite->GetWidth());
+            height = static_cast<float>(wR_Sprite->GetHeight());
         }
     }
 
