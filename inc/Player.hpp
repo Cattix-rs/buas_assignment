@@ -20,14 +20,11 @@ namespace Tmpl8
 		float GetX() const { return pos.x; }
 		float GetY() const { return pos.y; }
 
-		AABB getAABB() noexcept;
+		AABB getAABB() const noexcept;
 		 
 		void clampToScreen() noexcept;
 		
-		void SetHitBoxInsets(float insetX, float insetY) noexcept 
-		{
-			hitboxInsetX = insetX; hitboxInsetY = insetY;
-		}
+		
 		void SetSizeFromSprite() noexcept;
 			
 		vec2f size() const noexcept;
@@ -39,8 +36,9 @@ namespace Tmpl8
 
 		 vec2f v{ 0.0f, 0.0f };
 
-		 float hitboxInsetX = 8.0f;
-		 float hitboxInsetY = 6.0f;
+		
+
+		 AABB aabb;
 
 		 float wR_AnimeTimer = 0.0f;
 		 static constexpr float wR_FrameTime = 0.1f; // seconds per frame

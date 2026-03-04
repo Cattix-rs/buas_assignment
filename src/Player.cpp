@@ -20,11 +20,17 @@ namespace Tmpl8
             width = static_cast<float>(wR_Sprite->GetWidth());
             height = static_cast<float>(wR_Sprite->GetHeight());
             wR_Sprite->SetFrame(0);
+            aabb.min.x = 22.0f;
+                aabb.max.x = width - 22.0f;
+                aabb.min.y = 19.0f;
+                aabb.max.y = height - 19.0f;
         }
         else
         {
             width = height = 0.0f;
         }
+
+       
 
         wR_AnimeTimer = 0.0f;
         wR_AnimeFrame = 0;
@@ -41,17 +47,43 @@ namespace Tmpl8
     {
         if (!wR_Sprite) return;
 
+        auto approach = [](float current, float target, float maxDelta)
+            {
+                float diff = target - current;
+                if (diff > maxDelta) return current + maxDelta;
+                if (diff < -maxDelta) return current - maxDelta;
+                return target;
+            };
+
         ///input: check for high bit meaning key is down
         bool left = (GetAsyncKeyState(VK_LEFT) & 0x8000) != 0;
         bool right = (GetAsyncKeyState(VK_RIGHT) & 0x8000) != 0;
         bool up = (GetAsyncKeyState(VK_UP) & 0x8000) != 0;
         bool down = (GetAsyncKeyState(VK_DOWN) & 0x8000) != 0;
 
+        const float speed_x = 0.2f;
+          // units per second
+        float deceleration = 0.0003666f;   // how fast we slow down
 
-        if (left) v.x -= 0.02f;
-        if (right) v.x += 0.02f;
-        if (up) v.y -= 0.01f;
-        if (down)  v.y += 0.01f;
+        if (left)
+        {
+            v.x = -speed_x;
+        }
+        else if (right)
+        {
+            v.x = speed_x;
+        }
+        else
+        {
+            v.x = approach(v.x, 0.0f, deceleration * deltaTime);
+        }
+
+       
+
+        if (left) v.x = -speed_x;
+        if (right) v.x = speed_x;
+        if (up) v.y = -0.1f;
+        if (down)  v.y = 0.1f;
 
         u_physics.Applyg(v, deltaTime);
         pos = u_physics.IntegratePosition(pos, v, deltaTime);
@@ -102,22 +134,9 @@ namespace Tmpl8
         clampToScreen();
     }
 
-    AABB Player::getAABB() noexcept
+    AABB Player::getAABB() const noexcept
     {
-        // Build an AABB for the drawn sprite then use AABB helpers (center/extent)
-        AABB spriteBox{ pos, pos + vec2f{ width, height } };
-
-        // center and half-extents come from AABB utilities
-        vec2f center = spriteBox.center();
-        vec2f halfExtent = spriteBox.extent() - vec2f{ hitboxInsetX, hitboxInsetY };
-
-        // ensure half extents are non-negative
-        if (halfExtent.x < 0.0f) halfExtent.x = 0.0f;
-        if (halfExtent.y < 0.0f) halfExtent.y = 0.0f;
-
-        vec2f min = center - halfExtent;
-        vec2f max = center + halfExtent;
-        return AABB{ min, max };
+        return aabb + pos;
     }
 
     void Player::clampToScreen() noexcept

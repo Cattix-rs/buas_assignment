@@ -7,7 +7,7 @@ namespace Tmpl8
 {
 	void physics::Init()
 	{
-		g = vec2f{ 0.0f, 0.0000f };
+		g = vec2f{ 0.0f, 0.0001f };
 	}
 
 	void physics::Applyg(vec2f& v, float deltaTime) const
