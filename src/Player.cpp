@@ -162,7 +162,7 @@ namespace Tmpl8
 
         if (box.max.y > ScreenHeight)
         {
-            pos.y -= (box.max.y - ScreenHeight);
+            pos.y = ( ScreenHeight - box.Height());
             v.y = 0.0f;
         }
     }
