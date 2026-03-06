@@ -21,16 +21,16 @@ namespace Tmpl8
             height = static_cast<float>(wR_Sprite->GetHeight());
             wR_Sprite->SetFrame(0);
             aabb.min.x = 22.0f;
-                aabb.max.x = width - 22.0f;
-                aabb.min.y = 19.0f;
-                aabb.max.y = height - 19.0f;
+            aabb.max.x = width - 22.0f;
+            aabb.min.y = 19.0f;
+            aabb.max.y = height - 19.0f;
         }
         else
         {
             width = height = 0.0f;
         }
 
-       
+
 
         wR_AnimeTimer = 0.0f;
         wR_AnimeFrame = 0;
@@ -62,7 +62,7 @@ namespace Tmpl8
         bool down = (GetAsyncKeyState(VK_DOWN) & 0x8000) != 0;
 
         const float speed_x = 0.2f;
-          // units per second
+        // units per second
         float deceleration = 0.0003666f;   // how fast we slow down
 
         if (left)
@@ -78,7 +78,7 @@ namespace Tmpl8
             v.x = approach(v.x, 0.0f, deceleration * deltaTime);
         }
 
-       
+
 
         if (left) v.x = -speed_x;
         if (right) v.x = speed_x;
@@ -146,23 +146,25 @@ namespace Tmpl8
         if (box.min.x < 0.0f)
         {
             // move sprite right so box.min.x == 0
-            pos.x -= box.min.x;
+            pos.x = -aabb.min.x;
+            v.x = 0.0f;
         }
 
-        if (box.max.x > ScreenWidth)
+        if (box.max.x >= ScreenWidth)
         {
-            // move sprite left so box.max.x == ScreenWidth
-            pos.x -= (box.max.x - ScreenWidth);
+            // move sprite left so box.max.x == ScreenWidth - 1
+            pos.x = ScreenWidth - aabb.max.x - 1;
+            v.x = 0.0f;
         }
 
         if (box.min.y < 0.0f)
         {
-            pos.y -= box.min.y;
+            pos.y = -aabb.min.y;
         }
 
-        if (box.max.y > ScreenHeight)
+        if (box.max.y >= ScreenHeight)
         {
-            pos.y = ( ScreenHeight - box.Height());
+            pos.y = ScreenHeight - aabb.max.y - 1;
             v.y = 0.0f;
         }
     }
