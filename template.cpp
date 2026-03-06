@@ -184,27 +184,21 @@ bool redirectIO()
 {
 	CONSOLE_SCREEN_BUFFER_INFO coninfo;
 	AllocConsole();
-	GetConsoleScreenBufferInfo( GetStdHandle( STD_OUTPUT_HANDLE ), &coninfo );
+	GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &coninfo);
 	coninfo.dwSize.Y = 500;
-	SetConsoleScreenBufferSize( GetStdHandle( STD_OUTPUT_HANDLE ), coninfo.dwSize );
-	HANDLE h1 = GetStdHandle( STD_OUTPUT_HANDLE );
-	int h2 = _open_osfhandle( (intptr_t)h1, _O_TEXT );
-	FILE* fp = _fdopen( h2, "w" );
-	*stdout = *fp;
-	setvbuf( stdout, NULL, _IONBF, 0 );
-	h1 = GetStdHandle( STD_INPUT_HANDLE ), h2 = _open_osfhandle( (intptr_t)h1, _O_TEXT );
-	fp = _fdopen( h2, "r" ), *stdin = *fp;
-	setvbuf( stdin, NULL, _IONBF, 0 );
-	h1 = GetStdHandle( STD_ERROR_HANDLE ), h2 = _open_osfhandle( (intptr_t)h1, _O_TEXT );
-	fp = _fdopen( h2, "w" ), *stderr = *fp;
-	setvbuf( stderr, NULL, _IONBF, 0 );
-	ios::sync_with_stdio();
-    FILE* stream;
-    if ((stream = freopen("CON", "w", stdout)) == NULL)
-        return false;
-    if ((stream = freopen("CON", "w", stderr)) == NULL)
-        return false;
-    return true;
+	SetConsoleScreenBufferSize(GetStdHandle(STD_OUTPUT_HANDLE), coninfo.dwSize);
+	FILE* stream = nullptr;
+	if (freopen_s(&stream, "CONOUT$", "w", stdout) != 0)
+		return false;
+	if (freopen_s(&stream, "CONOUT$", "w", stderr) != 0)
+		return false;
+	if (freopen_s(&stream, "CONIN$", "r", stdin) != 0)
+		return false;
+	setvbuf(stdout, NULL, _IONBF, 0);
+	setvbuf(stderr, NULL, _IONBF, 0);
+	setvbuf(stdin, NULL, _IONBF, 0);
+	std::ios::sync_with_stdio();
+	return true;
 }
 #endif
 
