@@ -89,6 +89,7 @@
   <ItemGroup>
     <ClCompile Include="game.cpp" />
     <ClCompile Include="src\AABB.cpp" />
+    <ClCompile Include="src\Level.cpp" />
     <ClCompile Include="src\Player.cpp" />
     <ClCompile Include="src\spriteswap.cpp" />
     <ClCompile Include="src\physics.cpp" />
@@ -99,6 +100,7 @@
   <ItemGroup>
     <ClInclude Include="game.h" />
     <ClInclude Include="inc\AABB.hpp" />
+    <ClInclude Include="inc\Level.hpp" />
     <ClInclude Include="inc\Player.hpp" />
     <ClInclude Include="inc\spriteswap.hpp" />
     <ClInclude Include="inc\physics.hpp" />
