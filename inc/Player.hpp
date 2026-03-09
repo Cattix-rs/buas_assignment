@@ -1,6 +1,6 @@
 #pragma once
 #include "AABB.hpp"
-
+#include "Level.hpp"
 #include "../surface.h"
 #include "../template.h"
 
@@ -20,6 +20,8 @@ namespace Tmpl8
 		float GetX() const { return pos.x; }
 		float GetY() const { return pos.y; }
 
+		void SetLevel(Level* level) { this->level = level; }
+
 		AABB getAABB() const noexcept;
 		 
 		void clampToScreen() noexcept;
@@ -36,7 +38,7 @@ namespace Tmpl8
 
 		 vec2f v{ 0.0f, 0.0f };
 
-		
+		 Level* level = nullptr;
 
 		 AABB aabb;
 

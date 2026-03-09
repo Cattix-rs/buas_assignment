@@ -1,6 +1,7 @@
 #include <Player.hpp>
 #include <../surface.h>
 #include <physics.hpp>
+
 //#include <cstdio>
 #define WIN32_LEAN_AND_MEAN
 #include <Windows.h>
@@ -88,6 +89,8 @@ namespace Tmpl8
         u_physics.Applyg(v, deltaTime);
         pos = u_physics.IntegratePosition(pos, v, deltaTime);
 
+
+
         state newState = state::idle;
         if (right) newState = state::right;
         else if (left) newState = state::left;
@@ -104,7 +107,10 @@ namespace Tmpl8
             prevMovement = movement;
         }
 
+        float newX = pos.x + v.x;
+        float newY = pos.y + v.y;
 
+     //   if (!level->IsSolid)
 
         //animation advance when moving right. tick based animation
         switch (movement)
