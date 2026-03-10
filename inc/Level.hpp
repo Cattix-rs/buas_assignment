@@ -26,8 +26,12 @@ namespace Tmpl8
 
 		
 		const AABB* GetColliders() const { return colliders; }
-		//int GetColliderCount() const {
+		int GetColliderCount() const { return colliderCount; }
+
 	private:
-		vec2f<Collider> colliders;
+		static constexpr int MaxColliders = 32;
+		AABB colliders[MaxColliders];
+		int colliderCount = 0; // track how many are actually used
+	
 	};
 }
