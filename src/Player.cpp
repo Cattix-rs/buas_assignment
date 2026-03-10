@@ -1,5 +1,6 @@
 #include <Player.hpp>
 #include <../surface.h>
+#include <Level.hpp>
 #include <physics.hpp>
 
 //#include <cstdio>
@@ -89,7 +90,31 @@ namespace Tmpl8
         u_physics.Applyg(v, deltaTime);
         pos = u_physics.IntegratePosition(pos, v, deltaTime);
 
+        if (level)
+        {
+            AABB playerBox = getAABB();
 
+            for (const Collider& c : level->GetColliders())
+            {
+                auto result = playerBox.overlap(c.box);
+
+                if (!result)
+                    continue;
+
+                vec2f correction = *result;
+
+                if (c.type == ColliderType::OneWay)
+                {
+                    if (v.y < 0) continue;
+                    if (correction.y <= 0) continue;
+                }
+
+                pos += correction;
+
+                if (correction.y < 0)
+                    v.y = 0;
+            }
+        }
 
         state newState = state::idle;
         if (right) newState = state::right;
@@ -109,8 +134,6 @@ namespace Tmpl8
 
         float newX = pos.x + v.x;
         float newY = pos.y + v.y;
-
-     //   if (!level->IsSolid)
 
         //animation advance when moving right. tick based animation
         switch (movement)
@@ -140,10 +163,14 @@ namespace Tmpl8
         clampToScreen();
     }
 
+    
+
     AABB Player::getAABB() const noexcept
     {
         return aabb + pos;
     }
+
+    
 
     void Player::clampToScreen() noexcept
     {

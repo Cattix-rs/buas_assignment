@@ -5,23 +5,21 @@ namespace Tmpl8
 	
 	void Level::Init()
 	{
-		for (int y = 0; y < height; y++)
-		for (int x = 0; x < width; x++)
-		{
-			tiles[y][x] = 0;
-		}
+		 
+		colliders.push_back({
+			{
+				vec2f(0.0f, 400.0f), vec2f(400.0f, 432.0f)
+			},
+			ColliderType::Solid
+			});
 
-		for (int x = 0; x < width; x++)
-		{
-			tiles[20][x] = 1;
-		}
-	}
+		colliders.push_back({
+			{
+				vec2f(200.0f, 300.0f), vec2f(400.0f, 320.0f)
+			},
+			ColliderType::OneWay
+			});
 
-	bool Level::IsSolid(int x, int y) const
-	{
-		if (x < 0 || y < 0 || x >= width || y >= height)
-			return false;
-
-		return tiles[y][x] == 1;
+		
 	}
 }

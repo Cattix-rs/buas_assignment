@@ -4,6 +4,19 @@
 
 namespace Tmpl8
 {
+
+	enum class ColliderType
+	{
+		Solid,
+		OneWay
+	};
+
+	struct Collider
+	{
+		AABB box;
+		ColliderType type;
+	};
+
 	class Level
 	{
 	public:
@@ -11,12 +24,10 @@ namespace Tmpl8
 
 		void Draw(Surface* screen);
 
-		bool IsSolid(int x, int y) const;
-
+		
+		const AABB* GetColliders() const { return colliders; }
+		//int GetColliderCount() const {
 	private:
-		static const int width = 32;
-		static const int height = 32;
-
-		int tiles[height][width];
+		vec2f<Collider> colliders;
 	};
 }

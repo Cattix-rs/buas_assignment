@@ -23,6 +23,8 @@ namespace Tmpl8
 		void SetLevel(Level* level) { this->level = level; }
 
 		AABB getAABB() const noexcept;
+
+		AABB PlayerBox = getAABB();
 		 
 		void clampToScreen() noexcept;
 		
