@@ -1,6 +1,7 @@
 #pragma once
-
+#include <array>
 #include "../surface.h"
+#include <span>
 
 namespace Tmpl8
 {
@@ -14,7 +15,12 @@ namespace Tmpl8
 	struct Collider
 	{
 		AABB box;
-		ColliderType type;
+		ColliderType type = ColliderType::Solid;
+		Collider() = default;
+		Collider(vec2f min, vec2f max, ColliderType type) :box{ min,max }, type{type}
+		{
+			
+		}
 	};
 
 	class Level
@@ -25,12 +31,15 @@ namespace Tmpl8
 		void Draw(Surface* screen);
 
 		
-		const AABB* GetColliders() const { return colliders; }
+		std::span<const Collider> GetColliders() const;
 		int GetColliderCount() const { return colliderCount; }
+
+		void AddCollider(const Collider& c);
 
 	private:
 		static constexpr int MaxColliders = 32;
-		AABB colliders[MaxColliders];
+		//AABB colliders[MaxColliders];
+		std::array<Collider, MaxColliders> colliders{};
 		int colliderCount = 0; // track how many are actually used
 	
 	};
