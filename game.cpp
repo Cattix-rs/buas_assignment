@@ -24,7 +24,7 @@ namespace Tmpl8
 	{
 		// initialize movement/animation system with sprite and position pointers
 		player.Init(&theSprite, 0, 0);
-		
+		player.SetLevel(&level);
 		
 
 		// If sprite may change at runtime, update stored sprite size:
@@ -52,10 +52,12 @@ namespace Tmpl8
 	void Game::Tick(float deltaTime)
 	{
 		screen->Clear(0);
+		
 
 		player.Update(deltaTime);
 		
 		level.Draw(screen);
+		
 		
 		theSprite.Draw(screen, player.GetX(), player.GetY());
 		screen->Box(player.getAABB(), 0xffffffff);

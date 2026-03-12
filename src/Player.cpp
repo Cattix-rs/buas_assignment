@@ -87,8 +87,11 @@ namespace Tmpl8
         if (up) v.y = -0.1f;
         if (down)  v.y = 0.1f;
 
-        u_physics.Applyg(v, deltaTime);
+       
         pos = u_physics.IntegratePosition(pos, v, deltaTime);
+
+        vec2f nextPos = pos + v * deltaTime;
+        AABB nextBox = aabb + nextPos;
 
         if (level)
         {
@@ -109,13 +112,23 @@ namespace Tmpl8
                     if (correction.y <= 0) continue;
                 }
 
-                pos += correction;
+               /* pos += correction;
 
                 if (correction.y < 0)
-                    v.y = 0;
+                    v.y = 0;*/
+                if (correction.x != 0.0f)
+                {
+	                nextPos.x += correction.x; v.x = 0;
+                    v.x = 0.0f;
+                }
+                if (correction.y != 0.0f)
+                {
+	                nextPos.y += correction.y; v.y = 0.0f;
+                    v.y = 0.0f;
+                }
             }
         }
-
+        u_physics.Applyg(v, deltaTime);
         state newState = state::idle;
         if (right) newState = state::right;
         else if (left) newState = state::left;
