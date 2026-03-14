@@ -1,6 +1,6 @@
 #pragma once
 #include <Level.hpp>
-
+#include <Timer.hpp>
 namespace Tmpl8 {
 
 class Surface;
@@ -18,7 +18,7 @@ public:
 	void KeyDown( int key ) { /* implement if you want to handle keys */ }
 private:
 	Surface* screen;
-
+	Timer timer;
 	Level level;
 };
 

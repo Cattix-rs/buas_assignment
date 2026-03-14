@@ -1,5 +1,6 @@
 #include "game.h"
 #include "surface.h"
+#include <timer.hpp>
 
 #include <Player.hpp>
 
@@ -52,6 +53,14 @@ namespace Tmpl8
 	
 	void Game::Tick(float deltaTime)
 	{
+		timer.tick([&](double dt)
+			{
+				player.Update(static_cast<float>(dt));
+			});
+
+		timer.limitFPS(70); // frame limiter
+	
+
 		screen->Clear(0);
 		
 

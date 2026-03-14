@@ -164,14 +164,15 @@ namespace Tmpl8
         float newY = pos.y + v.y;
 
         //animation advance when moving right. tick based animation
+
         switch (movement)
         {
         case state::right:
         {
-            tickCounter++;
-            if (tickCounter >= ticksPerFrame)
+            wR_AnimeTimer += deltaTime; // add elapsed seconds
+
+            if (wR_AnimeTimer >= wR_FrameTime) // seconds per frame
             {
-                tickCounter = 0;
                 wR_AnimeTimer -= wR_FrameTime;
                 wR_AnimeFrame = (wR_AnimeFrame + 1) % wR_Sprite->Frames();
                 wR_Sprite->SetFrame(wR_AnimeFrame);
