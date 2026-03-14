@@ -24,6 +24,7 @@ namespace Tmpl8
 	{
 		// initialize movement/animation system with sprite and position pointers
 		player.Init(&theSprite, 0, 0);
+		level.Init();
 		player.SetLevel(&level);
 		
 
@@ -61,6 +62,7 @@ namespace Tmpl8
 		
 		theSprite.Draw(screen, player.GetX(), player.GetY());
 		screen->Box(player.getAABB(), 0xffffffff);
+		screen->Line(0.0f, 200.0f, 232.0f, 200.0f, 0xffffffff);
 	}
 };/// making sure it renders and compiles
 

@@ -87,22 +87,44 @@ namespace Tmpl8
         if (up) v.y = -0.1f;
         if (down)  v.y = 0.1f;
 
-       
-        pos = u_physics.IntegratePosition(pos, v, deltaTime);
+        u_physics.Applyg(v, deltaTime);
+      //  pos = u_physics.IntegratePosition(pos, v, deltaTime);
 
         vec2f nextPos = pos + v * deltaTime;
         AABB nextBox = aabb + nextPos;
 
         if (level)
         {
+            // ----------- X AXIS COLLISION -----------
+            pos.x += v.x * deltaTime;
+
             AABB playerBox = getAABB();
 
             for (const Collider& c : level->GetColliders())
             {
                 auto result = playerBox.overlap(c.box);
+                if (!result) continue;
 
-                if (!result)
-                    continue;
+                vec2f correction = *result;
+
+                if (correction.x != 0.0f)
+                {
+                    pos.x -= correction.x;
+                    v.x = 0.0f;
+
+                    playerBox = getAABB(); // update box after correction
+                }
+            }
+
+            // ----------- Y AXIS COLLISION -----------
+            pos.y += v.y * deltaTime;
+
+            playerBox = getAABB();
+
+            for (const Collider& c : level->GetColliders())
+            {
+                auto result = playerBox.overlap(c.box);
+                if (!result) continue;
 
                 vec2f correction = *result;
 
@@ -112,23 +134,16 @@ namespace Tmpl8
                     if (correction.y <= 0) continue;
                 }
 
-               /* pos += correction;
-
-                if (correction.y < 0)
-                    v.y = 0;*/
-                if (correction.x != 0.0f)
-                {
-	                nextPos.x += correction.x; v.x = 0;
-                    v.x = 0.0f;
-                }
                 if (correction.y != 0.0f)
                 {
-	                nextPos.y += correction.y; v.y = 0.0f;
+                    pos.y -= correction.y;
                     v.y = 0.0f;
+
+                    playerBox = getAABB();
                 }
             }
         }
-        u_physics.Applyg(v, deltaTime);
+      
         state newState = state::idle;
         if (right) newState = state::right;
         else if (left) newState = state::left;
