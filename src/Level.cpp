@@ -32,7 +32,7 @@ namespace Tmpl8
 
 	};
 
-	const Collider colliders_1[] = {Collider{{0.0f, 200.0f},{400.0f,232.0f},ColliderType::Solid}};
+	const Collider colliders_1[] = {Collider{{0.0f, 200.0f},{400.0f,232.0f},ColliderType::OneWay},{{0.0f, 512.0f},{400.0f,480.0f},ColliderType::Solid} };
 
 
 	void DrawTile(int tx, int ty, Surface* screen, int x, int y)

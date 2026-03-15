@@ -45,7 +45,7 @@ namespace Tmpl8
 		 AABB aabb;
 
 		 float wR_AnimeTimer = 0.0f;
-		 static constexpr float wR_FrameTime = 30.5f; // seconds per frame
+		 static constexpr float wR_FrameTime = 45.5f; // seconds per frame
 		 unsigned int wR_AnimeFrame = 0;
 
 		//tick based fields
