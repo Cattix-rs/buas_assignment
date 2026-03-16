@@ -143,6 +143,21 @@ namespace Tmpl8
                 }
             }
         }
+
+        if (level)
+        {
+            AABB playerBox = getAABB();
+
+            for (auto& p : level->GetPickups())
+            {
+	            if (!p.active) continue;
+                
+                if (playerBox.overlap(p.GetAABB()))
+                {
+                    p.active = false;
+                }
+            }
+        }
       
         state newState = state::idle;
         if (right) newState = state::right;

@@ -63,6 +63,7 @@ namespace Tmpl8
 
 		screen->Clear(0);
 		
+		//level.Init();
 
 		player.Update(deltaTime);
 		

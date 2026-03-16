@@ -6,7 +6,7 @@ namespace Tmpl8
 	namespace
 	{
 		Surface tiles("assets/Pixelart-drawing_14.png");
-		Surface Sprite pickup("assets/energon_pickup_48x48.png");
+		Sprite pickupSprite(new Surface("assets/energon_pickup_48x48.png"), 1);
 	}
 
 
@@ -76,6 +76,7 @@ namespace Tmpl8
 
 	void Level::Init()
 	{
+		AddPickup({ 300.0f, 450.0f });
 	}
 
 	void Level::Draw(Surface* screen)
@@ -88,6 +89,17 @@ namespace Tmpl8
 				DrawTile(tx, ty, screen, x * 32, y * 32);
 
 			}
+
+		for (int i = 0; i < pickupCount; i++)
+		{
+			if (!pickups[i].active)continue;
+
+			pickupSprite.Draw(
+				screen,
+				static_cast<int>(pickups[i].pos.x),
+				static_cast<int>(pickups[i].pos.y)
+			);
+		}
 	}
 
 	std::span<const Collider> Level::GetColliders() const
