@@ -33,7 +33,13 @@ namespace Tmpl8
 
 	};
 
-	const Collider colliders_1[] = {Collider{{0.0f, 200.0f},{400.0f,232.0f},ColliderType::OneWay},{{0.0f, 512.0f},{400.0f,480.0f},ColliderType::Solid} };
+	const Collider colliders_1[] = 
+	{
+		Collider{{0.0f, 200.0f},{400.0f,232.0f},ColliderType::OneWay},
+		Collider{{0.0f, 512.0f},{400.0f,480.0f},ColliderType::Solid}
+	};
+
+	const Pickup pickups_1[] =
 
 
 	void DrawTile(int tx, int ty, Surface* screen, int x, int y)
@@ -60,9 +66,9 @@ namespace Tmpl8
 		
 	}
 
-	std::span<const Pickup> Level::GetPickups() const
+	std::span< Pickup> Level::GetPickups()
 	{
-		return std::span<const Pickup>(pickups.data(), pickupCount);
+		return std::span< Pickup>(pickups.data(), pickupCount);
 	}
 
 	void Level::AddPickup(vec2f pos)
@@ -100,6 +106,10 @@ namespace Tmpl8
 				static_cast<int>(pickups[i].pos.y)
 			);
 		}
+	}
+	std::span< Pickup> Level::GetPickup()
+	{
+		return pickups_1; //non const refreence
 	}
 
 	std::span<const Collider> Level::GetColliders() const

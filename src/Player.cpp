@@ -130,6 +130,7 @@ namespace Tmpl8
 
                 if (c.type == ColliderType::OneWay)
                 {
+                    // check prev frame was max player <= min collider
                     if (v.y < 0) continue;
                     if (correction.y <= 0) continue;
                 }

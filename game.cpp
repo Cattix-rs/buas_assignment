@@ -58,7 +58,7 @@ namespace Tmpl8
 				player.Update(static_cast<float>(dt));
 			});
 
-		timer.limitFPS(70); // frame limiter
+		timer.limitFPS(90); // frame limiter
 	
 
 		screen->Clear(0);

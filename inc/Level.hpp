@@ -11,17 +11,20 @@ namespace Tmpl8
 		vec2f pos;
 		bool active = true;
 
-		static constexpr int Size = 48;
+		 int Size = 48;
 
-		//?
+		
 		AABB GetAABB() const
 		{
 			return { pos, pos + vec2f{Size,Size} };
 		}
 
 		Pickup() = default;
-		Pickup(float x, float y, int Size)
+		Pickup(float x, float y, int Size) 
+			: pos{x,y}
+		, Size{Size}
 		{}
+		
 	};
 
 	enum class ColliderType
@@ -54,8 +57,8 @@ namespace Tmpl8
 
 		void AddCollider(const Collider& c);
 
-		std::span<const Pickup> GetPickups() const;
-		int GetPickupCount() const { return pickupCount; }
+		std::span< Pickup> GetPickups() ;
+		int GetPickupCount() { return pickupCount; }
 
 		void AddPickup(vec2f pos);
 
