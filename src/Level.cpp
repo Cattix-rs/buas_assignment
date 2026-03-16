@@ -6,6 +6,7 @@ namespace Tmpl8
 	namespace
 	{
 		Surface tiles("assets/Pixelart-drawing_14.png");
+		Surface Sprite pickup("assets/energon_pickup_48x48.png");
 	}
 
 
@@ -58,6 +59,21 @@ namespace Tmpl8
 			colliders[colliderCount++] = c;
 		
 	}
+
+	std::span<const Pickup> Level::GetPickups() const
+	{
+		return std::span<const Pickup>(pickups.data(), pickupCount);
+	}
+
+	void Level::AddPickup(vec2f pos)
+	{
+		if (pickupCount >= MaxPickups) return;
+
+		pickups[pickupCount].pos = pos;
+		pickups[pickupCount].active = true;
+		pickupCount++;
+	}
+
 	void Level::Init()
 	{
 	}

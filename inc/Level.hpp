@@ -6,6 +6,24 @@
 namespace Tmpl8
 {
 
+	struct Pickup
+	{
+		vec2f pos;
+		bool active = true;
+
+		static constexpr int Size = 48;
+
+		//?
+		AABB GetAABB() const
+		{
+			return { pos, pos + vec2f{Size,Size} };
+		}
+
+		Pickup() = default;
+		Pickup(float x, float y, int Size)
+		{}
+	};
+
 	enum class ColliderType
 	{
 		Solid,
@@ -36,11 +54,19 @@ namespace Tmpl8
 
 		void AddCollider(const Collider& c);
 
+		std::span<const Pickup> GetPickups() const;
+		int GetPickupCount() const { return pickupCount; }
+
+		void AddPickup(vec2f pos);
+
 	private:
 		static constexpr int MaxColliders = 32;
 		//AABB colliders[MaxColliders];
 		std::array<Collider, MaxColliders> colliders{};
 		int colliderCount = 0; // track how many are actually used
+		static constexpr int MaxPickups = 32;
+		std::array<Pickup, MaxPickups> pickups{};
+		int pickupCount = 0; //track how many pickups are in use
 	
 	};
 }
