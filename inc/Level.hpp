@@ -23,6 +23,7 @@ namespace Tmpl8
 		Pickup(float x, float y, int Size) 
 			: pos{x,y}
 		, Size{Size}
+		
 		{}
 		
 	};
@@ -57,10 +58,10 @@ namespace Tmpl8
 
 		void AddCollider(const Collider& c);
 
-		std::span< Pickup> GetPickups() ;
+		std::span< Pickup> GetPickup() ;
 		int GetPickupCount() { return pickupCount; }
 
-		void AddPickup(vec2f pos);
+		void AddPickup(const Pickup& p);
 
 	private:
 		static constexpr int MaxColliders = 32;

@@ -149,7 +149,7 @@ namespace Tmpl8
         {
             AABB playerBox = getAABB();
 
-            for (auto& p : level->GetPickups())
+            for (Pickup& p : level->GetPickup())
             {
 	            if (!p.active) continue;
                 
