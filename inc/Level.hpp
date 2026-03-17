@@ -16,7 +16,7 @@ namespace Tmpl8
 		
 		AABB GetAABB() const
 		{
-			return { pos, pos + vec2f{Size,Size} };
+			return { pos, pos + vec2f(Size,Size) };
 		}
 
 		Pickup() = default;
