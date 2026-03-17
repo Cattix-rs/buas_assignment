@@ -11,18 +11,18 @@ namespace Tmpl8
 		vec2f pos;
 		bool active = true;
 
-		 int Size = 48;
+		 int size = 48;
 
 		
 		AABB GetAABB() const
 		{
-			return { pos, pos + vec2f(Size,Size) };
+			return { pos, pos + vec2f(size,size) };
 		}
 
 		Pickup() = default;
-		Pickup(float x, float y, int Size) 
+		Pickup(float x, float y, int size) 
 			: pos{x,y}
-		, Size{Size}
+		, size{size}
 		
 		{}
 		

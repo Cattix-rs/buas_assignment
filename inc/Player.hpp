@@ -39,6 +39,10 @@ namespace Tmpl8
 		 float height = 0.0f;
 
 		 vec2f v{ 0.0f, 0.0f };
+		 vec2f prevPos;
+
+		 bool onGround = false;
+		 bool jumpPressedLastFrame = false;
 
 		 Level* level = nullptr;
 

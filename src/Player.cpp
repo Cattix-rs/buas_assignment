@@ -9,6 +9,7 @@
 
 namespace Tmpl8
 {
+    
     static physics u_physics;
     void Player::Init(Sprite* sprite, int px, int py)
     {
@@ -47,6 +48,7 @@ namespace Tmpl8
 
     void Player::Update(float deltaTime)
     {
+        prevPos = pos;
         if (!wR_Sprite) return;
 
         auto approach = [](float current, float target, float maxDelta)
@@ -60,9 +62,9 @@ namespace Tmpl8
         ///input: check for high bit meaning key is down
         bool left = (GetAsyncKeyState(VK_LEFT) & 0x8000) != 0;
         bool right = (GetAsyncKeyState(VK_RIGHT) & 0x8000) != 0;
-        bool up = (GetAsyncKeyState(VK_UP) & 0x8000) != 0;
-        bool down = (GetAsyncKeyState(VK_DOWN) & 0x8000) != 0;
+           bool jump = (GetAsyncKeyState(VK_SPACE) & 0x8000) != 0;
 
+        const float jumpStrength = -0.25f; // tuned for ms system
         const float speed_x = 0.2f;
         // units per second
         float deceleration = 0.0003666f;   // how fast we slow down
@@ -80,12 +82,18 @@ namespace Tmpl8
             v.x = approach(v.x, 0.0f, deceleration * deltaTime);
         }
 
+        bool jumpPressed = jump && !jumpPressedLastFrame;
+        jumpPressedLastFrame = jump;
 
+        
 
+        if (jumpPressed && onGround)
+        {
+            v.y = jumpStrength;
+            onGround = false;
+        }
         if (left) v.x = -speed_x;
         if (right) v.x = speed_x;
-        if (up) v.y = -0.1f;
-        if (down)  v.y = 0.1f;
 
         u_physics.Applyg(v, deltaTime);
       //  pos = u_physics.IntegratePosition(pos, v, deltaTime);
@@ -95,10 +103,12 @@ namespace Tmpl8
 
         if (level)
         {
+            onGround = false;
             // ----------- X AXIS COLLISION -----------
             pos.x += v.x * deltaTime;
 
             AABB playerBox = getAABB();
+            AABB prevBox = aabb + prevPos;
 
             for (const Collider& c : level->GetColliders())
             {
@@ -131,8 +141,15 @@ namespace Tmpl8
                 if (c.type == ColliderType::OneWay)
                 {
                     // check prev frame was max player <= min collider
-                    if (v.y < 0) continue;
-                    if (correction.y <= 0) continue;
+                    if (v.y <= 0) continue;
+                   
+                    if (prevBox.max.y > c.box.min.y)
+                        continue;
+                }
+
+                if (correction.y > 0.0f)
+                {
+                    onGround = true;
                 }
 
                 if (correction.y != 0.0f)
@@ -142,6 +159,9 @@ namespace Tmpl8
 
                     playerBox = getAABB();
                 }
+
+
+                
             }
         }
 
@@ -164,7 +184,7 @@ namespace Tmpl8
         if (right) newState = state::right;
         else if (left) newState = state::left;
         else if (up) newState = state::up;
-        else if (down) newState = state::down;
+        
 
         movement = newState;
 
@@ -176,8 +196,7 @@ namespace Tmpl8
             prevMovement = movement;
         }
 
-        float newX = pos.x + v.x;
-        float newY = pos.y + v.y;
+        
 
         //animation advance when moving right. tick based animation
 
@@ -244,6 +263,7 @@ namespace Tmpl8
         {
             pos.y = ScreenHeight - aabb.max.y - 1;
             v.y = 0.0f;
+            
         }
     }
 
