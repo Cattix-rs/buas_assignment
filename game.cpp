@@ -28,7 +28,7 @@ namespace Tmpl8
 		level.Init();
 		player.SetLevel(&level);
 		
-
+		
 		// If sprite may change at runtime, update stored sprite size:
 		player.SetSizeFromSprite();
 	}
@@ -63,12 +63,89 @@ namespace Tmpl8
 
 		screen->Clear(0);
 		
-		//level.Init();
+		if (level)
+		{
+			onGround = false;
+			// ----------- X AXIS COLLISION -----------
+			pos.x += v.x * deltaTime;
+
+			AABB playerBox = getAABB();
+			AABB prevBox = aabb + prevPos;
+
+			for (const Collider& c : level->GetColliders())
+			{
+				auto result = playerBox.overlap(c.box);
+				if (!result) continue;
+
+				vec2f correction = *result;
+
+				if (correction.x != 0.0f)
+				{
+					pos.x -= correction.x;
+					v.x = 0.0f;
+
+					playerBox = getAABB(); // update box after correction
+				}
+			}
+
+			// ----------- Y AXIS COLLISION -----------
+			pos.y += v.y * deltaTime;
+
+			playerBox = getAABB();
+
+			for (const Collider& c : level->GetColliders())
+			{
+				auto result = playerBox.overlap(c.box);
+				if (!result) continue;
+
+				vec2f correction = *result;
+
+				if (c.type == ColliderType::OneWay)
+				{
+					// check prev frame was max player <= min collider
+					if (v.y <= 0) continue;
+
+					if (prevBox.max.y > c.box.min.y)
+						continue;
+				}
+
+				if (correction.y > 0.0f)
+				{
+					onGround = true;
+				}
+
+				if (correction.y != 0.0f)
+				{
+					pos.y -= correction.y;
+					v.y = 0.0f;
+
+					playerBox = getAABB();
+				}
+			}
+		}
+		if (level)
+		{
+			AABB playerBox = getAABB();
+
+			for (Pickup& p : level->GetPickup())
+			{
+				if (!p.active) continue;
+
+				if (playerBox.overlap(p.GetAABB()))
+				{
+					p.active = false;
+					AddEnergon(25.0f);
+				}
+			}
+		}
 
 		player.Update(deltaTime);
 		
 		level.Draw(screen);
 		
+		
+
+		player.Draw(screen);
 		
 		theSprite.Draw(screen, player.GetX(), player.GetY());
 		screen->Box(player.getAABB(), 0xffffffff);

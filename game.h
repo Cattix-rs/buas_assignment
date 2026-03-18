@@ -16,10 +16,14 @@ public:
 	void MouseMove( int x, int y ) { /* implement if you want to detect mouse movement */ }
 	void KeyUp( int key ) { /* implement if you want to handle keys */ }
 	void KeyDown( int key ) { /* implement if you want to handle keys */ }
+
+	
+
+	void SetLevel(Level* level) { this->level = level; }//needs to be moved to level or game
 private:
 	Surface* screen;
 	Timer timer;
-	Level level;
+	Level* level = nullptr;
 };
 
 }; // namespace Tmpl8

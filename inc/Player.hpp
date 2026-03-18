@@ -20,19 +20,31 @@ namespace Tmpl8
 		float GetX() const { return pos.x; }
 		float GetY() const { return pos.y; }
 
-		void SetLevel(Level* level) { this->level = level; }
+		
 
 		AABB getAABB() const noexcept;
 
 		AABB PlayerBox = getAABB();
 		 
 		void clampToScreen() noexcept;
+
+		void Draw(Surface* screen);
 		
+		bool isDead = false;
+		bool IsDead() const { return isDead; }
 		
 		void SetSizeFromSprite() noexcept;
 			
 		vec2f size() const noexcept;
+
+		float GetEnergon() const noexcept { return energon; }
+		void AddEnergon(float amount) noexcept { energon = std::min(maxEnergon, energon + amount); }
 	private:
+		float energon = 100.0f;          // current energon
+		const float maxEnergon = 100.0f; // maximum energon
+		float walkAccumulator = 0.0f;    // track distance walked to reduce energon per 10 pixels
+
+
 		 Sprite* wR_Sprite = nullptr;
 		 vec2f pos{ 0.0f, 0.0f };
 		 float width = 0.0f;
@@ -44,7 +56,7 @@ namespace Tmpl8
 		 bool onGround = false;
 		 bool jumpPressedLastFrame = false;
 
-		 Level* level = nullptr;
+		 
 
 		 AABB aabb;
 

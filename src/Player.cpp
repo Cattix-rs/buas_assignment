@@ -44,27 +44,29 @@ namespace Tmpl8
         v = vec2f{ 0.0f,0.0f };
     }
 
-
+    float approach(float current, float target, float maxDelta)
+    {
+        float diff = target - current;
+        if (diff > maxDelta) return current + maxDelta;
+        if (diff < -maxDelta) return current - maxDelta;
+        return target;
+    }
 
     void Player::Update(float deltaTime)
     {
         prevPos = pos;
         if (!wR_Sprite) return;
 
-        auto approach = [](float current, float target, float maxDelta)
-            {
-                float diff = target - current;
-                if (diff > maxDelta) return current + maxDelta;
-                if (diff < -maxDelta) return current - maxDelta;
-                return target;
-            };
+        if (isDead) return;
+
+        
 
         ///input: check for high bit meaning key is down
         bool left = (GetAsyncKeyState(VK_LEFT) & 0x8000) != 0;
         bool right = (GetAsyncKeyState(VK_RIGHT) & 0x8000) != 0;
            bool jump = (GetAsyncKeyState(VK_SPACE) & 0x8000) != 0;
 
-        const float jumpStrength = -0.25f; // tuned for ms system
+        const float jumpStrength = -0.20f; // tuned for ms system
         const float speed_x = 0.2f;
         // units per second
         float deceleration = 0.0003666f;   // how fast we slow down
@@ -101,89 +103,34 @@ namespace Tmpl8
         vec2f nextPos = pos + v * deltaTime;
         AABB nextBox = aabb + nextPos;
 
-        if (level)
+        
+        float distanceMoved = std::abs(pos.x - prevPos.x);
+        walkAccumulator += distanceMoved;
+
+        // every 10 pixels walked, decrease energon by 1
+        while (walkAccumulator >= 10.0f)
         {
-            onGround = false;
-            // ----------- X AXIS COLLISION -----------
-            pos.x += v.x * deltaTime;
-
-            AABB playerBox = getAABB();
-            AABB prevBox = aabb + prevPos;
-
-            for (const Collider& c : level->GetColliders())
-            {
-                auto result = playerBox.overlap(c.box);
-                if (!result) continue;
-
-                vec2f correction = *result;
-
-                if (correction.x != 0.0f)
-                {
-                    pos.x -= correction.x;
-                    v.x = 0.0f;
-
-                    playerBox = getAABB(); // update box after correction
-                }
-            }
-
-            // ----------- Y AXIS COLLISION -----------
-            pos.y += v.y * deltaTime;
-
-            playerBox = getAABB();
-
-            for (const Collider& c : level->GetColliders())
-            {
-                auto result = playerBox.overlap(c.box);
-                if (!result) continue;
-
-                vec2f correction = *result;
-
-                if (c.type == ColliderType::OneWay)
-                {
-                    // check prev frame was max player <= min collider
-                    if (v.y <= 0) continue;
-                   
-                    if (prevBox.max.y > c.box.min.y)
-                        continue;
-                }
-
-                if (correction.y > 0.0f)
-                {
-                    onGround = true;
-                }
-
-                if (correction.y != 0.0f)
-                {
-                    pos.y -= correction.y;
-                    v.y = 0.0f;
-
-                    playerBox = getAABB();
-                }
-
-
-                
-            }
+            if (energon > 0.0f) energon -= 1.0f;
+            walkAccumulator -= 10.0f;
         }
+        
 
-        if (level)
+        
+
+        if (jumpPressed && onGround)
         {
-            AABB playerBox = getAABB();
-
-            for (Pickup& p : level->GetPickup())
+            if (energon >= 10.0f) // only jump if enough energon
             {
-	            if (!p.active) continue;
-                
-                if (playerBox.overlap(p.GetAABB()))
-                {
-                    p.active = false;
-                }
+                v.y = jumpStrength;
+                onGround = false;
+                energon -= 10.0f; // jump cost
             }
         }
       
         state newState = state::idle;
         if (right) newState = state::right;
         else if (left) newState = state::left;
-        else if (up) newState = state::up;
+        
         
 
         movement = newState;
@@ -264,6 +211,40 @@ namespace Tmpl8
             pos.y = ScreenHeight - aabb.max.y - 1;
             v.y = 0.0f;
             
+        }
+
+        if (energon <= 0.0f)
+        {
+             isDead = true;
+        }
+    }
+
+    
+
+    void Player::Draw(Surface* screen)//needs to be be in game or ui class
+    {
+        int barWidth = static_cast<int>((GetEnergon() / 100.0f) * 100);
+        int barHeight = 10;
+        int barX = 10;
+        int barY = 10;
+
+        // filled blue portion
+       
+        // empty gray portion
+        screen->Box(barX + barWidth, barY, barX + 100, barY + barHeight, 0x333333);
+        if (!isDead)
+        {
+            screen->Box(barX, barY, barX + barWidth, barY + barHeight, 0x0000FF); // solid blue
+        }
+
+        // --- Draw "You Lost" message if energon is 0 ---
+        if (isDead )
+        {
+            const char* msg = "YOU LOST";
+            // simple center screen message (assuming screen width/height constants)
+            int msgX = 800 / 2 - 50;
+            int msgY = 512 / 2 - 10;
+            screen->Print(msg,msgX, msgY,  0xFF0000); // red text
         }
     }
 
