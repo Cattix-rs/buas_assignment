@@ -118,11 +118,12 @@ namespace Tmpl8
 
         if (jumpPressed && onGround)
         {
-            if (energon >= 10.0f) // only jump if enough energon
+            if (energon >= 0.01f) // only jump if enough energon
             {
+                pos.y -= 0.0001f;
                 v.y = jumpStrength;
                 onGround = false;
-                energon -= 10.0f; // jump cost
+                energon -= 5.0f; // jump cost
             }
         }
       

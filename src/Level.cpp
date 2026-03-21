@@ -37,7 +37,7 @@ namespace Tmpl8
 	{
 		Collider{{0.0f, 200.0f},{400.0f,232.0f},ColliderType::OneWay},
 
-		Collider{{0.0f, 325.0f},{800.0f,512.0f},ColliderType::Solid}
+		Collider{{0.0f, 511.9f},{800.0f,512.0f},ColliderType::Floor}
 	};
 
 	const Pickup pickups_1[] =
