@@ -20,11 +20,25 @@ namespace Tmpl8
 		float GetX() const { return pos.x; }
 		float GetY() const { return pos.y; }
 
+		vec2f GetPos() const { return pos; }
+		vec2f GetVelocity() const { return v; }
+
+		void SetPos(const vec2f& p) { pos = p; }
+		void SetVelocity(const vec2f& vel) { v = vel; }
 		
+		void SetOnGround(bool value) { onGround = value; }
+		bool IsOnGround() const { return onGround; }
 
-		AABB getAABB() const noexcept;
+		bool JumpedLastFrame() const { return jumpedLastFrame; }
+		void SetJumpedLastFrame(bool s) { jumpedLastFrame = s; }
 
-		AABB PlayerBox = getAABB();
+		vec2f IntegratePosition(const vec2f& pos, const vec2f& v, float deltaTime) const;
+
+		AABB aabb;
+
+		AABB GetAABB() const noexcept;
+
+		AABB PlayerBox = GetAABB();
 		 
 		void clampToScreen() noexcept;
 
@@ -54,11 +68,11 @@ namespace Tmpl8
 		 vec2f prevPos;
 
 		 bool onGround = false;
-		 bool jumpPressedLastFrame = false;
+		 bool jumpedLastFrame = false;
 
 		 
 
-		 AABB aabb;
+		
 
 		 float wR_AnimeTimer = 0.0f;
 		 static constexpr float wR_FrameTime = 45.5f; // seconds per frame

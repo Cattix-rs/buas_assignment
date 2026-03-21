@@ -1,6 +1,7 @@
 #pragma once
 #include <Level.hpp>
 #include <Timer.hpp>
+#include <physics.hpp>
 namespace Tmpl8 {
 
 class Surface;
@@ -18,12 +19,13 @@ public:
 	void KeyDown( int key ) { /* implement if you want to handle keys */ }
 
 	
+	//void SetLevel(Level* level) { this->level = level; }//needs to be moved to level or game
 
-	void SetLevel(Level* level) { this->level = level; }//needs to be moved to level or game
 private:
-	Surface* screen;
+	Surface* screen = nullptr;
 	Timer timer;
-	Level* level = nullptr;
+	Level level;
+	physics physics;
 };
 
 }; // namespace Tmpl8

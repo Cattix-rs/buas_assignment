@@ -1,6 +1,7 @@
 #include "game.h"
 #include "surface.h"
 #include <timer.hpp>
+#include <physics.hpp>
 
 #include <Player.hpp>
 
@@ -24,9 +25,10 @@ namespace Tmpl8
 	void Game::Init()
 	{
 		// initialize movement/animation system with sprite and position pointers
-		player.Init(&theSprite, 0, 0);
 		level.Init();
-		player.SetLevel(&level);
+		player.Init(&theSprite, 0, 0);
+		
+		
 		
 		
 		// If sprite may change at runtime, update stored sprite size:
@@ -47,97 +49,20 @@ namespace Tmpl8
 	// -----------------------------------------------------------
 	// Main application tick function
 	// -----------------------------------------------------------
-
+	
 	
 	//int i;
 	
 	void Game::Tick(float deltaTime)
 	{
-		timer.tick([&](double dt)
-			{
-				player.Update(static_cast<float>(dt));
-			});
-
-		timer.limitFPS(90); // frame limiter
+		
 	
 
 		screen->Clear(0);
 		
-		if (level)
-		{
-			onGround = false;
-			// ----------- X AXIS COLLISION -----------
-			pos.x += v.x * deltaTime;
-
-			AABB playerBox = getAABB();
-			AABB prevBox = aabb + prevPos;
-
-			for (const Collider& c : level->GetColliders())
-			{
-				auto result = playerBox.overlap(c.box);
-				if (!result) continue;
-
-				vec2f correction = *result;
-
-				if (correction.x != 0.0f)
-				{
-					pos.x -= correction.x;
-					v.x = 0.0f;
-
-					playerBox = getAABB(); // update box after correction
-				}
-			}
-
-			// ----------- Y AXIS COLLISION -----------
-			pos.y += v.y * deltaTime;
-
-			playerBox = getAABB();
-
-			for (const Collider& c : level->GetColliders())
-			{
-				auto result = playerBox.overlap(c.box);
-				if (!result) continue;
-
-				vec2f correction = *result;
-
-				if (c.type == ColliderType::OneWay)
-				{
-					// check prev frame was max player <= min collider
-					if (v.y <= 0) continue;
-
-					if (prevBox.max.y > c.box.min.y)
-						continue;
-				}
-
-				if (correction.y > 0.0f)
-				{
-					onGround = true;
-				}
-
-				if (correction.y != 0.0f)
-				{
-					pos.y -= correction.y;
-					v.y = 0.0f;
-
-					playerBox = getAABB();
-				}
-			}
-		}
-		if (level)
-		{
-			AABB playerBox = getAABB();
-
-			for (Pickup& p : level->GetPickup())
-			{
-				if (!p.active) continue;
-
-				if (playerBox.overlap(p.GetAABB()))
-				{
-					p.active = false;
-					AddEnergon(25.0f);
-				}
-			}
-		}
+		physics.ResolvePlayerCollision(player, level, deltaTime);
+		physics.CheckPickupCollision(player, level);
+		
 
 		player.Update(deltaTime);
 		
@@ -148,7 +73,7 @@ namespace Tmpl8
 		player.Draw(screen);
 		
 		theSprite.Draw(screen, player.GetX(), player.GetY());
-		screen->Box(player.getAABB(), 0xffffffff);
+		screen->Box(player.GetAABB(), 0xffffffff);
 		screen->Line(0.0f, 200.0f, 232.0f, 200.0f, 0xffffffff);
 	}
 };/// making sure it renders and compiles

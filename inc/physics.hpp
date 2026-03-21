@@ -1,6 +1,7 @@
 #pragma once
 #include "../template.h"
-#include 
+#include "player.hpp"
+#include "Level.hpp"
 
 namespace Tmpl8
 {
@@ -16,6 +17,9 @@ namespace Tmpl8
 
 		// position calculation
 		vec2f IntegratePosition(const vec2f& prevPos, const vec2f& v, float deltaTime) const;
+
+		static void ResolvePlayerCollision(Player& player, const Level& level, float deltaTime);
+		void CheckPickupCollision(Player& player, Level& level);
 
 	private:
 		vec2f g{ 0.0f, 0.0f };

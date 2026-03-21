@@ -84,8 +84,8 @@ namespace Tmpl8
             v.x = approach(v.x, 0.0f, deceleration * deltaTime);
         }
 
-        bool jumpPressed = jump && !jumpPressedLastFrame;
-        jumpPressedLastFrame = jump;
+        bool jumpPressed = jump && !jumpedLastFrame;
+        jumpedLastFrame = jump;
 
         
 
@@ -174,9 +174,13 @@ namespace Tmpl8
         clampToScreen();
     }
 
-    
 
-    AABB Player::getAABB() const noexcept
+    vec2f Player::IntegratePosition(const vec2f& pos, const vec2f& v, float deltaTime) const
+    {
+        return pos + v * deltaTime;
+    }
+
+    AABB Player::GetAABB() const noexcept
     {
         return aabb + pos;
     }
@@ -185,7 +189,7 @@ namespace Tmpl8
 
     void Player::clampToScreen() noexcept
     {
-        AABB box = getAABB();
+        AABB box = GetAABB();
 
         if (box.min.x < 0.0f)
         {
