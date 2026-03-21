@@ -65,19 +65,25 @@ namespace Tmpl8
 			{
 				if (v.y <= 0.0f) continue;
 
-				if (prevBox.max.y < c.box.min.y)
-					continue;
+				//if (prevBox.max.y < c.box.min.y)
+				//	continue;
 			}
 
-			if (correction.y > 0.0f)
-				player.SetOnGround(true);
+			
 
 			if (correction.y != 0.0f)
 			{
-				pos.y -= correction.y;
-				v.y = 0.0f;
-
-				playerBox = player.GetAABB();
+				if (v.y > 0.0f)
+				{
+					pos.y -= correction.y;
+					v.y = 0.0f;
+					player.SetOnGround(true);
+				}
+				else if (v.y < 0.0f) 
+				{
+					pos.y -= correction.y;
+					v.y = 0.0f; 
+				}
 			}
 		}
 

@@ -54,7 +54,7 @@ namespace Tmpl8
 
     void Player::Update(float deltaTime)
     {
-        prevPos = pos;
+       
         if (!wR_Sprite) return;
 
         if (isDead) return;
@@ -66,7 +66,7 @@ namespace Tmpl8
         bool right = (GetAsyncKeyState(VK_RIGHT) & 0x8000) != 0;
            bool jump = (GetAsyncKeyState(VK_SPACE) & 0x8000) != 0;
 
-        const float jumpStrength = -0.20f; // tuned for ms system
+        const float jumpStrength = -0.30f; // tuned for ms system
         const float speed_x = 0.2f;
         // units per second
         float deceleration = 0.0003666f;   // how fast we slow down
@@ -96,22 +96,25 @@ namespace Tmpl8
         u_physics.Applyg(v, deltaTime);
       //  pos = u_physics.IntegratePosition(pos, v, deltaTime);
 
-        vec2f nextPos = pos + v * deltaTime;
-        AABB nextBox = aabb + nextPos;
+      
+       
 
-        
-        float distanceMoved = std::abs(pos.x - prevPos.x);
-        walkAccumulator += distanceMoved;
+        bool isWalking = std::abs(v.x) > 0.01f;
 
-        // every 10 pixels walked, decrease energon by 1
-        while (walkAccumulator >= 10.0f)
-        {
-            if (energon > 0.0f) energon -= 1.0f;
-            walkAccumulator -= 10.0f;
-        }
+         if (v.x == 0.0f)   walkAccumulator = 0.0f;
         
+         if (isWalking)
+         {
+             float distanceMoved = std::abs(pos.x - prevPos.x);
+             walkAccumulator += distanceMoved;
 
-        
+             const float pixelsPerEnergon = 10.0f;
+             while (walkAccumulator >= pixelsPerEnergon)
+             {
+                 if (energon > 0.0f) energon -= 0.00015f * deltaTime; // deltaTime in seconds
+                 walkAccumulator -= pixelsPerEnergon;
+             }
+         }
 
         if (jumpPressed && onGround)
         {
@@ -234,7 +237,7 @@ namespace Tmpl8
         screen->Box(barX + barWidth, barY, barX + 100, barY + barHeight, 0x333333);
         if (!isDead)
         {
-            screen->Box(barX, barY, barX + barWidth, barY + barHeight, 0x0000FF); // solid blue
+            screen->Bar(barX, barY, barX + barWidth, barY + barHeight, 0x0000FF); // solid blue
         }
 
         // --- Draw "You Lost" message if energon is 0 ---

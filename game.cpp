@@ -51,7 +51,7 @@ namespace Tmpl8
 	// Main application tick function
 	// -----------------------------------------------------------
 	
-	
+	static physics u_physics;
 	//int i;
 	
 	void Game::Tick(float deltaTime)
@@ -67,7 +67,8 @@ namespace Tmpl8
 
 		timer.limitFPS(60); //  FPS cap
 		
-
+		
+		
 
 		screen->Clear(0);
 		player.Update(deltaTime);
@@ -80,13 +81,21 @@ namespace Tmpl8
 		
 		level.Draw(screen);
 		
-		
+		for (const auto& c : level.GetColliders())
+		{
+			if (c.type == ColliderType::Solid)
+				screen->Box(c.box, 0xFF0000FF); 
+			else if (c.type == ColliderType::OneWay)
+				screen->Box(c.box, 0x402E8B57); 
+			else if (c.type == ColliderType::Floor)
+				screen->Box(c.box, 0x00000000); 
+		}
 
 		player.Draw(screen);
 		
 		theSprite.Draw(screen, player.GetX(), player.GetY());
 		screen->Box(player.GetAABB(), 0xffffffff);
-		screen->Line(0.0f, 200.0f, 232.0f, 200.0f, 0xffffffff);
+		//screen->Line(0.0f, 200.0f, 232.0f, 200.0f, 0xffffffff);
 		
 	}
 };/// making sure it renders and compiles

@@ -30,6 +30,7 @@ namespace Tmpl8
 
 	enum class ColliderType
 	{
+		Floor,
 		Solid,
 		OneWay
 	};
