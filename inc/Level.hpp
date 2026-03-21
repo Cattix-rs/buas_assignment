@@ -67,7 +67,7 @@ namespace Tmpl8
 		static constexpr int MaxColliders = 32;
 		//AABB colliders[MaxColliders];
 		std::array<Collider, MaxColliders> colliders{};
-		int colliderCount = 0; // track how many are actually used
+		int colliderCount = 3; // track how many are actually used
 		static constexpr int MaxPickups = 32;
 		std::array<Pickup, MaxPickups> pickups{};
 		int pickupCount = 0; //track how many pickups are in use

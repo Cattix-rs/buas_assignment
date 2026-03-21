@@ -65,7 +65,7 @@ namespace Tmpl8
 			{
 				if (v.y <= 0.0f) continue;
 
-				if (prevBox.max.y > c.box.min.y)
+				if (prevBox.max.y < c.box.min.y)
 					continue;
 			}
 

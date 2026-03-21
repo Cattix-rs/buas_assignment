@@ -8,6 +8,7 @@
 #include <cstdio> //printf
 #include <iostream>
 #include <ostream>
+#include <windows.h>
 
 namespace Tmpl8
 {
@@ -56,9 +57,20 @@ namespace Tmpl8
 	void Game::Tick(float deltaTime)
 	{
 		
-	
+		timer.tick([&](double dt)
+			{
+				player.Update(static_cast<float>(dt));
+
+				physics.ResolvePlayerCollision(player, level, static_cast<float>(dt));
+				physics.CheckPickupCollision(player, level);
+			});
+
+		timer.limitFPS(60); //  FPS cap
+		
+
 
 		screen->Clear(0);
+		player.Update(deltaTime);
 		
 		physics.ResolvePlayerCollision(player, level, deltaTime);
 		physics.CheckPickupCollision(player, level);
@@ -75,6 +87,7 @@ namespace Tmpl8
 		theSprite.Draw(screen, player.GetX(), player.GetY());
 		screen->Box(player.GetAABB(), 0xffffffff);
 		screen->Line(0.0f, 200.0f, 232.0f, 200.0f, 0xffffffff);
+		
 	}
 };/// making sure it renders and compiles
 

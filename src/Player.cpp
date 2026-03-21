@@ -26,7 +26,7 @@ namespace Tmpl8
             aabb.min.x = 22.0f;
             aabb.max.x = width - 22.0f;
             aabb.min.y = 19.0f;
-            aabb.max.y = height - 19.0f;
+            aabb.max.y = height - 23.0f;
         }
         else
         {
@@ -89,11 +89,7 @@ namespace Tmpl8
 
         
 
-        if (jumpPressed && onGround)
-        {
-            v.y = jumpStrength;
-            onGround = false;
-        }
+       
         if (left) v.x = -speed_x;
         if (right) v.x = speed_x;
 

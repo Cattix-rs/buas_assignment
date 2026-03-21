@@ -5,7 +5,7 @@ namespace Tmpl8
 
 	namespace
 	{
-		Surface tiles("assets/pixelart_by_crazywingman.png");
+		Surface tiles("assets/pixelart-drawing_14.png");
 		Sprite pickupSprite(new Surface("assets/energon_pickup_48x48.png"), 1);
 	}
 
@@ -36,8 +36,8 @@ namespace Tmpl8
 	const Collider colliders_1[] = 
 	{
 		Collider{{0.0f, 200.0f},{400.0f,232.0f},ColliderType::OneWay},
-		Collider{{0.0f, 512.0f},{400.0f,480.0f},ColliderType::Solid},
-		Collider{{0.0f, 512.0f},{800.0f,511.9f},ColliderType::Solid}
+		
+		Collider{{0.0f, 488.0f},{800.0f,512.0f},ColliderType::OneWay}
 	};
 
 	const Pickup pickups_1[] =
@@ -86,6 +86,10 @@ namespace Tmpl8
 
 	void Level::Init()
 	{
+
+		colliderCount = 0;   
+		pickupCount = 0;     
+
 		for (const Collider& c : colliders_1)
 		{
 			AddCollider(c);
