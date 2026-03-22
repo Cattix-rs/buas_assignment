@@ -36,14 +36,14 @@ namespace Tmpl8
 
 	const Collider colliders_1[] =
 	{
-		Collider{{0.0f, 200.0f},{400.0f,232.0f},ColliderType::OneWay,phase_swich_lvl::lvl_1Set1},
-		Collider{{0.0f, 0.0f},{800.0f,0.3f},ColliderType::Solid,phase_swich_lvl::any},
-		Collider{{0.0f, 511.5f},{800.0f,512.0f},ColliderType::Floor,phase_swich_lvl::any}
+		Collider{{0.0f, 200.0f},{400.0f,232.0f},ColliderType::OneWay,phase_switch_lvl::lvl_1Set1},
+		Collider{{0.0f, 0.0f},{800.0f,0.2f},ColliderType::Solid,phase_switch_lvl::any},
+		Collider{{0.0f, 511.5f},{800.0f,512.0f},ColliderType::Floor,phase_switch_lvl::any}
 	};
 
 	const Pickup pickups_1[] =
 	{
-		Pickup{200.0f,450.0f, 48,phase_swich_lvl::lvl_1Set1,PickupType::normal}
+		Pickup{200.0f,450.0f, 48,phase_switch_lvl::lvl_1Set1,PickupType::big}
 	};
 
 
@@ -85,11 +85,11 @@ namespace Tmpl8
 		pickupCount++;
 	}
 
-	void Level::SwichPhase(phase_swich_lvl newPhase)
+	void Level::SwichPhase(phase_switch_lvl newPhase)
 	{
 		for (int i = 0; i < pickupCount; i++)
 		{
-			if (pickups[i].ps_type != phase_swich_lvl::any && pickups[i].ps_type != newPhase)
+			if (pickups[i].ps_type != phase_switch_lvl::any && pickups[i].ps_type != newPhase)
 			{
 				pickups[i].active = false;
 			}
@@ -105,8 +105,8 @@ namespace Tmpl8
 
 		colliderCount = 0;
 		pickupCount = 0;
-		pickupSpriteNormal = nullptr;
-		pickupSpriteBig = nullptr;
+		this->pickupSpriteNormal = &Tmpl8::pickupSpriteNormal;
+		this->pickupSpriteBig = &Tmpl8::pickupSpriteBig;
 
 		for (const Collider& c : colliders_1)
 		{
@@ -133,7 +133,7 @@ namespace Tmpl8
 		for (int i = 0; i < pickupCount; i++)
 		{
 			auto& p = pickups[i];
-			//if (!pickups[i].active)continue;
+			if (!pickups[i].active)continue;
 
 			if(p.type == PickupType::big && pickupSpriteBig != nullptr)
 			{
@@ -144,6 +144,7 @@ namespace Tmpl8
 				pickupSpriteNormal->Draw(screen, (int)p.pos.x, (int)p.pos.y);
 			}
 		}
+
 	}
 	
 	std::span<const Collider> Level::GetColliders() const

@@ -32,11 +32,16 @@ namespace Tmpl8
 
 		AABB playerBox = player.GetAABB();
 		AABB prevBox = player.aabb + prevPos;
+		auto colliders = level.GetColliders();
 
+		
 
 		for (const Collider& c : level.GetColliders())
 		{
-			
+			bool isAny = (c.ps_type == phase_switch_lvl::any);
+			bool isMatch = (static_cast<int>(c.ps_type) == activePhase);
+			if (!(isAny || isMatch)) continue;
+
 			auto result = playerBox.overlap(c.box);
 			if (!result) continue;
 
@@ -57,6 +62,10 @@ namespace Tmpl8
 
 		for (const Collider& c : level.GetColliders())
 		{
+			bool isAny = (c.ps_type == phase_switch_lvl::any);
+			bool isMatch = (static_cast<int>(c.ps_type) == activePhase);
+			if (!(isAny || isMatch)) continue;
+
 			auto result = playerBox.overlap(c.box);
 			if (!result) continue;
 

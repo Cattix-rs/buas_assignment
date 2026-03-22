@@ -25,7 +25,7 @@ namespace Tmpl8
             wR_Sprite->SetFrame(0);
             aabb.min.x = 22.0f;
             aabb.max.x = width - 22.0f;
-            aabb.min.y = 19.0f;
+            aabb.min.y = 23.0f;
             aabb.max.y = height - 23.0f;
         }
         else
@@ -68,7 +68,7 @@ namespace Tmpl8
         bool right = (GetAsyncKeyState(VK_RIGHT) & 0x8000) != 0;
            bool jump = (GetAsyncKeyState(VK_SPACE) & 0x8000) != 0;
 
-        const float jumpStrength = -0.30f; // tuned for ms system
+        const float jumpStrength = -0.25f; // tuned for ms system
         const float speed_x = 0.2f;
         // units per second
         float deceleration = 0.0003666f;   // how fast we slow down

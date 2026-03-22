@@ -18,7 +18,7 @@ public:
 	void KeyUp( int key ) { /* implement if you want to handle keys */ }
 	void KeyDown( int key ) { /* implement if you want to handle keys */ }
 
-	int const GetCurrentPhase() { return currentPhase; }
+	int GetCurrentPhase() const { return currentPhase; }
 	
 	//oid SetLevel(Level* level) { this->level = level; }//needs to be moved to level or game
 
@@ -30,7 +30,7 @@ private:
 	float msAccumulator = 0.0f;
 	const float Tick_Rate_100ms = 100.0f;
 	int TickCounter;
-	int currentPhase = -1;
+	int currentPhase  = -1;
 };
 
 }; // namespace Tmpl8

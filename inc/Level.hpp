@@ -5,7 +5,7 @@
 
 namespace Tmpl8
 {
-	enum class phase_swich_lvl
+	enum class phase_switch_lvl
 	{
 		any,
 		lvl_1Set1,
@@ -24,7 +24,7 @@ namespace Tmpl8
 		bool active = true;
 		PickupType type = PickupType::normal;
 		int size = 48;
-		phase_swich_lvl ps_type = phase_swich_lvl::any;
+		phase_switch_lvl ps_type = phase_switch_lvl::any;
 		float pickup_Value;
 		
 		AABB GetAABB() const
@@ -33,7 +33,7 @@ namespace Tmpl8
 		}
 
 		Pickup() = default;
-		Pickup(float x, float y, int size, phase_swich_lvl ps_type,PickupType type) 
+		Pickup(float x, float y, int size, phase_switch_lvl ps_type,PickupType type) 
 			: pos{x,y}
 		, size{size}
 		, ps_type{ps_type}
@@ -60,12 +60,12 @@ namespace Tmpl8
 
 	struct Collider
 	{
-		int phaseID = 0;
+		
 		AABB box;
-		phase_swich_lvl ps_type = phase_swich_lvl::any;
+		phase_switch_lvl ps_type = phase_switch_lvl::any;
 		ColliderType type = ColliderType::Solid;
 		Collider() = default;
-		Collider(vec2f min, vec2f max, ColliderType type, phase_swich_lvl ps_type) :box{ min,max }, type{type}, ps_type{ ps_type }
+		Collider(vec2f min, vec2f max, ColliderType type, phase_switch_lvl ps_type) :box{ min,max }, type{type}, ps_type{ ps_type }
 		{
 			
 		}
@@ -89,7 +89,7 @@ namespace Tmpl8
 
 		void AddPickup(const Pickup& p);
 		float pickup_Value;
-		void SwichPhase(phase_swich_lvl newPhase);
+		void SwichPhase(phase_switch_lvl newPhase);
 	private:
 		static constexpr int MaxColliders = 32;
 		//AABB colliders[MaxColliders];

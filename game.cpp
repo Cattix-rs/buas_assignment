@@ -28,7 +28,7 @@ namespace Tmpl8
 		currentPhase = 0;
 		// initialize movement/animation system with sprite and position pointers
 		level.Init();
-		player.Init(&theSprite, 0, 0);
+		player.Init(&theSprite, 0, 400);
 		
 		
 		
@@ -66,6 +66,7 @@ namespace Tmpl8
 			});
 		#ifdef _DEBUG
 		timer.limitFPS(60); //  FPS cap
+		
 		#endif
 
 		msAccumulator += deltaTime;
@@ -76,6 +77,7 @@ namespace Tmpl8
 
 			if (TickCounter % 60 == 0)
 			{
+				printf("PHASE SWAP: Current Phase is now %d\n", currentPhase);
 				currentPhase = (currentPhase + 1) % 3;
  				TickCounter = 0;
 			}
@@ -88,21 +90,28 @@ namespace Tmpl8
 		gamephysics.CheckPickupCollision(player, level);
 		
 
-		
+		level.Draw(screen, currentPhase);
 		
 		
 		
 		for (const auto& c : level.GetColliders())
 		{
-			if (c.phaseID != -1 && c.phaseID != currentPhase) continue;
-			if (c.type == ColliderType::Solid)
-				screen->Box(c.box, 0xFF0000FF); 
-			else if (c.type == ColliderType::OneWay)
-				screen->Box(c.box, 0x402E8B57); 
-			else if (c.type == ColliderType::Floor)
-				screen->Box(c.box, 0x00000000); 
+			bool isAny = (c.ps_type == phase_switch_lvl::any);
+			bool isMatch = (static_cast<int>(c.ps_type) == currentPhase);
+			if (isAny || isMatch)
+			{
+				if (c.type == ColliderType::Solid)
+					screen->Box(c.box, 0xFF0000FF);
+				else if (c.type == ColliderType::OneWay)
+				{
+					screen->Box(c.box, 0xFF2E8B57);
+				}
+				else if (c.type == ColliderType::Floor)
+					screen->Box(c.box, 0x00000000);
+			}
+			
 		}
-		level.Draw(screen, currentPhase);
+		
 		player.Draw(screen);
 		
 		theSprite.Draw(screen, player.GetX(), player.GetY());
@@ -110,7 +119,7 @@ namespace Tmpl8
 		
 		
 		screen->Box(player.GetAABB(), 0xffffffff);
-		screen->Line(0.0f, 200.0f, 232.0f, 200.0f, 0xffffffff);
+		player.clampToScreen();
 		
 	}
 
