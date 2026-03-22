@@ -56,7 +56,6 @@ namespace Tmpl8
 	
 	void Game::Tick(float deltaTime)
 	{
-		
 		timer.tick([&](double dt)
 			{
 				player.Update(static_cast<float>(dt));
@@ -64,9 +63,11 @@ namespace Tmpl8
 				physics.ResolvePlayerCollision(player, level, static_cast<float>(dt));
 				physics.CheckPickupCollision(player, level);
 			});
-
+		#ifdef _DEBUG
 		timer.limitFPS(60); //  FPS cap
-		
+		#endif
+
+
 		
 		
 
@@ -77,7 +78,7 @@ namespace Tmpl8
 		physics.CheckPickupCollision(player, level);
 		
 
-		player.Update(deltaTime);
+		
 		
 		level.Draw(screen);
 		
@@ -94,6 +95,19 @@ namespace Tmpl8
 		player.Draw(screen);
 		
 		theSprite.Draw(screen, player.GetX(), player.GetY());
+
+		msAccumulator += deltaTime;
+		while (msAccumulator >= Tick_Rate_100ms)
+		{
+			TickCounter++;
+			msAccumulator -= Tick_Rate_100ms;
+
+			if (TickCounter % 1200 == 0)
+			{
+				currentPhase = (currentPhase + 1) % 3;
+			}
+		}
+
 		screen->Box(player.GetAABB(), 0xffffffff);
 		//screen->Line(0.0f, 200.0f, 232.0f, 200.0f, 0xffffffff);
 		

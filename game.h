@@ -26,6 +26,10 @@ private:
 	Timer timer;
 	Level level;
 	physics physics;
+	float msAccumulator = 0.0f;
+	const float Tick_Rate_100ms = 100.0f;
+	int TickCounter;
+	int currentPhase = -1;
 };
 
 }; // namespace Tmpl8

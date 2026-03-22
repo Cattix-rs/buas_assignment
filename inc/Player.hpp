@@ -50,7 +50,6 @@ namespace Tmpl8
 		void SetSizeFromSprite() noexcept;
 			
 		vec2f size() const noexcept;
-		
 
 		float GetEnergon() const noexcept { return energon; }
 		void AddEnergon(float amount) noexcept { energon = std::min(maxEnergon, energon + amount); }
@@ -79,7 +78,7 @@ namespace Tmpl8
 		
 
 		 float wR_AnimeTimer = 0.0f;
-		 static constexpr float wR_FrameTime = 45.5f; // seconds per frame
+		 static constexpr float wR_FrameTime = 60.5f; // seconds per frame
 		 unsigned int wR_AnimeFrame = 0;
 
 		//tick based fields

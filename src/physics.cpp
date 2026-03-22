@@ -1,5 +1,5 @@
 #include <physics.hpp>
-
+#include "../game.h"
 
 #include "../template.h"
 
@@ -33,9 +33,18 @@ namespace Tmpl8
 
 		AABB playerBox = player.GetAABB();
 		AABB prevBox = player.aabb + prevPos;
+		phase_swich_lvl;
+		
+		if (current.phase != phase_swich_lvl::Any && (int)c.phase != currentPhase) {
+			continue;
+		}
 
 		for (const Collider& c : level.GetColliders())
 		{
+			if (c. != Phase::Any && (int)c.phase != currentPhase)
+			{
+				continue;
+			}
 			auto result = playerBox.overlap(c.box);
 			if (!result) continue;
 

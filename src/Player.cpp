@@ -35,7 +35,7 @@ namespace Tmpl8
 
 
 
-        wR_AnimeTimer = 0.0f;
+        wR_AnimeTimer = 100.0f;
         wR_AnimeFrame = 0;
         prevMovement = movement = state::idle;
         tickCounter = 0;
@@ -43,6 +43,8 @@ namespace Tmpl8
         u_physics.Init();
         v = vec2f{ 0.0f,0.0f };
     }
+
+    
 
     float approach(float current, float target, float maxDelta)
     {
@@ -153,7 +155,7 @@ namespace Tmpl8
         {
             wR_AnimeTimer += deltaTime; // add elapsed seconds
 
-            if (wR_AnimeTimer >= wR_FrameTime) // seconds per frame
+            while (wR_AnimeTimer >= wR_FrameTime) // seconds per frame
             {
                 wR_AnimeTimer -= wR_FrameTime;
                 wR_AnimeFrame = (wR_AnimeFrame + 1) % wR_Sprite->Frames();
@@ -266,4 +268,6 @@ namespace Tmpl8
         if (!wR_Sprite) return vec2f{ 0.0f, 0.0f };
         return vec2f{ static_cast<float>(wR_Sprite->GetWidth()), static_cast<float>(wR_Sprite->GetHeight()) };
     }
+
+    
 }

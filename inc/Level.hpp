@@ -5,14 +5,20 @@
 
 namespace Tmpl8
 {
-
+	enum class phase_swich_lvl
+	{
+		any,
+		lvl_1Set1,
+		lvl_1Set2,
+		lvl_1set3
+	};
 	struct Pickup
 	{
 		vec2f pos;
 		bool active = true;
 
 		 int size = 48;
-
+		 phase_swich_lvl ps_type = phase_swich_lvl::any;
 		
 		AABB GetAABB() const
 		{
@@ -20,10 +26,10 @@ namespace Tmpl8
 		}
 
 		Pickup() = default;
-		Pickup(float x, float y, int size) 
+		Pickup(float x, float y, int size, phase_swich_lvl ps_type) 
 			: pos{x,y}
 		, size{size}
-		
+		, ps_type{ps_type}
 		{}
 		
 	};
@@ -38,9 +44,10 @@ namespace Tmpl8
 	struct Collider
 	{
 		AABB box;
+		phase_swich_lvl ps_type = phase_swich_lvl::any;
 		ColliderType type = ColliderType::Solid;
 		Collider() = default;
-		Collider(vec2f min, vec2f max, ColliderType type) :box{ min,max }, type{type}
+		Collider(vec2f min, vec2f max, ColliderType type, phase_swich_lvl ps_type) :box{ min,max }, type{type}, ps_type{ ps_type }
 		{
 			
 		}
