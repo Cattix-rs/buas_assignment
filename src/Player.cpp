@@ -10,7 +10,7 @@
 namespace Tmpl8
 {
     
-    static physics u_physics;
+	Physics u_physics;
     void Player::Init(Sprite* sprite, int px, int py)
     {
         wR_Sprite = sprite;
@@ -243,14 +243,14 @@ namespace Tmpl8
             screen->Bar(barX, barY, barX + barWidth, barY + barHeight, 0x0000FF); // solid blue
         }
 
-        // --- Draw "You Lost" message if energon is 0 ---
+        
         if (isDead )
         {
             const char* msg = "YOU LOST";
-            // simple center screen message (assuming screen width/height constants)
+            
             int msgX = 800 / 2 - 50;
             int msgY = 512 / 2 - 10;
-            screen->Print(msg,msgX, msgY,  0xFF0000); // red text
+            screen->Print(msg,msgX, msgY,  0xFF0000); 
         }
     }
 

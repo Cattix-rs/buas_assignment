@@ -25,6 +25,7 @@ namespace Tmpl8
 	}
 	void Game::Init()
 	{
+		currentPhase = 0;
 		// initialize movement/animation system with sprite and position pointers
 		level.Init();
 		player.Init(&theSprite, 0, 0);
@@ -51,7 +52,7 @@ namespace Tmpl8
 	// Main application tick function
 	// -----------------------------------------------------------
 	
-	static physics u_physics;
+	static Physics u_physics;
 	//int i;
 	
 	void Game::Tick(float deltaTime)
@@ -60,41 +61,12 @@ namespace Tmpl8
 			{
 				player.Update(static_cast<float>(dt));
 
-				physics.ResolvePlayerCollision(player, level, static_cast<float>(dt));
-				physics.CheckPickupCollision(player, level);
+				gamephysics.ResolvePlayerCollision(player, level, static_cast<float>(dt),currentPhase);
+				gamephysics.CheckPickupCollision(player, level);
 			});
 		#ifdef _DEBUG
 		timer.limitFPS(60); //  FPS cap
 		#endif
-
-
-		
-		
-
-		screen->Clear(0);
-		player.Update(deltaTime);
-		
-		physics.ResolvePlayerCollision(player, level, deltaTime);
-		physics.CheckPickupCollision(player, level);
-		
-
-		
-		
-		level.Draw(screen);
-		
-		for (const auto& c : level.GetColliders())
-		{
-			if (c.type == ColliderType::Solid)
-				screen->Box(c.box, 0xFF0000FF); 
-			else if (c.type == ColliderType::OneWay)
-				screen->Box(c.box, 0x402E8B57); 
-			else if (c.type == ColliderType::Floor)
-				screen->Box(c.box, 0x00000000); 
-		}
-
-		player.Draw(screen);
-		
-		theSprite.Draw(screen, player.GetX(), player.GetY());
 
 		msAccumulator += deltaTime;
 		while (msAccumulator >= Tick_Rate_100ms)
@@ -102,16 +74,47 @@ namespace Tmpl8
 			TickCounter++;
 			msAccumulator -= Tick_Rate_100ms;
 
-			if (TickCounter % 1200 == 0)
+			if (TickCounter % 60 == 0)
 			{
 				currentPhase = (currentPhase + 1) % 3;
+ 				TickCounter = 0;
 			}
 		}
 
+		screen->Clear(0);
+		player.Update(deltaTime);
+		
+		gamephysics.ResolvePlayerCollision(player, level, deltaTime, currentPhase);
+		gamephysics.CheckPickupCollision(player, level);
+		
+
+		
+		
+		
+		
+		for (const auto& c : level.GetColliders())
+		{
+			if (c.phaseID != -1 && c.phaseID != currentPhase) continue;
+			if (c.type == ColliderType::Solid)
+				screen->Box(c.box, 0xFF0000FF); 
+			else if (c.type == ColliderType::OneWay)
+				screen->Box(c.box, 0x402E8B57); 
+			else if (c.type == ColliderType::Floor)
+				screen->Box(c.box, 0x00000000); 
+		}
+		level.Draw(screen, currentPhase);
+		player.Draw(screen);
+		
+		theSprite.Draw(screen, player.GetX(), player.GetY());
+		
+		
+		
 		screen->Box(player.GetAABB(), 0xffffffff);
-		//screen->Line(0.0f, 200.0f, 232.0f, 200.0f, 0xffffffff);
+		screen->Line(0.0f, 200.0f, 232.0f, 200.0f, 0xffffffff);
 		
 	}
+
+	
 };/// making sure it renders and compiles
 
 

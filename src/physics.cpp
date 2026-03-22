@@ -1,50 +1,42 @@
 #include <physics.hpp>
 #include "../game.h"
-
+#include <Level.hpp>
 #include "../template.h"
 
 
 namespace Tmpl8
 {
-	void physics::Init()
+	void Physics::Init()
 	{
 		g = vec2f{ 0.0f, 0.0001f };
 	}
 
-	void physics::Applyg(vec2f& v, float deltaTime) const
+	void Physics::Applyg(vec2f& v, float deltaTime) const
 	{
 		v.y += g.y * deltaTime;
 	}
 
-	vec2f physics::IntegratePosition(const vec2f& prevPos, const vec2f& v, float deltaTime) const
+	vec2f Physics::IntegratePosition(const vec2f& prevPos, const vec2f& v, float deltaTime) const
 	{
 		return prevPos + v * deltaTime;
 	}
 
-	void physics::ResolvePlayerCollision(Player& player, const Level& level, float deltaTime)
+	void Physics::ResolvePlayerCollision(Player& player, const Level& level, float deltaTime, int activePhase)
 	{
 		vec2f pos = player.GetPos();
 		vec2f v = player.GetVelocity();
 
 		vec2f prevPos = pos;
-
 		
 		pos = player.IntegratePosition(prevPos, { v.x, 0.0f }, deltaTime);
 
 		AABB playerBox = player.GetAABB();
 		AABB prevBox = player.aabb + prevPos;
-		phase_swich_lvl;
-		
-		if (current.phase != phase_swich_lvl::Any && (int)c.phase != currentPhase) {
-			continue;
-		}
+
 
 		for (const Collider& c : level.GetColliders())
 		{
-			if (c. != Phase::Any && (int)c.phase != currentPhase)
-			{
-				continue;
-			}
+			
 			auto result = playerBox.overlap(c.box);
 			if (!result) continue;
 
@@ -100,7 +92,7 @@ namespace Tmpl8
 		player.SetVelocity(v);
 	}
 
-	void physics::CheckPickupCollision(Player& player, Level& level)
+	void Physics::CheckPickupCollision(Player& player, Level& level)
 	{
 		AABB playerBox = player.GetAABB();
 
@@ -113,7 +105,7 @@ namespace Tmpl8
 			if (playerBox.overlap(pickupBox))
 			{
 				pickup.active = false;
-				player.AddEnergon(25.0f);
+				player.AddEnergon(pickup.pickup_Value);
 			}
 		}
 	}

@@ -397,6 +397,8 @@ int main( int argc, char **argv )
 		}
 	}
 	game->Shutdown();
+	delete game;
+	delete surface;
 	SDL_Quit();
 	return 0;
 }

@@ -12,13 +12,20 @@ namespace Tmpl8
 		lvl_1Set2,
 		lvl_1set3
 	};
+	
+	enum class PickupType
+	{
+		normal,
+		big
+	};
 	struct Pickup
 	{
 		vec2f pos;
 		bool active = true;
-
-		 int size = 48;
-		 phase_swich_lvl ps_type = phase_swich_lvl::any;
+		PickupType type = PickupType::normal;
+		int size = 48;
+		phase_swich_lvl ps_type = phase_swich_lvl::any;
+		float pickup_Value;
 		
 		AABB GetAABB() const
 		{
@@ -26,11 +33,21 @@ namespace Tmpl8
 		}
 
 		Pickup() = default;
-		Pickup(float x, float y, int size, phase_swich_lvl ps_type) 
+		Pickup(float x, float y, int size, phase_swich_lvl ps_type,PickupType type) 
 			: pos{x,y}
 		, size{size}
 		, ps_type{ps_type}
-		{}
+		, type{type}
+		{
+			if (type == PickupType::big)
+			{
+				pickup_Value = 50.0f;
+			}
+			else
+			{
+				pickup_Value = 10.0f;
+			}
+		}
 		
 	};
 
@@ -43,6 +60,7 @@ namespace Tmpl8
 
 	struct Collider
 	{
+		int phaseID = 0;
 		AABB box;
 		phase_swich_lvl ps_type = phase_swich_lvl::any;
 		ColliderType type = ColliderType::Solid;
@@ -58,7 +76,7 @@ namespace Tmpl8
 	public:
 		void Init();
 
-		void Draw(Surface* screen);
+		void Draw(Surface* screen, int activePhase);
 
 		
 		std::span<const Collider> GetColliders() const;
@@ -70,7 +88,8 @@ namespace Tmpl8
 		int GetPickupCount() { return pickupCount; }
 
 		void AddPickup(const Pickup& p);
-
+		float pickup_Value;
+		void SwichPhase(phase_swich_lvl newPhase);
 	private:
 		static constexpr int MaxColliders = 32;
 		//AABB colliders[MaxColliders];
@@ -79,6 +98,8 @@ namespace Tmpl8
 		static constexpr int MaxPickups = 32;
 		std::array<Pickup, MaxPickups> pickups{};
 		int pickupCount = 0; //track how many pickups are in use
+		Sprite* pickupSpriteNormal = nullptr;
+		Sprite* pickupSpriteBig = nullptr;
 	
 	};
 }

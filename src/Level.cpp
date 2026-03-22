@@ -6,7 +6,8 @@ namespace Tmpl8
 	namespace
 	{
 		Surface tiles("assets/pixelart-drawing_14.png");
-		Sprite pickupSprite(new Surface("assets/energon_pickup_48x48.png"), 1);
+		Sprite pickupSpriteNormal(new Surface("assets/energon_pickup_48x48.png"), 1);
+		Sprite pickupSpriteBig(new Surface("assets/mineral_pickup_48x48.png"), 1);
 	}
 
 
@@ -42,7 +43,7 @@ namespace Tmpl8
 
 	const Pickup pickups_1[] =
 	{
-		Pickup{200.0f,450.0f, 48,phase_swich_lvl::lvl_1Set1}
+		Pickup{200.0f,450.0f, 48,phase_swich_lvl::lvl_1Set1,PickupType::normal}
 	};
 
 
@@ -84,11 +85,28 @@ namespace Tmpl8
 		pickupCount++;
 	}
 
+	void Level::SwichPhase(phase_swich_lvl newPhase)
+	{
+		for (int i = 0; i < pickupCount; i++)
+		{
+			if (pickups[i].ps_type != phase_swich_lvl::any && pickups[i].ps_type != newPhase)
+			{
+				pickups[i].active = false;
+			}
+			else
+			{
+				pickups[i].active = true;
+			}
+		}
+	} 
+
 	void Level::Init()
 	{
 
-		colliderCount = 0;   
-		pickupCount = 0;     
+		colliderCount = 0;
+		pickupCount = 0;
+		pickupSpriteNormal = nullptr;
+		pickupSpriteBig = nullptr;
 
 		for (const Collider& c : colliders_1)
 		{
@@ -101,7 +119,7 @@ namespace Tmpl8
 		}
 	}
 
-	void Level::Draw(Surface* screen)
+	void Level::Draw(Surface* screen, int activePhase)
 	{
 		for (int y = 0; y < 16; y++)
 			for (int x = 0; x < 25; x++)
@@ -114,20 +132,20 @@ namespace Tmpl8
 
 		for (int i = 0; i < pickupCount; i++)
 		{
-			if (!pickups[i].active)continue;
+			auto& p = pickups[i];
+			//if (!pickups[i].active)continue;
 
-			pickupSprite.Draw(
-				screen,
-				static_cast<int>(pickups[i].pos.x),
-				static_cast<int>(pickups[i].pos.y)
-			);
+			if(p.type == PickupType::big && pickupSpriteBig != nullptr)
+			{
+				pickupSpriteBig->Draw(screen, (int)p.pos.x, (int)p.pos.y);
+			}
+			else if (p.type == PickupType::normal && pickupSpriteNormal != nullptr)
+			{
+				pickupSpriteNormal->Draw(screen, (int)p.pos.x, (int)p.pos.y);
+			}
 		}
 	}
-	//std::span< Pickup> Level::GetPickup()
-	//{
-	//	return pickups_1; //non const refrence
-	//}
-
+	
 	std::span<const Collider> Level::GetColliders() const
 	{
 		return std::span<const Collider>(colliders.data(), colliderCount);

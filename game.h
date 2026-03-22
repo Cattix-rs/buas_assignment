@@ -18,14 +18,15 @@ public:
 	void KeyUp( int key ) { /* implement if you want to handle keys */ }
 	void KeyDown( int key ) { /* implement if you want to handle keys */ }
 
+	int const GetCurrentPhase() { return currentPhase; }
 	
-	//void SetLevel(Level* level) { this->level = level; }//needs to be moved to level or game
+	//oid SetLevel(Level* level) { this->level = level; }//needs to be moved to level or game
 
 private:
 	Surface* screen = nullptr;
 	Timer timer;
 	Level level;
-	physics physics;
+	Physics gamephysics;
 	float msAccumulator = 0.0f;
 	const float Tick_Rate_100ms = 100.0f;
 	int TickCounter;
