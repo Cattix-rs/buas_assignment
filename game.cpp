@@ -53,7 +53,6 @@ namespace Tmpl8
 	// -----------------------------------------------------------
 	
 	static Physics u_physics;
-	//int i;
 	
 	void Game::Tick(float deltaTime)
 	{
@@ -75,11 +74,14 @@ namespace Tmpl8
 			TickCounter++;
 			msAccumulator -= Tick_Rate_100ms;
 
-			if (TickCounter % 60 == 0)
+			if (TickCounter % 1 == 0)
 			{
-				printf("PHASE SWAP: Current Phase is now %d\n", currentPhase);
+				printf("PHASE SWAP: Current Phase is now %d\n", currentPhase + 1);
 				currentPhase = (currentPhase + 1) % 3;
  				TickCounter = 0;
+
+				level.SwichPhase(currentPhase);
+				
 			}
 		}
 

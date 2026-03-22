@@ -32,7 +32,7 @@ namespace Tmpl8
 
 		AABB playerBox = player.GetAABB();
 		AABB prevBox = player.aabb + prevPos;
-		auto colliders = level.GetColliders();
+		
 
 		
 

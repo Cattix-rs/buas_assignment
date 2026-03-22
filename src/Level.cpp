@@ -43,7 +43,7 @@ namespace Tmpl8
 
 	const Pickup pickups_1[] =
 	{
-		Pickup{200.0f,450.0f, 48,phase_switch_lvl::lvl_1Set1,PickupType::big}
+		Pickup{200.0f,450.0f, 48,phase_switch_lvl::lvl_1set3,PickupType::big}
 	};
 
 
@@ -84,21 +84,41 @@ namespace Tmpl8
 		pickups[pickupCount].active = true;
 		pickupCount++;
 	}
-
-	void Level::SwichPhase(phase_switch_lvl newPhase)
+	
+	void Level::SwichPhase(int activePhase)
 	{
-		for (int i = 0; i < pickupCount; i++)
+		auto allPickups = GetPickup();
+
+		
+		for (auto& p : allPickups)
 		{
-			if (pickups[i].ps_type != phase_switch_lvl::any && pickups[i].ps_type != newPhase)
+			// 3. Logic check
+			bool isAny = (p.ps_type == phase_switch_lvl::any);
+			bool isMatch = (static_cast<int>(p.ps_type) == activePhase);
+
+			if (isAny || isMatch)
 			{
-				pickups[i].active = false;
+				p.active = true;  // <--- SET BREAKPOINT HERE
 			}
 			else
 			{
-				pickups[i].active = true;
+				p.active = false;
 			}
 		}
-	} 
+	}
+
+	void Level::RegeneratePickups(int activePhase)
+	{
+		
+		for ( auto& p : GetPickup())
+		{
+			
+			if (p.ps_type == phase_switch_lvl::any || static_cast<int>(p.ps_type) == activePhase)
+			{
+				p.active = true;
+			}
+		}
+	}
 
 	void Level::Init()
 	{

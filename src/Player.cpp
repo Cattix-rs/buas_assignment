@@ -68,7 +68,7 @@ namespace Tmpl8
         bool right = (GetAsyncKeyState(VK_RIGHT) & 0x8000) != 0;
            bool jump = (GetAsyncKeyState(VK_SPACE) & 0x8000) != 0;
 
-        const float jumpStrength = -0.25f; // tuned for ms system
+        const float jumpStrength = -0.1f; // tuned for ms system
         const float speed_x = 0.2f;
         // units per second
         float deceleration = 0.0003666f;   // how fast we slow down
@@ -125,7 +125,7 @@ namespace Tmpl8
                 pos.y -= 0.0001f;
                 v.y = jumpStrength;
                 onGround = false;
-                energon -= 5.0f; // jump cost
+                energon -= 0.0f; // jump cost
             }
         }
       
@@ -237,7 +237,7 @@ namespace Tmpl8
         // filled blue portion
        
         // empty gray portion
-        screen->Box(barX + barWidth, barY, barX + 100, barY + barHeight, 0x333333);
+        screen->Box(barX + barWidth, barY, barX + 200, barY + barHeight, 0x333333);
         if (!isDead)
         {
             screen->Bar(barX, barY, barX + barWidth, barY + barHeight, 0x0000FF); // solid blue

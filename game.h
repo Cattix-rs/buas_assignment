@@ -20,8 +20,8 @@ public:
 
 	int GetCurrentPhase() const { return currentPhase; }
 	
-	//oid SetLevel(Level* level) { this->level = level; }//needs to be moved to level or game
-
+	
+	int currentPhase = 0;
 private:
 	Surface* screen = nullptr;
 	Timer timer;
@@ -30,7 +30,7 @@ private:
 	float msAccumulator = 0.0f;
 	const float Tick_Rate_100ms = 100.0f;
 	int TickCounter;
-	int currentPhase  = -1;
+	
 };
 
 }; // namespace Tmpl8

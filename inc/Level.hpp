@@ -21,7 +21,7 @@ namespace Tmpl8
 	struct Pickup
 	{
 		vec2f pos;
-		bool active = true;
+		bool active = false;
 		PickupType type = PickupType::normal;
 		int size = 48;
 		phase_switch_lvl ps_type = phase_switch_lvl::any;
@@ -89,17 +89,19 @@ namespace Tmpl8
 
 		void AddPickup(const Pickup& p);
 		float pickup_Value;
-		void SwichPhase(phase_switch_lvl newPhase);
+		void SwichPhase(int activePhase);
+		void RegeneratePickups(int activePhase);
 	private:
 		static constexpr int MaxColliders = 32;
 		//AABB colliders[MaxColliders];
 		std::array<Collider, MaxColliders> colliders{};
-		int colliderCount = 3; // track how many are actually used
+		int colliderCount = 0; // track how many are actually used
 		static constexpr int MaxPickups = 32;
 		std::array<Pickup, MaxPickups> pickups{};
 		int pickupCount = 0; //track how many pickups are in use
 		Sprite* pickupSpriteNormal = nullptr;
 		Sprite* pickupSpriteBig = nullptr;
+		
 	
 	};
 }
