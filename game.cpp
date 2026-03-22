@@ -80,9 +80,18 @@ namespace Tmpl8
 				currentPhase = (currentPhase + 1) % 3;
  				TickCounter = 0;
 
-				level.SwichPhase(currentPhase);
-				
+				for (auto& p : level.GetPickup())
+				{
+					// If the pickup belongs to the phase we just switched TO,
+					// or if it's an 'any' phase pickup, we set it back to active.
+					if (p.ps_type == phase_switch_lvl::any || static_cast<int>(p.ps_type) == currentPhase)
+					{
+						p.active = true;
+					}
+				}
+				printf("Swapped to Phase %d: Pickups Reactivated!\n", currentPhase);
 			}
+			
 		}
 
 		screen->Clear(0);
