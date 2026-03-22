@@ -74,16 +74,16 @@ namespace Tmpl8
 			TickCounter++;
 			msAccumulator -= Tick_Rate_100ms;
 
-			if (TickCounter % 1 == 0)
+			if (TickCounter % 60 == 0)
 			{
 				printf("PHASE SWAP: Current Phase is now %d\n", currentPhase + 1);
 				currentPhase = (currentPhase + 1) % 3;
  				TickCounter = 0;
 
+				//level.SwichPhase(currentPhase);
 				for (auto& p : level.GetPickup())
 				{
-					// If the pickup belongs to the phase we just switched TO,
-					// or if it's an 'any' phase pickup, we set it back to active.
+					
 					if (p.ps_type == phase_switch_lvl::any || static_cast<int>(p.ps_type) == currentPhase)
 					{
 						p.active = true;

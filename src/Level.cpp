@@ -37,13 +37,18 @@ namespace Tmpl8
 	const Collider colliders_1[] =
 	{
 		Collider{{0.0f, 200.0f},{400.0f,232.0f},ColliderType::OneWay,phase_switch_lvl::lvl_1Set1},
+		Collider{{0.0f, 80.0f},{80.0f,123.0f},ColliderType::Solid,phase_switch_lvl::lvl_1Set1},
+		Collider{{625.0f, 45.0f},{800.0f,65.0f},ColliderType::OneWay,phase_switch_lvl::lvl_1Set1},
+		Collider{{580.0f, 290.0f},{800.0f,370.0f},ColliderType::Solid,phase_switch_lvl::lvl_1Set1},
 		Collider{{0.0f, 0.0f},{800.0f,0.2f},ColliderType::Solid,phase_switch_lvl::any},
 		Collider{{0.0f, 511.5f},{800.0f,512.0f},ColliderType::Floor,phase_switch_lvl::any}
 	};
 
 	const Pickup pickups_1[] =
 	{
-		Pickup{200.0f,450.0f, 48,phase_switch_lvl::lvl_1Set1,PickupType::big}
+		Pickup{15.0f,40.0f, 48,phase_switch_lvl::lvl_1Set1,PickupType::big},
+		Pickup{670.0f,0.0f, 48,phase_switch_lvl::lvl_1Set1,PickupType::normal},
+		Pickup{600.0f,245.0f, 48,phase_switch_lvl::lvl_1Set1,PickupType::normal}
 	};
 
 
