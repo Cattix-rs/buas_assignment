@@ -74,13 +74,17 @@ namespace Tmpl8
 			TickCounter++;
 			msAccumulator -= Tick_Rate_100ms;
 
-			if (TickCounter % 60 == 0)
+			if (TickCounter % 75 == 0)
 			{
 				printf("PHASE SWAP: Current Phase is now %d\n", currentPhase + 1);
-				currentPhase = (currentPhase + 1) % 3;
+				currentPhase = (currentPhase + 1) % 4;
  				TickCounter = 0;
+				if (currentPhase == 0)
+				{
+					currentPhase = 1; // Loop back to 1, skipping 0
+				}
 
-				//level.SwichPhase(currentPhase);
+				level.SwichPhase(currentPhase);
 				for (auto& p : level.GetPickup())
 				{
 					

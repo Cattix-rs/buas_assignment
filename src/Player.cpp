@@ -68,7 +68,7 @@ namespace Tmpl8
         bool right = (GetAsyncKeyState(VK_RIGHT) & 0x8000) != 0;
            bool jump = (GetAsyncKeyState(VK_SPACE) & 0x8000) != 0;
 
-        const float jumpStrength = -0.23f; // tuned for ms system
+        const float jumpStrength = -0.325f; // tuned for ms system
         const float speed_x = 0.2f;
         // units per second
         float deceleration = 0.0003666f;   // how fast we slow down
@@ -251,6 +251,7 @@ namespace Tmpl8
             int msgX = 800 / 2 - 50;
             int msgY = 512 / 2 - 10;
             screen->Print(msg,msgX, msgY,  0xFF0000); 
+            
         }
     }
 

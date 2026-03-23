@@ -8,7 +8,7 @@ namespace Tmpl8
 {
 	void Physics::Init()
 	{
-		g = vec2f{ 0.0f, 0.0001f };
+		g = vec2f{ 0.0f, 0.0002333f };
 	}
 
 	void Physics::Applyg(vec2f& v, float deltaTime) const
@@ -73,10 +73,11 @@ namespace Tmpl8
 
 			if (c.type == ColliderType::OneWay)
 			{
-				if (v.y <= 0.0f) continue;
-
-				if (prevBox.max.y < c.box.min.y)
-					continue;
+				if (v.y < 0.0f || prevBox.max.y > c.box.min.y)
+				{
+					continue; // STOP HERE. Do not run the 'pos.y -=' code below.
+				}
+					
 			}
 
 			
