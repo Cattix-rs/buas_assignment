@@ -68,7 +68,7 @@ namespace Tmpl8
         bool right = (GetAsyncKeyState(VK_RIGHT) & 0x8000) != 0;
            bool jump = (GetAsyncKeyState(VK_SPACE) & 0x8000) != 0;
 
-        const float jumpStrength = -0.325f; // tuned for ms system
+        const float jumpStrength = -0.35f; // tuned for ms system 325 good
         const float speed_x = 0.2f;
         // units per second
         float deceleration = 0.0003666f;   // how fast we slow down
@@ -120,12 +120,12 @@ namespace Tmpl8
 
         if (jumpPressed && onGround)
         {
-            if (energon >= 0.01f) // only jump if enough energon
+            if (energon >= 0.01f) 
             {
                 pos.y -= 0.0001f;
                 v.y = jumpStrength;
                 onGround = false;
-                energon -= 0.0f; // jump cost
+                energon -= 0.1f; // jump cost
             }
         }
       
@@ -180,7 +180,7 @@ namespace Tmpl8
     vec2f Player::IntegratePosition(const vec2f& pos, const vec2f& v, float deltaTime) const
     {
         return pos + v * deltaTime;
-    }
+    } 
 
     AABB Player::GetAABB() const noexcept
     {

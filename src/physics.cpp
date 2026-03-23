@@ -2,6 +2,7 @@
 #include "../game.h"
 #include <Level.hpp>
 #include "../template.h"
+#include <iostream>
 
 
 namespace Tmpl8
@@ -30,8 +31,9 @@ namespace Tmpl8
 		
 		pos = player.IntegratePosition(prevPos, { v.x, 0.0f }, deltaTime);
 
-		AABB playerBox = player.GetAABB();
 		AABB prevBox = player.aabb + prevPos;
+		AABB playerBox = player.GetAABB();
+		
 		
 
 		
@@ -73,16 +75,21 @@ namespace Tmpl8
 
 			if (c.type == ColliderType::OneWay)
 			{
-				if (v.y < 0.0f || prevBox.max.y > c.box.min.y)
+				if (v.y < 0.0f)
 				{
-					continue; // STOP HERE. Do not run the 'pos.y -=' code below.
+					continue;
+				}
+
+				if (prevBox.max.y < c.box.min.y && playerBox.max.y > c.box.min.y)
+				{
+						pos.y -= correction.y;
+						v.y = 0.0f;
+						player.SetOnGround(true);
+					
 				}
 					
 			}
-
-			
-
-			if (correction.y != 0.0f)
+			else if (correction.y != 0.0f)
 			{
 				if (v.y >= 0.0f)
 				{

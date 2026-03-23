@@ -56,45 +56,22 @@ namespace Tmpl8
 	
 	void Game::Tick(float deltaTime)
 	{
-		timer.tick([&](double dt)
-			{
-				player.Update(static_cast<float>(dt));
-
-				gamephysics.ResolvePlayerCollision(player, level, static_cast<float>(dt),currentPhase);
-				gamephysics.CheckPickupCollision(player, level);
-			});
-		#ifdef _DEBUG
-		timer.limitFPS(60); //  FPS cap
-		
-		#endif
-
 		msAccumulator += deltaTime;
 		while (msAccumulator >= Tick_Rate_100ms)
 		{
 			TickCounter++;
 			msAccumulator -= Tick_Rate_100ms;
 
-			if (TickCounter % 75 == 0)
+			if (TickCounter % 50 == 0)
 			{
 				printf("PHASE SWAP: Current Phase is now %d\n", currentPhase + 1);
-				currentPhase = (currentPhase + 1) % 4;
+				currentPhase = currentPhase  % 3 +1;
  				TickCounter = 0;
-				if (currentPhase == 0)
-				{
-					currentPhase = 1; // Loop back to 1, skipping 0
-				}
 
 				level.SwichPhase(currentPhase);
-				for (auto& p : level.GetPickup())
-				{
-					
-					if (p.ps_type == phase_switch_lvl::any || static_cast<int>(p.ps_type) == currentPhase)
-					{
-						p.active = true;
-					}
-				}
+				
 				printf("Swapped to Phase %d: Pickups Reactivated!\n", currentPhase);
-			}
+			} 
 			
 		}
 

@@ -5,7 +5,7 @@ namespace Tmpl8
 
 	namespace
 	{
-		Surface tiles("assets/pixelart-drawing_14.png");
+		Surface tiles("assets/blocks-n-bushes-v2.png");
 		Sprite pickupSpriteNormal(new Surface("assets/energon_pickup_48x48.png"), 1);
 		Sprite pickupSpriteBig(new Surface("assets/mineral_pickup_48x48.png"), 1);
 	}
@@ -21,7 +21,7 @@ namespace Tmpl8
 		"cb ad bd cd ad bd cd ad bd cd ad bd cd ad bd cd bd cd ad bd ad bd cd ad cb",
 		"cb ad bd cd ad bd cd ad bd cd ad bd cd ad bd cd bd cd ad bd ad bd cd ad cb",
 		"cb ad bd cd ad bd cd ad bd cd ad bd cd ad bd cd bd cd ad bd ad bd cd ad cb",
-		"cb ad bd cd ad bd cd ad bd cd ad bd cd ad bd cd bd cd ad bd ad bd cd ad cb",
+		"cb ad bd cd ad bd cd ad bd eb ad bd cd ad bd cd bd cd ad bd ad bd cd ad cb",
 		"cb ad bd cd ad bd cd ad bd cd ad bd cd ad bd cd bd cd ad bd ad bd cd ad cb",
 		"cb ad bd cd ad bd cd ad bd cd ad bd cd ad bd cd bd cd ad bd ad bd cd ad cb",
 		"cb ad bd cd ad bd cd ad bd cd ad bd cd ad bd cd bd cd ad bd ad bd cd ad cb",
@@ -64,7 +64,7 @@ namespace Tmpl8
 		Collider{{0.0f, 511.5f},{800.0f,512.0f},ColliderType::Floor,phase_switch_lvl::any}
 	};
 
-	const Pickup pickups_1[] =
+	 Pickup pickups_1[] =
 	{
 		Pickup{15.0f,40.0f, 48,phase_switch_lvl::lvl_1Set1,PickupType::big},
 		Pickup{670.0f,0.0f, 48,phase_switch_lvl::lvl_1Set1,PickupType::normal},
@@ -78,18 +78,19 @@ namespace Tmpl8
 		Pickup{650.0f,16.0f, 48,phase_switch_lvl::lvl_1set3,PickupType::big}
 	};
 
+	int Tilemap_with = 192;
 
 	void DrawTile(int tx, int ty, Surface* screen, int x, int y)
 	{
-		Pixel* src = tiles.GetBuffer() + tx * 32 + (ty * 32) * 96;
+		Pixel* src = tiles.GetBuffer() + tx * 32 + (ty * 32) * Tilemap_with;
 		Pixel* dst = screen->GetBuffer() + x + y * 800;
 		for (int i = 0; i < 32; i++)
 			for (int j = 0; j < 32; j++)
 			{
 				// Check alpha threshold.
-				unsigned char a = (src[j + i * 96] >> 24) & 0xFF;
+				unsigned char a = (src[j + i * Tilemap_with] >> 24) & 0xFF;
 				if (a > 128)
-					dst[j + i * 800] = src[j + i * 96];
+					dst[j + i * 800] = src[j + i * Tilemap_with];
 
 			}
 	}
