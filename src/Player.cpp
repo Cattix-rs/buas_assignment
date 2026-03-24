@@ -9,8 +9,8 @@
 
 namespace Tmpl8
 {
-    
-	Physics u_physics;
+
+    Physics u_physics;
     void Player::Init(Sprite* sprite, int px, int py)
     {
         wR_Sprite = sprite;
@@ -44,7 +44,7 @@ namespace Tmpl8
         v = vec2f{ 0.0f,0.0f };
     }
 
-    
+
 
     float approach(float current, float target, float maxDelta)
     {
@@ -56,17 +56,14 @@ namespace Tmpl8
 
     void Player::Update(float deltaTime)
     {
-       
         if (!wR_Sprite) return;
 
         if (isDead) return;
 
-        
-
         ///input: check for high bit meaning key is down
         bool left = (GetAsyncKeyState(VK_LEFT) & 0x8000) != 0;
         bool right = (GetAsyncKeyState(VK_RIGHT) & 0x8000) != 0;
-           bool jump = (GetAsyncKeyState(VK_SPACE) & 0x8000) != 0;
+        bool jump = (GetAsyncKeyState(VK_SPACE) & 0x8000) != 0;
 
         const float jumpStrength = -0.35f; // tuned for ms system 325 good
         const float speed_x = 0.2f;
@@ -89,38 +86,31 @@ namespace Tmpl8
         bool jumpPressed = jump && !jumpedLastFrame;
         jumpedLastFrame = jump;
 
-        
-
-       
         if (left) v.x = -speed_x;
         if (right) v.x = speed_x;
 
         u_physics.Applyg(v, deltaTime);
-      //  pos = u_physics.IntegratePosition(pos, v, deltaTime);
-
-      
-       
 
         bool isWalking = std::abs(v.x) > 0.01f;
 
-         if (v.x == 0.0f)   walkAccumulator = 0.0f;
-        
-         if (isWalking)
-         {
-             float distanceMoved = std::abs(pos.x - prevPos.x);
-             walkAccumulator += distanceMoved;
+        if (v.x == 0.0f)   walkAccumulator = 0.0f;
 
-             const float pixelsPerEnergon = 10.0f;
-             while (walkAccumulator >= pixelsPerEnergon)
-             {
-                 if (energon > 0.0f) energon -= 0.00015f * deltaTime; // deltaTime in seconds
-                 walkAccumulator -= pixelsPerEnergon;
-             }
-         }
+        if (isWalking)
+        {
+            float distanceMoved = v.x * deltaTime;
+            walkAccumulator += distanceMoved;
+
+            const float pixelsPerEnergon = 10.0f;
+            while (walkAccumulator >= pixelsPerEnergon)
+            {
+                if (energon > 0.0f) energon -= 0.00015f * deltaTime; // deltaTime in seconds
+                walkAccumulator -= pixelsPerEnergon;
+            }
+        }
 
         if (jumpPressed && onGround)
         {
-            if (energon >= 0.01f) 
+            if (energon >= 0.01f)
             {
                 pos.y -= 0.1f;
                 v.y = jumpStrength;
@@ -128,12 +118,12 @@ namespace Tmpl8
                 energon -= 0.1f; // jump cost
             }
         }
-      
+
         state newState = state::idle;
         if (right) newState = state::right;
         else if (left) newState = state::left;
-        
-        
+
+
 
         movement = newState;
 
@@ -145,7 +135,7 @@ namespace Tmpl8
             prevMovement = movement;
         }
 
-        
+
 
         //animation advance when moving right. tick based animation
 
@@ -173,21 +163,19 @@ namespace Tmpl8
             wR_Sprite->SetFrame(0);
 
         }
-        clampToScreen();
     }
 
 
-    vec2f Player::IntegratePosition(const vec2f& pos, const vec2f& v, float deltaTime) const
-   {
-        return pos + v * deltaTime;
-    } 
+    vec2f Player::IntegratePosition(float deltaTime)
+    {
+        pos += v * deltaTime;
+        return pos;
+    }
 
     AABB Player::GetAABB() const noexcept
     {
         return aabb + pos;
     }
-
-    
 
     void Player::clampToScreen() noexcept
     {
@@ -203,7 +191,7 @@ namespace Tmpl8
         if (box.max.x >= ScreenWidth)
         {
             // move sprite left so box.max.x == ScreenWidth - 1
-            pos.x = ScreenWidth - aabb.max.x - 1;
+            pos.x = ScreenWidth - aabb.max.x;
             v.x = 0.0f;
         }
 
@@ -214,18 +202,18 @@ namespace Tmpl8
 
         if (box.max.y >= ScreenHeight)
         {
-            pos.y = ScreenHeight - aabb.max.y - 1;
+            pos.y = ScreenHeight - aabb.max.y;
             v.y = 0.0f;
-            
+            onGround = true;
         }
 
         if (energon <= 0.0f)
         {
-             isDead = true;
+            isDead = true;
         }
     }
 
-    
+
 
     void Player::Draw(Surface* screen)//needs to be be in game or ui class
     {
@@ -235,7 +223,7 @@ namespace Tmpl8
         int barY = 10;
 
         // filled blue portion
-       
+
         // empty gray portion
         screen->Box(barX + barWidth, barY, barX + 200, barY + barHeight, 0x333333);
         if (!isDead)
@@ -243,15 +231,15 @@ namespace Tmpl8
             screen->Bar(barX, barY, barX + barWidth, barY + barHeight, 0x0000FF); // solid blue
         }
 
-        
-        if (isDead )
+
+        if (isDead)
         {
             const char* msg = "YOU LOST";
-            
+
             int msgX = 800 / 2 - 50;
             int msgY = 512 / 2 - 10;
-            screen->Print(msg,msgX, msgY,  0xFF0000); 
-            
+            screen->Print(msg, msgX, msgY, 0xFF0000);
+
         }
     }
 
@@ -270,5 +258,5 @@ namespace Tmpl8
         return vec2f{ static_cast<float>(wR_Sprite->GetWidth()), static_cast<float>(wR_Sprite->GetHeight()) };
     }
 
-    
+
 }
