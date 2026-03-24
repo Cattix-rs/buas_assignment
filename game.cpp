@@ -62,7 +62,7 @@ namespace Tmpl8
 			TickCounter++;
 			msAccumulator -= Tick_Rate_100ms;
 
-			if (TickCounter % 50 == 0)
+			if (TickCounter % 70 == 0)
 			{
 				printf("PHASE SWAP: Current Phase is now %d\n", currentPhase + 1);
 				currentPhase = currentPhase  % 3 +1;

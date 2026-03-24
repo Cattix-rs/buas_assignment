@@ -37,74 +37,74 @@ namespace Tmpl8
 		
 
 		
-
-		for (const Collider& c : level.GetColliders())
-		{
-			bool isAny = (c.ps_type == phase_switch_lvl::any);
-			bool isMatch = (static_cast<int>(c.ps_type) == activePhase);
-			if (!(isAny || isMatch)) continue;
-
-			auto result = playerBox.overlap(c.box);
-			if (!result) continue;
-
-			vec2f correction = *result;
-
-			if (correction.x != 0.0f)
+		
+			for (const Collider& c : level.GetColliders())
 			{
-				pos.x -= correction.x;
-				v.x = 0.0f;
+				bool isAny = (c.ps_type == phase_switch_lvl::any);
+				bool isMatch = (static_cast<int>(c.ps_type) == activePhase);
+				if (!(isAny || isMatch)) continue;
 
-				playerBox = player.GetAABB();
-			}
-		}
-		pos = player.IntegratePosition(pos, { 0.0f,v.y }, deltaTime);
+				auto result = playerBox.overlap(c.box);
+				if (!result) continue;
 
-		player.SetOnGround(false);
-		playerBox = player.GetAABB();
+				vec2f correction = *result;
 
-		for (const Collider& c : level.GetColliders())
-		{
-			bool isAny = (c.ps_type == phase_switch_lvl::any);
-			bool isMatch = (static_cast<int>(c.ps_type) == activePhase);
-			if (!(isAny || isMatch)) continue;
-
-			auto result = playerBox.overlap(c.box);
-			if (!result) continue;
-
-			vec2f correction = *result;
-
-			if (c.type == ColliderType::OneWay)
-			{
-				if (v.y < 0.0f)
+				if (correction.x != 0.0f)
 				{
-					continue;
+					pos.x -= correction.x;
+					v.x = 0.0f;
+
+					playerBox = player.GetAABB();
 				}
+			}
+			pos = player.IntegratePosition(pos, { 0.0f,v.y }, deltaTime);
 
-				if (prevBox.max.y < c.box.min.y && playerBox.max.y > c.box.min.y)
+			player.SetOnGround(false);
+			playerBox = player.GetAABB();
+
+			for (const Collider& c : level.GetColliders())
+			{
+				bool isAny = (c.ps_type == phase_switch_lvl::any);
+				bool isMatch = (static_cast<int>(c.ps_type) == activePhase);
+				if (!(isAny || isMatch)) continue;
+
+				auto result = playerBox.overlap(c.box);
+				if (!result) continue;
+
+				vec2f correction = *result;
+
+				if (c.type == ColliderType::OneWay)
 				{
+					if (v.y < 0.0f)
+					{
+						continue;
+					}
+
+					if (prevBox.max.y < c.box.min.y && playerBox.max.y > c.box.min.y)  //prevbox.max.y == player.box.max.y
+					{
 						pos.y -= correction.y;
 						v.y = 0.0f;
 						player.SetOnGround(true);
-					
-				}
-					
-			}
-			else if (correction.y != 0.0f)
-			{
-				if (v.y >= 0.0f)
-				{
-					pos.y -= correction.y;
-					v.y = 0.0f;
-					player.SetOnGround(true);
-				}
-				else if (v.y < 0.0f) 
-				{
-					pos.y -= correction.y;
-					v.y = 0.0f; 
-				}
-			}
-		}
 
+					}
+
+				}
+				else if (correction.y != 0.0f)
+				{
+					if (v.y >= 0.0f)
+					{
+						pos.y -= correction.y;
+						v.y = 0.0f;
+						player.SetOnGround(true);
+					}
+					else if (v.y < 0.0f)
+					{
+						pos.y -= correction.y;
+						v.y = 0.0f;
+					}
+				}
+			}
+		
 		player.SetPos(pos);
 		player.SetVelocity(v);
 	}

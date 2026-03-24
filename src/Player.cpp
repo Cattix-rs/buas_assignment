@@ -122,7 +122,7 @@ namespace Tmpl8
         {
             if (energon >= 0.01f) 
             {
-                pos.y -= 0.0001f;
+                pos.y -= 0.1f;
                 v.y = jumpStrength;
                 onGround = false;
                 energon -= 0.1f; // jump cost
@@ -178,7 +178,7 @@ namespace Tmpl8
 
 
     vec2f Player::IntegratePosition(const vec2f& pos, const vec2f& v, float deltaTime) const
-    {
+   {
         return pos + v * deltaTime;
     } 
 

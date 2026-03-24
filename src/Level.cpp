@@ -131,7 +131,7 @@ namespace Tmpl8
 
 			if (isAny || isMatch)
 			{
-				p.active = true;  // <--- SET BREAKPOINT HERE this fucn does nto activate thaem
+				p.active = true; 
 			}
 			else
 			{
