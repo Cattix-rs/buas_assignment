@@ -103,7 +103,7 @@ namespace Tmpl8
             const float pixelsPerEnergon = 10.0f;
             while (walkAccumulator >= pixelsPerEnergon)
             {
-                if (energon > 0.0f) energon -= 0.00015f * deltaTime; // deltaTime in seconds
+                if (energon > 0.0f) energon -= 0.00015f * deltaTime; 
                 walkAccumulator -= pixelsPerEnergon;
             }
         }
@@ -115,7 +115,7 @@ namespace Tmpl8
                 pos.y -= 0.1f;
                 v.y = jumpStrength;
                 onGround = false;
-                energon -= 0.1f; // jump cost
+                energon -= 0.1f; 
             }
         }
 
@@ -222,9 +222,9 @@ namespace Tmpl8
         int barX = 10;
         int barY = 10;
 
-        // filled blue portion
+        
 
-        // empty gray portion
+       
         screen->Box(barX + barWidth, barY, barX + 200, barY + barHeight, 0x333333);
         if (!isDead)
         {
