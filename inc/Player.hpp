@@ -49,7 +49,7 @@ namespace Tmpl8
         float GetEnergon() const noexcept { return energon; }
         void AddEnergon(float amount) noexcept { energon = std::min(maxEnergon, energon + amount); }
     private:
-        float energon = 200.0f;          // current energon
+        float energon = 100.0f;          // current energon
         const float maxEnergon = 400.0f; // maximum energon
         float walkAccumulator = 0.0f;    // track distance walked to reduce energon per 10 pixels
         bool isDead = false;

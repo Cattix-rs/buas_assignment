@@ -20,9 +20,23 @@ public:
 
 	int GetCurrentPhase() const { return currentPhase; }
 	
+	void SavePlayerData();
+	void LoadScores();
+	void DrawScores();
 	
 	int currentPhase = 0;
 private:
+	std::string playerName = "";
+	struct ScoreEntry { std::string name; int score; };
+	std::vector<ScoreEntry> highScores;
+
+	enum State
+	{
+		PLAYING,
+		NAME_ENTRY,
+		LEADERBOARD
+	};
+	State CurrentState = PLAYING;
 	Surface* screen = nullptr;
 	Timer timer;
 	Level level;

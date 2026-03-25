@@ -22,7 +22,7 @@ namespace Tmpl8
 	struct Pickup
 	{
 		vec2f pos;
-		bool active = false;
+		bool active = true;
 		PickupType type = PickupType::normal;
 		int size = 48;
 		phase_switch_lvl ps_type = phase_switch_lvl::any;

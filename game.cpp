@@ -2,10 +2,10 @@
 #include "surface.h"
 #include <timer.hpp>
 #include <physics.hpp>
-
 #include <Player.hpp>
 
 #include <cstdio> //printf
+#include <fstream>
 #include <iostream>
 #include <ostream>
 #include <windows.h>
@@ -35,10 +35,20 @@ namespace Tmpl8
 		
 		// If sprite may change at runtime, update stored sprite size:
 		player.SetSizeFromSprite();
+		
 	}
-	
-	
-	
+
+	void Game::SavePlayerData()
+	{
+		
+	}
+
+	void Game::LoadScores()
+	{
+		std::ifstream file("highscore/highscores.txt");
+		//if ()
+	}
+
 	// -----------------------------------------------------------
 	// Close down application
 	// -----------------------------------------------------------
@@ -64,7 +74,7 @@ namespace Tmpl8
 			TickCounter++;
 			msAccumulator -= Tick_Rate_100ms;
 
-			if (TickCounter % 70 == 0)
+			if (TickCounter % 60 == 0)
 			{
 				printf("PHASE SWAP: Current Phase is now %d\n", currentPhase + 1);
 				currentPhase = currentPhase  % 3 +1;

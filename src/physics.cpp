@@ -44,7 +44,7 @@ namespace Tmpl8
                     if (v.y > 0.0f && prevAABB.max.y <= c.box.min.y)
                     {
                         pos.y -= result->y; // Resolve collision.
-                        pos.y = std::round(pos.y); // Snap to pixel grid to prevent jittering
+                        pos.y = std::round(pos.y); 
                         v.y = 0.0f;
                         player.SetOnGround(true);
                     }
