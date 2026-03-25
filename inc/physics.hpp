@@ -17,9 +17,6 @@ namespace Tmpl8
 		// gravity constant
 		void Applyg(vec2f& v, float deltaTime) const;
 
-		// position calculation
-		vec2f IntegratePosition(const vec2f& prevPos, const vec2f& v, float deltaTime) const;
-
 		static void ResolvePlayerCollision(Player& player, const Level& level, float deltaTime, int activePhase);
 		void CheckPickupCollision(Player& player, Level& level);
 

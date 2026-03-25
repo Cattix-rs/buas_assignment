@@ -56,6 +56,8 @@ namespace Tmpl8
 	
 	void Game::Tick(float deltaTime)
 	{
+        deltaTime = Min(deltaTime, 33.3333f); // clamp deltaTime to avoid large jumps
+
 		msAccumulator += deltaTime;
 		while (msAccumulator >= Tick_Rate_100ms)
 		{
@@ -80,12 +82,9 @@ namespace Tmpl8
 		
 		gamephysics.ResolvePlayerCollision(player, level, deltaTime, currentPhase);
 		gamephysics.CheckPickupCollision(player, level);
-		
 
 		level.Draw(screen, currentPhase);
-		
-		
-		
+				
 		for (const auto& c : level.GetColliders())
 		{
 			bool isAny = (c.ps_type == phase_switch_lvl::any);
@@ -105,13 +104,9 @@ namespace Tmpl8
 		}
 		
 		player.Draw(screen);
-		
-		theSprite.Draw(screen, player.GetX(), player.GetY());
-		
-		
+		theSprite.Draw(screen, player.GetX(), player.GetY());	
 		
 		screen->Box(player.GetAABB(), 0xffffffff);
-		player.clampToScreen();
 		
 	}
 
