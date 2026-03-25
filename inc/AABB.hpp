@@ -128,7 +128,7 @@ namespace Tmpl8
 			return (min + max) * 0.5f;
 		}
 
-		std::optional<vec2f> overlap(const AABB& aabb)const noexcept
+		std::optional<vec2f> overlap(const AABB& aabb) const noexcept
 		{
 			vec2f overlap = Min(max, aabb.max) - Max(min, aabb.min);
 			if (overlap.x > 0.0f && overlap.y > 0.0f)

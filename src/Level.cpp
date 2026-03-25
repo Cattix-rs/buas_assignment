@@ -60,8 +60,8 @@ namespace Tmpl8
 		Collider{{777.0f, 277.0f},{800.0f,341.0f},ColliderType::Solid,phase_switch_lvl::lvl_1set3},
 		Collider{{577.0f, 48.0f},{610.0f,139.2f},ColliderType::Solid,phase_switch_lvl::lvl_1set3},
 		Collider{{629.0f, 102.0f},{706.4f,127.2f},ColliderType::Solid,phase_switch_lvl::lvl_1set3},
-		Collider{{0.0f, 0.0f},{800.0f,0.2f},ColliderType::Solid,phase_switch_lvl::any},
-		Collider{{0.0f, 511.5f},{800.0f,512.0f},ColliderType::Floor,phase_switch_lvl::any}
+		Collider{{0.0f, 0.0f},{800.0f,0.0f},ColliderType::Solid,phase_switch_lvl::any},
+		Collider{{0.0f, 512.0f},{800.0f,1024.0f},ColliderType::Floor,phase_switch_lvl::any}
 	};
 
 	 Pickup pickups_1[] =
