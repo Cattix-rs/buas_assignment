@@ -4,6 +4,12 @@
 #include <physics.hpp>
 namespace Tmpl8 {
 
+	struct highscores
+	{
+		char name[5];
+		uint32_t score;
+	};
+
 class Surface;
 class Game
 {

@@ -46,7 +46,15 @@ namespace Tmpl8
 	void Game::LoadScores()
 	{
 		std::ifstream file("highscore/highscores.txt");
-		//if ()
+		if (!file) return;
+
+		char name[5];
+		uint32_t score;
+		while (file >> name >> score)
+		{
+			highScores.push_back({ name,score });
+		}
+		file.close();
 	}
 
 	// -----------------------------------------------------------
