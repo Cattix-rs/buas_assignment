@@ -1,13 +1,10 @@
 #include "game.h"
-
 #include <algorithm>
-
 #include "surface.h"
 #include <timer.hpp>
 #include <physics.hpp>
 #include <Player.hpp>
-
-#include <cstdio> //printf
+#include <cstdio> 
 #include <fstream>
 #include <iostream>
 #include <ostream>
@@ -55,7 +52,6 @@ namespace Tmpl8
 		{
 			for (const auto& entry : m_HighScores)
 			{
-				// Use "\n" instead of std::endl to avoid unnecessary disk flushing
 				highscores << entry.name << " " << entry.score << "\n";
 			}
 		}
@@ -84,14 +80,14 @@ namespace Tmpl8
 		int yPos = 150;
 
 		const char* msgT25 = "   Top 25   ";
-		screen->Print(msgT25, xPos + 25, yPos - 30, 0xffffff);
+		screen->Print(msgT25, xPos + 250, yPos - 30, 0xffffff);
 
 		for (size_t i = 0; i < m_HighScores.size(); ++i)
 		{
 			if (i == 10)
 			{
-				xPos = xPos + 300; // Move 300 pixels to the right
-				yPos = 150;       // Reset height to the top
+				xPos = xPos + 300;
+				yPos = 150;
 			}
 			char buffer[64];
 
@@ -130,16 +126,16 @@ namespace Tmpl8
 			screen->Print("Enter a Short Name (5characters max)", 275, 160, 0xFFFFFF);
 
 			char nameDisplay[16];
-			if (strlen(m_CurrentName) == 0) sprintf(nameDisplay, "_ _ _ _ _");
-			else if (strlen(m_CurrentName) == 1) sprintf(nameDisplay, "%c _ _ _ _", m_CurrentName[0]);
-			else if (strlen(m_CurrentName) == 2) sprintf(nameDisplay, "%c %c _ _ _", m_CurrentName[0], m_CurrentName[1]);
-			else if (strlen(m_CurrentName) == 3) sprintf(nameDisplay, "%c %c %c _ _", m_CurrentName[0], m_CurrentName[1], m_CurrentName[2]);
-			else if (strlen(m_CurrentName) == 4) sprintf(nameDisplay, "%c %c %c %c _", m_CurrentName[0], m_CurrentName[1], m_CurrentName[2], m_CurrentName[3]);
-			else sprintf(nameDisplay, "%c %c %c %c %c", m_CurrentName[0], m_CurrentName[1], m_CurrentName[2], m_CurrentName[3], m_CurrentName[4]);
+			if (strlen(m_CurrentName) == 0) sprintf(nameDisplay, "_____");
+			else if (strlen(m_CurrentName) == 1) sprintf(nameDisplay, "%c____", m_CurrentName[0]);
+			else if (strlen(m_CurrentName) == 2) sprintf(nameDisplay, "%c%c___", m_CurrentName[0], m_CurrentName[1]);
+			else if (strlen(m_CurrentName) == 3) sprintf(nameDisplay, "%c%c%c__", m_CurrentName[0], m_CurrentName[1], m_CurrentName[2]);
+			else if (strlen(m_CurrentName) == 4) sprintf(nameDisplay, "%c%c%c%c_", m_CurrentName[0], m_CurrentName[1], m_CurrentName[2], m_CurrentName[3]);
+			else sprintf(nameDisplay, "%c%c%c%c%c", m_CurrentName[0], m_CurrentName[1], m_CurrentName[2], m_CurrentName[3], m_CurrentName[4]);
 
 			screen->Print(nameDisplay, 320, 190, 0x00FF00);
 
-			if (strlen(m_CurrentName) > 2)
+			if (strlen(m_CurrentName) > 1)
 			{
 				screen->Print("Press enter to save", 275, 230, 0x555555);
 			}
@@ -151,9 +147,9 @@ namespace Tmpl8
 	void Game::Restart()
 	{
 		CurrentState = PLAYING;
-		currentPhase = 1;
+		currentPhase = 0;
 		msAccumulator = 0.0f;
-		TickCounter = 0;
+		TickCounter = 318;
 		player.Reset();
 		player.Init(&theSprite, 0, 400);
 		
@@ -205,7 +201,7 @@ namespace Tmpl8
 	
 	void Game::Tick(float deltaTime)
 	{
-        deltaTime = Min(deltaTime, 33.3333f); // clamp deltaTime to avoid large jumps
+        deltaTime = Min(deltaTime, 33.3333f);
 		screen->Clear(0);
 
 		if (CurrentState == PLAYING)
@@ -216,7 +212,7 @@ namespace Tmpl8
 				TickCounter++;
 				msAccumulator -= Tick_Rate_100ms;
 
-				if (TickCounter % 180 == 0)
+				if (TickCounter % 320 == 0)
 				{
 					printf("PHASE SWAP: Current Phase is now %d\n", currentPhase + 1);
 					currentPhase = currentPhase % 3 + 1;
