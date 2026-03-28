@@ -21,23 +21,19 @@ namespace Tmpl8
 	namespace
 	{
 		Sprite theSprite(new Surface("assets/WALK.PNG"), 8);
-		int px = 0, py = 0;
 
-		//Movement instance (onc per controlled entity;
+
 		Player player;
 	}
 	void Game::Init()
 	{
 		currentPhase = 0;
 		CurrentState = PLAYING;
-		// initialize movement/animation system with sprite and position pointers
+		
 		level.Init();
 		player.Init(&theSprite, 0, 400);
+		LoadScores();
 		
-		
-		
-		
-		// If sprite may change at runtime, update stored sprite size:
 		player.SetSizeFromSprite();
 		
 	}
@@ -57,7 +53,11 @@ namespace Tmpl8
 
 		if (highscores.is_open())
 		{
-			highscores.write(reinterpret_cast<char*>(m_HighScores.data()), m_HighScores.size() * sizeof(HighScoreEntry));
+			for (const auto& entry : m_HighScores)
+			{
+				// Use "\n" instead of std::endl to avoid unnecessary disk flushing
+				highscores << entry.name << " " << entry.score << "\n";
+			}
 		}
 		highscores.close();
 	}
@@ -66,15 +66,16 @@ namespace Tmpl8
 	void Game::LoadScores()
 	{
 		
-		std::ifstream file("highscore/highscores.txt");
-		if (!file) return;
-		char tempName[6];
+		std::ifstream Infile("highscores/highscores.txt");
+		if (!Infile) return;
+
+		std::string tempName;
 		uint32_t tempScore;
-		while (file >> tempName >> tempScore)
+		while (Infile >> tempName >> tempScore)
 		{
-			m_HighScores.emplace_back(tempName, static_cast<uint32_t>(tempScore));
+			m_HighScores.emplace_back(tempName.c_str(), static_cast<uint32_t>(tempScore));
 		}
-		file.close();
+		Infile.close();
 	}
 
 	void Game::DrawScores()
@@ -87,7 +88,12 @@ namespace Tmpl8
 
 		for (size_t i = 0; i < m_HighScores.size(); ++i)
 		{
-			char buffer[32];
+			if (i == 10)
+			{
+				xPos = xPos + 300; // Move 300 pixels to the right
+				yPos = 150;       // Reset height to the top
+			}
+			char buffer[64];
 
 			sprintf(buffer, "%d. %s %u", static_cast<int>(i) + 1, m_HighScores[i].name, m_HighScores[i].score);
 			screen->Print(buffer, xPos, yPos, 0x00ff00); 
@@ -100,7 +106,58 @@ namespace Tmpl8
 	// -----------------------------------------------------------
 	void Game::Shutdown()
 	{
+		player.debugShutdown();
+	}
+
+	void Game::Draw()
+	{
+		uint32_t score = player.GetScore();
+		if (CurrentState == PLAYING)
+		{
+			
+			char ScoreBuf[32];
+			sprintf(ScoreBuf, "Score: %05u", score);
+			screen->Print(ScoreBuf, 10, 10, 0xFFFF00);
+		}
+		else if (CurrentState == NAMING)
+		{
+			screen->Print("---Game Over---", 280, 100, 0xFF0000);
+
+			char finalScore[32];
+			sprintf(finalScore, "Final Score: %u", score);
+			screen->Print(finalScore, 285, 120, 0xFFFF00);
+
+			screen->Print("Enter a Short Name (5characters max)", 275, 160, 0xFFFFFF);
+
+			char nameDisplay[16];
+			if (strlen(m_CurrentName) == 0) sprintf(nameDisplay, "_ _ _ _ _");
+			else if (strlen(m_CurrentName) == 1) sprintf(nameDisplay, "%c _ _ _ _", m_CurrentName[0]);
+			else if (strlen(m_CurrentName) == 2) sprintf(nameDisplay, "%c %c _ _ _", m_CurrentName[0], m_CurrentName[1]);
+			else if (strlen(m_CurrentName) == 3) sprintf(nameDisplay, "%c %c %c _ _", m_CurrentName[0], m_CurrentName[1], m_CurrentName[2]);
+			else if (strlen(m_CurrentName) == 4) sprintf(nameDisplay, "%c %c %c %c _", m_CurrentName[0], m_CurrentName[1], m_CurrentName[2], m_CurrentName[3]);
+			else sprintf(nameDisplay, "%c %c %c %c %c", m_CurrentName[0], m_CurrentName[1], m_CurrentName[2], m_CurrentName[3], m_CurrentName[4]);
+
+			screen->Print(nameDisplay, 320, 190, 0x00FF00);
+
+			if (strlen(m_CurrentName) > 2)
+			{
+				screen->Print("Press enter to save", 275, 230, 0x555555);
+			}
+			
+			
+		}
+	}
+
+	void Game::Restart()
+	{
+		CurrentState = PLAYING;
+		currentPhase = 1;
+		msAccumulator = 0.0f;
+		TickCounter = 0;
+		player.Reset();
+		player.Init(&theSprite, 0, 400);
 		
+		m_CurrentName[0] = '\0';
 	}
 
 	bool Game::WasKeyPressed(int vKey)
@@ -115,6 +172,13 @@ namespace Tmpl8
 
 	void Game::HandleTyping()
 	{
+		int len = strlen(m_CurrentName);
+
+		if (WasKeyPressed(VK_BACK) && len > 0)
+		{
+			m_CurrentName[len - 1] = '\0';
+		}
+		if (len < 5)
 		for (int vk = 0x41; vk <= 0x5A; ++vk)
 		{
 			if (WasKeyPressed(vk))
@@ -122,13 +186,13 @@ namespace Tmpl8
 				size_t len = strlen(m_CurrentName);
 				if (len < 5)
 				{
-					m_CurrentName[len] = (char)vk;
+					m_CurrentName[len] = static_cast<char>(vk);
 					m_CurrentName[len + 1] = '\0';
-					printf("Name: %s\n", m_CurrentName);
+					break;
 				}
 			}
 		}
-		if (WasKeyPressed(VK_RETURN) && strlen(m_CurrentName) == 3) {
+		if (WasKeyPressed(VK_RETURN) && strlen(m_CurrentName) > 1) {
 			SavePlayerData(m_CurrentName, playerScore);
 			CurrentState = SHOW_SCORES;
 		}
@@ -142,6 +206,7 @@ namespace Tmpl8
 	void Game::Tick(float deltaTime)
 	{
         deltaTime = Min(deltaTime, 33.3333f); // clamp deltaTime to avoid large jumps
+		screen->Clear(0);
 
 		if (CurrentState == PLAYING)
 		{
@@ -159,14 +224,20 @@ namespace Tmpl8
 
 					level.SwichPhase(currentPhase);
 
-					player.AddScore(60);
+					player.AddScore(6);
 
 					printf("Swapped to Phase %d: Pickups Reactivated!\n", currentPhase);
 				}
 
 			}
 
-			screen->Clear(0);
+#ifdef _DEBUG
+			if (GetAsyncKeyState(VK_END) & 0x8000)
+			{
+				Shutdown();
+			}
+#endif
+			
 			player.Update(deltaTime);
 
 			gamephysics.ResolvePlayerCollision(player, level, deltaTime, currentPhase);
@@ -222,8 +293,14 @@ namespace Tmpl8
 		else if (CurrentState == SHOW_SCORES)
 		{
 			DrawScores();
+			screen->Print("PRESS R TO TRY AGAIN", 300, 400, 0x00FF00);
+
+			if (WasKeyPressed('R'))
+			{
+				Restart();
+			}
 		}
-		
+		Draw();
 	}
 
 	

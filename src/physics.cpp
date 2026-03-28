@@ -89,6 +89,7 @@ namespace Tmpl8
             {
                 pickup.active = false;
                 player.AddEnergon(pickup.pickup_Value);
+                player.AddScore(2 * pickup.pickup_Value);
             }
         }
     }

@@ -97,7 +97,7 @@ namespace Tmpl8
 
         if (isWalking)
         {
-            float distanceMoved = v.x * deltaTime;
+            float distanceMoved = std::abs(v.x) * deltaTime;
             walkAccumulator += distanceMoved;
 
             const float pixelsPerEnergon = 10.0f;

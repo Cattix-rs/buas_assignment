@@ -52,7 +52,8 @@ namespace Tmpl8
 
         int GetScore() const noexcept { return score; }
         void AddScore(uint32_t points) { score += points; }
-        void Reset() { score = 0; isDead = false; }
+        void Reset() { score = 40; energon = 100; isDead = false; }
+        void debugShutdown() { energon -= maxEnergon; }
     private:
         float energon = 100.0f;          // current energon
         const float maxEnergon = 400.0f; // maximum energon
