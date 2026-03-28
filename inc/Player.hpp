@@ -42,17 +42,25 @@ namespace Tmpl8
 
         bool IsDead() const { return isDead; }
 
+
         void SetSizeFromSprite() noexcept;
 
         vec2f size() const noexcept;
 
         float GetEnergon() const noexcept { return energon; }
         void AddEnergon(float amount) noexcept { energon = std::min(maxEnergon, energon + amount); }
+
+        int GetScore() const noexcept { return score; }
+        void AddScore(uint32_t points) { score += points; }
+        void Reset() { score = 0; isDead = false; }
     private:
         float energon = 100.0f;          // current energon
         const float maxEnergon = 400.0f; // maximum energon
         float walkAccumulator = 0.0f;    // track distance walked to reduce energon per 10 pixels
+        uint32_t score = 0;
         bool isDead = false;
+
+        
 
         float Delta_x;
 

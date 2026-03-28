@@ -103,7 +103,7 @@ namespace Tmpl8
             const float pixelsPerEnergon = 10.0f;
             while (walkAccumulator >= pixelsPerEnergon)
             {
-                if (energon > 0.0f) energon -= 0.00015f * deltaTime; 
+                if (energon > 0.0f) energon -= 0.015f * deltaTime; 
                 walkAccumulator -= pixelsPerEnergon;
             }
         }
@@ -115,7 +115,7 @@ namespace Tmpl8
                 pos.y -= 0.1f;
                 v.y = jumpStrength;
                 onGround = false;
-                energon -= 0.1f; 
+                energon -= 5.0f; 
             }
         }
 

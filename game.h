@@ -4,10 +4,27 @@
 #include <physics.hpp>
 namespace Tmpl8 {
 
-	struct highscores
+	struct HighScoreEntry
 	{
-		char name[5];
+		char name[6];
 		uint32_t score;
+
+		HighScoreEntry(const char* n, uint32_t s) : score(static_cast<uint32_t>(s))
+		{
+			strncpy(name, n, 5);
+			name[5] = '\0';
+		}
+		HighScoreEntry() : score(0)
+		{
+			name[0] = '\0';
+		}
+	};
+
+	enum GameState
+	{
+		PLAYING,
+		NAMING,
+		SHOW_SCORES
 	};
 
 class Surface;
@@ -24,25 +41,25 @@ public:
 	void KeyUp( int key ) { /* implement if you want to handle keys */ }
 	void KeyDown( int key ) { /* implement if you want to handle keys */ }
 
+	bool WasKeyPressed(int vKey);
+	void HandleTyping();
+
 	int GetCurrentPhase() const { return currentPhase; }
 	
-	void SavePlayerData();
+	void SavePlayerData(const char* name, uint32_t score);
 	void LoadScores();
 	void DrawScores();
 	
 	int currentPhase = 0;
 private:
 	std::string playerName = "";
-	struct ScoreEntry { std::string name; int score; };
-	std::vector<ScoreEntry> highScores;
+	std::vector<HighScoreEntry> m_HighScores;
+	bool m_prevKeystate[256] = {false};
+	uint32_t playerScore = 0;
 
-	enum State
-	{
-		PLAYING,
-		NAME_ENTRY,
-		LEADERBOARD
-	};
-	State CurrentState = PLAYING;
+
+	GameState CurrentState = PLAYING;
+	char m_CurrentName[6] = "";
 	Surface* screen = nullptr;
 	Timer timer;
 	Level level;
