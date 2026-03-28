@@ -49,7 +49,7 @@ namespace Tmpl8
 
 		if (m_HighScores.size() > 25) m_HighScores.resize(25);
 
-		std::ofstream highscores("highscores/highscores.txt", std::ios::trunc);
+		std::ofstream highscores("highscores.txt", std::ios::trunc);
 
 		if (highscores.is_open())
 		{
@@ -66,7 +66,7 @@ namespace Tmpl8
 	void Game::LoadScores()
 	{
 		
-		std::ifstream Infile("highscores/highscores.txt");
+		std::ifstream Infile("highscores.txt");
 		if (!Infile) return;
 
 		std::string tempName;
@@ -216,7 +216,7 @@ namespace Tmpl8
 				TickCounter++;
 				msAccumulator -= Tick_Rate_100ms;
 
-				if (TickCounter % 60 == 0)
+				if (TickCounter % 180 == 0)
 				{
 					printf("PHASE SWAP: Current Phase is now %d\n", currentPhase + 1);
 					currentPhase = currentPhase % 3 + 1;

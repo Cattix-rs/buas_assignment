@@ -427,3 +427,5 @@ FodyWeavers.xsd
 *.msm
 *.msp
 /.github/copilot-instructions.md
+#highscores 
+highscores.txt
