@@ -42,7 +42,7 @@ namespace Tmpl8
 		{
 			if (type == PickupType::big)
 			{
-				pickup_Value = 50.0f;
+				pickup_Value = 30.0f;
 			}
 			else
 			{
