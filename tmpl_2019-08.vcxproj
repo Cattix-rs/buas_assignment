@@ -91,7 +91,7 @@
     <ClCompile Include="src\AABB.cpp" />
     <ClCompile Include="src\Level.cpp" />
     <ClCompile Include="src\Player.cpp" />
-    <ClCompile Include="src\spriteswap.cpp" />
+    <ClCompile Include="src\Sprite.cpp" />
     <ClCompile Include="src\physics.cpp" />
     <ClCompile Include="src\Timer.cpp" />
     <ClCompile Include="surface.cpp" />
@@ -102,7 +102,7 @@
     <ClInclude Include="inc\AABB.hpp" />
     <ClInclude Include="inc\Level.hpp" />
     <ClInclude Include="inc\Player.hpp" />
-    <ClInclude Include="inc\spriteswap.hpp" />
+    <ClInclude Include="inc\Sprite.hpp" />
     <ClInclude Include="inc\physics.hpp" />
     <ClInclude Include="inc\Timer.hpp" />
     <ClInclude Include="surface.h" />

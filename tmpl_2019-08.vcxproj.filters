@@ -30,7 +30,7 @@
     <ClCompile Include="src\physics.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\spriteswap.cpp">
+    <ClCompile Include="src\Sprite.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\AABB.cpp">
@@ -56,7 +56,7 @@
     <ClInclude Include="inc\Player.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="inc\spriteswap.hpp">
+    <ClInclude Include="inc\Sprite.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="inc\physics.hpp">
