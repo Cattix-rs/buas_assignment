@@ -24,7 +24,9 @@ namespace Tmpl8 {
 	{
 		PLAYING,
 		NAMING,
-		SHOW_SCORES
+		SHOW_SCORES,
+		TUTORIAL
+
 	};
 
 class Surface;
@@ -60,7 +62,7 @@ private:
 	uint32_t playerScore = 0;
 
 
-	GameState CurrentState = PLAYING;
+	GameState CurrentState = TUTORIAL;
 	char m_CurrentName[6] = "";
 	Surface* screen = nullptr;
 	Timer timer;

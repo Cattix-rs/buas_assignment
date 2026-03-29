@@ -89,6 +89,8 @@
   <ItemGroup>
     <ClCompile Include="game.cpp" />
     <ClCompile Include="src\AABB.cpp" />
+    <ClCompile Include="src\BlendMode.cpp" />
+    <ClCompile Include="src\Color.cpp" />
     <ClCompile Include="src\Image.cpp" />
     <ClCompile Include="src\Level.cpp" />
     <ClCompile Include="src\Player.cpp" />
@@ -101,6 +103,8 @@
   <ItemGroup>
     <ClInclude Include="game.h" />
     <ClInclude Include="inc\AABB.hpp" />
+    <ClInclude Include="inc\BlendMode.hpp" />
+    <ClInclude Include="inc\Color.hpp" />
     <ClInclude Include="inc\Image.hpp" />
     <ClInclude Include="inc\Level.hpp" />
     <ClInclude Include="inc\Player.hpp" />

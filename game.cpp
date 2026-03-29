@@ -25,7 +25,7 @@ namespace Tmpl8
 	void Game::Init()
 	{
 		currentPhase = 0;
-		CurrentState = PLAYING;
+		CurrentState = TUTORIAL;
 		
 		level.Init();
 		player.Init(&theSprite, 0, 400);
@@ -108,7 +108,7 @@ namespace Tmpl8
 	void Game::Draw()
 	{
 		uint32_t score = player.GetScore();
-		if (CurrentState == PLAYING)
+		if (CurrentState == PLAYING || CurrentState == TUTORIAL)
 		{
 			
 			char ScoreBuf[32];
@@ -212,7 +212,7 @@ namespace Tmpl8
 				TickCounter++;
 				msAccumulator -= Tick_Rate_100ms;
 
-				if (TickCounter % 320 == 0)
+				if (TickCounter % 32 == 0)
 				{
 					printf("PHASE SWAP: Current Phase is now %d\n", currentPhase + 1);
 					currentPhase = currentPhase % 3 + 1;
@@ -295,6 +295,69 @@ namespace Tmpl8
 			{
 				Restart();
 			}
+		}
+		else if (CurrentState == TUTORIAL)
+		{
+			player.Update(deltaTime);
+			int score = player.GetScore();
+			gamephysics.ResolvePlayerCollision(player, level, deltaTime, currentPhase);
+			gamephysics.CheckPickupCollision(player, level);
+
+			level.Draw(screen, currentPhase);
+
+			const char* msg = "Try Hiting space Bar and you can use Arow keys for movement \n";
+			int msgX = 800 / 2 - 50;
+			int msgY = 400 / 2 - 10;
+			screen->Print(msg, msgX, msgY, 0x000000);
+
+			currentPhase = 1;
+			for (const auto& c : level.GetColliders())
+			{
+				bool isAny = (c.ps_type == phase_switch_lvl::any);
+				bool isMatch = (static_cast<int>(c.ps_type) == currentPhase);
+				if (isAny || isMatch)
+				{
+					if (c.type == ColliderType::Solid)
+						screen->Box(c.box, 0xFF0000FF);
+					else if (c.type == ColliderType::OneWay)
+					{
+						screen->Box(c.box, 0xFF2E8B57);
+					}
+					else if (c.type == ColliderType::Floor)
+						screen->Box(c.box, 0x00000000);
+				}
+
+			}
+
+			if ((player.IsDead() && CurrentState == TUTORIAL) || (score == 360))
+			{
+				int score = player.GetScore();
+				m_CurrentName[0] = '\0';
+				this->playerScore = score;
+				for (int i = 0; i < 256; i++) {
+					m_prevKeystate[i] = (GetAsyncKeyState(i) & 0x8000) != 0;
+				}
+				const char* msg = "YOUR ENERGON IS NOW ZERO YOU WOULD OF LOST IF YOU WERENT IN TUTORIAL;\n ";
+
+				int msgX = 800 / 2 - 50;
+				int msgY = 512 / 2 - 10;
+				screen->Print(msg, msgX, msgY, 0xFF0000);
+
+				const char* msg2 = "OR YOU HAVE COLLECTED ENOUGE POINTS WITHOUT REACHING ZERO ENERGY \n ";
+				screen->Print(msg2, msgX, msgY + 20, 0xFF0000);
+
+				screen->Print("PRESS ENTER TO Load Into THE GAME, You can move till you Run out of Energy", 300, 400, 0x00FF00);
+
+				if (WasKeyPressed(VK_RETURN))
+				{
+					Restart();
+				}
+
+			}
+			player.Draw(screen);
+			theSprite.Draw(screen, player.GetX(), player.GetY());
+
+			screen->Box(player.GetAABB(), 0xffffffff);
 		}
 		Draw();
 	}

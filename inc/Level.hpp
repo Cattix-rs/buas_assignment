@@ -11,7 +11,7 @@ namespace Tmpl8
 		lvl_1Set1,
 		lvl_1Set2,
 		lvl_1set3,
-		lvl_2set1
+		lvl_2set1 // not implemented 
 	};
 	
 	enum class PickupType
