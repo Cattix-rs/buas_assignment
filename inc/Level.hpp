@@ -10,7 +10,7 @@ namespace Tmpl8
 		any,
 		lvl_1Set1,
 		lvl_1Set2,
-		lvl_1set3,
+		lvl_1Set3,
 		lvl_2set1 // not implemented 
 	};
 	

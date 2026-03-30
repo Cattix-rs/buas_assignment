@@ -49,17 +49,17 @@ namespace Tmpl8
 		Collider{{358.0f, 412.0f},{445.0f, 471.0f},ColliderType::Solid,phase_switch_lvl::lvl_1Set2},
 		Collider{{572.0f, 391.0f},{627, 448},ColliderType::Solid,phase_switch_lvl::lvl_1Set2},
 		Collider{{702.0f, 301},{768.0f, 358.0f},ColliderType::Solid,phase_switch_lvl::lvl_1Set2},
-		Collider{{0.0f, 42.0f},{70.0f,60.2f},ColliderType::OneWay,phase_switch_lvl::lvl_1set3},
-		Collider{{8.0f, 193.0f},{76.0f,219.2f},ColliderType::Solid,phase_switch_lvl::lvl_1set3},
-		Collider{{24.0f, 365.0f},{100.0f,436.0f},ColliderType::Solid,phase_switch_lvl::lvl_1set3},
-		Collider{{135.0f, 447.0f},{202.0f,471.2f},ColliderType::Solid,phase_switch_lvl::lvl_1set3},
-		Collider{{666.6f, 413.0f},{800.0f,444.4f},ColliderType::Solid,phase_switch_lvl::lvl_1set3},
-		Collider{{610.0f, 248.0f},{673.0f,401.2f},ColliderType::Solid,phase_switch_lvl::lvl_1set3},
-		Collider{{335.0f, 236.0f},{449.0f,355.2f},ColliderType::Solid,phase_switch_lvl::lvl_1set3},
-		Collider{{496.0f, 133.0f},{520.0f,240.2f},ColliderType::Solid,phase_switch_lvl::lvl_1set3},
-		Collider{{777.0f, 277.0f},{800.0f,341.0f},ColliderType::Solid,phase_switch_lvl::lvl_1set3},
-		Collider{{577.0f, 48.0f},{610.0f,139.2f},ColliderType::Solid,phase_switch_lvl::lvl_1set3},
-		Collider{{629.0f, 102.0f},{706.4f,127.2f},ColliderType::Solid,phase_switch_lvl::lvl_1set3},
+		Collider{{0.0f, 42.0f},{70.0f,60.2f},ColliderType::OneWay,phase_switch_lvl::lvl_1Set3},
+		Collider{{8.0f, 193.0f},{76.0f,219.2f},ColliderType::Solid,phase_switch_lvl::lvl_1Set3},
+		Collider{{24.0f, 365.0f},{100.0f,436.0f},ColliderType::Solid,phase_switch_lvl::lvl_1Set3},
+		Collider{{135.0f, 447.0f},{202.0f,471.2f},ColliderType::Solid,phase_switch_lvl::lvl_1Set3},
+		Collider{{666.6f, 413.0f},{800.0f,444.4f},ColliderType::Solid,phase_switch_lvl::lvl_1Set3},
+		Collider{{610.0f, 248.0f},{673.0f,401.2f},ColliderType::Solid,phase_switch_lvl::lvl_1Set3},
+		Collider{{335.0f, 236.0f},{449.0f,355.2f},ColliderType::Solid,phase_switch_lvl::lvl_1Set3},
+		Collider{{496.0f, 133.0f},{520.0f,240.2f},ColliderType::Solid,phase_switch_lvl::lvl_1Set3},
+		Collider{{777.0f, 277.0f},{800.0f,341.0f},ColliderType::Solid,phase_switch_lvl::lvl_1Set3},
+		Collider{{577.0f, 48.0f},{610.0f,139.2f},ColliderType::Solid,phase_switch_lvl::lvl_1Set3},
+		Collider{{629.0f, 102.0f},{706.4f,127.2f},ColliderType::Solid,phase_switch_lvl::lvl_1Set3},
 		Collider{{0.0f, -250.0f},{800.0f,0.0f},ColliderType::Solid,phase_switch_lvl::any},
 		Collider{{0.0f, 512.0f},{800.0f,1024.0f},ColliderType::Floor,phase_switch_lvl::any}
 	};
@@ -73,9 +73,9 @@ namespace Tmpl8
 		Pickup{700.0f,24.0f, 48,phase_switch_lvl::lvl_1Set2,PickupType::big},
 		Pickup{715.0f,250.0f, 48,phase_switch_lvl::lvl_1Set2,PickupType::normal},
 		Pickup{360.0f,220.0f, 48,phase_switch_lvl::lvl_1Set2,PickupType::normal},
-		Pickup{6.0f,6.0f, 48,phase_switch_lvl::lvl_1set3,PickupType::normal},
-		Pickup{690.0f,380.0f, 48,phase_switch_lvl::lvl_1set3,PickupType::normal},
-		Pickup{650.0f,16.0f, 48,phase_switch_lvl::lvl_1set3,PickupType::big}
+		Pickup{6.0f,6.0f, 48,phase_switch_lvl::lvl_1Set3,PickupType::normal},
+		Pickup{690.0f,380.0f, 48,phase_switch_lvl::lvl_1Set3,PickupType::normal},
+		Pickup{650.0f,16.0f, 48,phase_switch_lvl::lvl_1Set3,PickupType::big}
 	};
 
 	int Tilemap_with = 192;

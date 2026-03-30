@@ -110,9 +110,8 @@ namespace Tmpl8
 		uint32_t score = player.GetScore();
 		if (CurrentState == PLAYING || CurrentState == TUTORIAL)
 		{
-			
 			char ScoreBuf[32];
-			sprintf(ScoreBuf, "Score: %05u", score);
+			snprintf(ScoreBuf, 32, "Score: %05u", score);
 			screen->Print(ScoreBuf, 10, 10, 0xFFFF00);
 		}
 		else if (CurrentState == NAMING)
@@ -120,18 +119,18 @@ namespace Tmpl8
 			screen->Print("---Game Over---", 280, 100, 0xFF0000);
 
 			char finalScore[32];
-			sprintf(finalScore, "Final Score: %u", score);
+			snprintf(finalScore,32, "Final Score: %u", score);
 			screen->Print(finalScore, 285, 120, 0xFFFF00);
 
 			screen->Print("Enter a Short Name (5characters max)", 275, 160, 0xFFFFFF);
 
 			char nameDisplay[16];
-			if (strlen(m_CurrentName) == 0) sprintf(nameDisplay, "_____");
-			else if (strlen(m_CurrentName) == 1) sprintf(nameDisplay, "%c____", m_CurrentName[0]);
-			else if (strlen(m_CurrentName) == 2) sprintf(nameDisplay, "%c%c___", m_CurrentName[0], m_CurrentName[1]);
-			else if (strlen(m_CurrentName) == 3) sprintf(nameDisplay, "%c%c%c__", m_CurrentName[0], m_CurrentName[1], m_CurrentName[2]);
-			else if (strlen(m_CurrentName) == 4) sprintf(nameDisplay, "%c%c%c%c_", m_CurrentName[0], m_CurrentName[1], m_CurrentName[2], m_CurrentName[3]);
-			else sprintf(nameDisplay, "%c%c%c%c%c", m_CurrentName[0], m_CurrentName[1], m_CurrentName[2], m_CurrentName[3], m_CurrentName[4]);
+			if (strlen(m_CurrentName) == 0) snprintf(nameDisplay,16, "_____");
+			else if (strlen(m_CurrentName) == 1) snprintf(nameDisplay,16, "%c____", m_CurrentName[0]);
+			else if (strlen(m_CurrentName) == 2) snprintf(nameDisplay,16, "%c%c___", m_CurrentName[0], m_CurrentName[1]);
+			else if (strlen(m_CurrentName) == 3) snprintf(nameDisplay,16, "%c%c%c__", m_CurrentName[0], m_CurrentName[1], m_CurrentName[2]);
+			else if (strlen(m_CurrentName) == 4) snprintf(nameDisplay,16, "%c%c%c%c_", m_CurrentName[0], m_CurrentName[1], m_CurrentName[2], m_CurrentName[3]);
+			else snprintf(nameDisplay,16, "%c%c%c%c%c", m_CurrentName[0], m_CurrentName[1], m_CurrentName[2], m_CurrentName[3], m_CurrentName[4]);
 
 			screen->Print(nameDisplay, 320, 190, 0x00FF00);
 
@@ -273,7 +272,7 @@ namespace Tmpl8
 				for (int i = 0; i < 256; i++) {
 					m_prevKeystate[i] = (GetAsyncKeyState(i) & 0x8000) != 0;
 				}
-				const char* msg = "your energon is now zero (you lost). Score: %u. Switching to Naming. \n ";
+				const char* msg = "your energon is now zero (you lost). Switching to Naming. \n ";
 
 				int msgX = 800 / 2 - 50;
 				int msgY = 512 / 2 - 10;
@@ -329,14 +328,12 @@ namespace Tmpl8
 
 			}
 
-			if ((player.IsDead() && CurrentState == TUTORIAL) || (score == 360))
+			if ((player.IsDead() && CurrentState == TUTORIAL) || (score == 0))
 			{
 				int score = player.GetScore();
 				m_CurrentName[0] = '\0';
 				this->playerScore = score;
-				for (int i = 0; i < 256; i++) {
-					m_prevKeystate[i] = (GetAsyncKeyState(i) & 0x8000) != 0;
-				}
+				
 				const char* msg = "YOUR ENERGON IS NOW ZERO YOU WOULD OF LOST IF YOU WERENT IN TUTORIAL;\n ";
 
 				int msgX = 800 / 2 - 50;
@@ -352,6 +349,11 @@ namespace Tmpl8
 				{
 					Restart();
 				}
+				/*if ((GetAsyncKeyState(VK_RETURN) & 0x8000) != 0)
+				{
+					WasKeyPressed(VK_RETURN);
+					Restart();
+				}*/
 
 			}
 			player.Draw(screen);
@@ -364,6 +366,8 @@ namespace Tmpl8
 
 	
 };/// making sure it renders and compiles
+// input class
+//correct sprite
 
 
 //tiled https://discord.com/channels/515453022097244160/1407719742541922374/1467979701610877102 https://discord.com/channels/515453022097244160/1407719742541922374/1467979756602527921

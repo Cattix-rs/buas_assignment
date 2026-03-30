@@ -3,6 +3,7 @@
 #include <memory>
 #include <span>
 #include <vector>
+#include "Color.hpp"
 #include "../surface.h"
 #include "physics.hpp"
 
