@@ -328,7 +328,7 @@ namespace Tmpl8
 
 			}
 
-			if ((player.IsDead() && CurrentState == TUTORIAL) || (score == 0))
+			if ((player.IsDead() && CurrentState == TUTORIAL) || (score == 360))
 			{
 				int score = player.GetScore();
 				m_CurrentName[0] = '\0';
@@ -349,12 +349,6 @@ namespace Tmpl8
 				{
 					Restart();
 				}
-				/*if ((GetAsyncKeyState(VK_RETURN) & 0x8000) != 0)
-				{
-					WasKeyPressed(VK_RETURN);
-					Restart();
-				}*/
-
 			}
 			player.Draw(screen);
 			theSprite.Draw(screen, player.GetX(), player.GetY());
@@ -368,6 +362,8 @@ namespace Tmpl8
 };/// making sure it renders and compiles
 // input class
 //correct sprite
+///when i geth them proper collder bg
+///sound
 
 
 //tiled https://discord.com/channels/515453022097244160/1407719742541922374/1467979701610877102 https://discord.com/channels/515453022097244160/1407719742541922374/1467979756602527921

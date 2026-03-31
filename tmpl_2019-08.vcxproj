@@ -92,6 +92,7 @@
     <ClCompile Include="src\BlendMode.cpp" />
     <ClCompile Include="src\Color.cpp" />
     <ClCompile Include="src\Image.cpp" />
+    <ClCompile Include="src\Input.cpp" />
     <ClCompile Include="src\Level.cpp" />
     <ClCompile Include="src\Player.cpp" />
     <ClCompile Include="src\Sprite.cpp" />
@@ -106,6 +107,7 @@
     <ClInclude Include="inc\BlendMode.hpp" />
     <ClInclude Include="inc\Color.hpp" />
     <ClInclude Include="inc\Image.hpp" />
+    <ClInclude Include="inc\Input.hpp" />
     <ClInclude Include="inc\Level.hpp" />
     <ClInclude Include="inc\Player.hpp" />
     <ClInclude Include="inc\Sprite.hpp" />
