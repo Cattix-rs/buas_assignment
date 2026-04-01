@@ -8,7 +8,9 @@
 #include <fstream>
 #include <iostream>
 #include <ostream>
-#include <windows.h>
+
+
+#include "Input.hpp"
 
 namespace Tmpl8
 {
@@ -155,28 +157,21 @@ namespace Tmpl8
 		m_CurrentName[0] = '\0';
 	}
 
-	bool Game::WasKeyPressed(int vKey)
-	{
-		bool isDown = (GetAsyncKeyState(vKey) & 0x8000) != 0;
-		bool wasDown = m_prevKeystate[vKey];
+	
 
-		m_prevKeystate[vKey] = isDown;
-
-		return (isDown && !wasDown);
-	}
 
 	void Game::HandleTyping()
 	{
 		int len = strlen(m_CurrentName);
 
-		if (WasKeyPressed(VK_BACK) && len > 0)
+		if (Input::BackSpace() && len > 0)
 		{
 			m_CurrentName[len - 1] = '\0';
 		}
 		if (len < 5)
-		for (int vk = 0x41; vk <= 0x5A; ++vk)
+		for (int vk = SDL_SCANCODE_A; vk <= SDL_SCANCODE_Z; ++vk)
 		{
-			if (WasKeyPressed(vk))
+			if (Input::IsPressed(vk))
 			{
 				size_t len = strlen(m_CurrentName);
 				if (len < 5)
@@ -187,7 +182,7 @@ namespace Tmpl8
 				}
 			}
 		}
-		if (WasKeyPressed(VK_RETURN) && strlen(m_CurrentName) > 1) {
+		if (Input::Enter() && strlen(m_CurrentName) > 1) {
 			SavePlayerData(m_CurrentName, playerScore);
 			CurrentState = SHOW_SCORES;
 		}
@@ -205,6 +200,7 @@ namespace Tmpl8
 
 		if (CurrentState == PLAYING)
 		{
+			Input::Update();
 			msAccumulator += deltaTime;
 			while (msAccumulator >= Tick_Rate_100ms)
 			{
@@ -227,7 +223,7 @@ namespace Tmpl8
 			}
 
 #ifdef _DEBUG
-			if (GetAsyncKeyState(VK_END) & 0x8000)
+			if (Input::End())
 			{
 				Shutdown();
 			}
@@ -269,9 +265,6 @@ namespace Tmpl8
 				CurrentState = NAMING;
 				m_CurrentName[0] = '\0';
 				this->playerScore = score;
-				for (int i = 0; i < 256; i++) {
-					m_prevKeystate[i] = (GetAsyncKeyState(i) & 0x8000) != 0;
-				}
 				const char* msg = "your energon is now zero (you lost). Switching to Naming. \n ";
 
 				int msgX = 800 / 2 - 50;
@@ -290,7 +283,7 @@ namespace Tmpl8
 			DrawScores();
 			screen->Print("PRESS R TO TRY AGAIN", 300, 400, 0x00FF00);
 
-			if (WasKeyPressed('R'))
+			if (Input::R())
 			{
 				Restart();
 			}
@@ -328,8 +321,9 @@ namespace Tmpl8
 
 			}
 
-			if ((player.IsDead() && CurrentState == TUTORIAL) || (score == 360))
+			if ((player.IsDead() && CurrentState == TUTORIAL) || (score == 0))
 			{
+				Input::Update();
 				int score = player.GetScore();
 				m_CurrentName[0] = '\0';
 				this->playerScore = score;
@@ -345,7 +339,7 @@ namespace Tmpl8
 
 				screen->Print("PRESS ENTER TO Load Into THE GAME, You can move till you Run out of Energy", 300, 400, 0x00FF00);
 
-				if (WasKeyPressed(VK_RETURN))
+				if (Input::Enter())
 				{
 					Restart();
 				}

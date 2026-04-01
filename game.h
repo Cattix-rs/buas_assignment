@@ -2,6 +2,9 @@
 #include <Level.hpp>
 #include <Timer.hpp>
 #include <physics.hpp>
+
+#include "Input.hpp"
+
 namespace Tmpl8 {
 
 	struct HighScoreEntry
@@ -40,12 +43,11 @@ public:
 	void MouseUp( int button ) { /* implement if you want to detect mouse button presses */ }
 	void MouseDown( int button ) { /* implement if you want to detect mouse button presses */ }
 	void MouseMove( int x, int y ) { /* implement if you want to detect mouse movement */ }
-	void KeyUp( int key ) { /* implement if you want to handle keys */ }
-	void KeyDown( int key ) { /* implement if you want to handle keys */ }
+	void KeyUp( int key ) { Input::SendKeyUp(key); }
+	void KeyDown(int key) { Input::SendKeyDown(key); }
 	void Draw();
 
 	void Restart();
-	bool WasKeyPressed(int vKey);
 	void HandleTyping();
 
 	int GetCurrentPhase() const { return currentPhase; }
@@ -58,7 +60,6 @@ public:
 private:
 	std::string playerName = "";
 	std::vector<HighScoreEntry> m_HighScores;
-	bool m_prevKeystate[256] = {false};
 	uint32_t playerScore = 0;
 
 

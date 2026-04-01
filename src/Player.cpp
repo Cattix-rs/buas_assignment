@@ -1,11 +1,9 @@
 #include <Player.hpp>
 #include <../surface.h>
-#include <Level.hpp>
+#include <Input.hpp>
 #include <physics.hpp>
 
 //#include <cstdio>
-#define WIN32_LEAN_AND_MEAN
-#include <Windows.h>
 
 namespace Tmpl8
 {
@@ -60,34 +58,31 @@ namespace Tmpl8
 
         if (isDead) return;
 
-        ///input: check for high bit meaning key is down
-        bool left = (GetAsyncKeyState(VK_LEFT) & 0x8000) != 0;
-        bool right = (GetAsyncKeyState(VK_RIGHT) & 0x8000) != 0;
-        bool jump = (GetAsyncKeyState(VK_SPACE) & 0x8000) != 0;
+        
 
         const float jumpStrength = -0.35f; // tuned for ms system 325 good
         const float speed_x = 0.2f;
         // units per second
         float deceleration = 0.0003666f;   // how fast we slow down
 
-        if (left)
+        if (Input::Left()) 
         {
             v.x = -speed_x;
+            movement = state::left;
         }
-        else if (right)
+        else if (Input::Right())
         {
             v.x = speed_x;
+            movement = state::right;
         }
         else
         {
             v.x = approach(v.x, 0.0f, deceleration * deltaTime);
+            movement = state::idle;
         }
 
-        bool jumpPressed = jump && !jumpedLastFrame;
-        jumpedLastFrame = jump;
-
-        if (left) v.x = -speed_x;
-        if (right) v.x = speed_x;
+        bool jumpPressed = Input::Space() && !jumpedLastFrame;
+        jumpedLastFrame = Input::Space();
 
         u_physics.Applyg(v, deltaTime);
 
@@ -120,8 +115,11 @@ namespace Tmpl8
         }
 
         state newState = state::idle;
-        if (right) newState = state::right;
-        else if (left) newState = state::left;
+        if (v.x > 0.01f) 
+            newState = state::right;
+
+        else if (v.x < -0.01f) 
+            newState = state::left;
 
 
 
@@ -154,6 +152,16 @@ namespace Tmpl8
             break;
         }
         case state::left:
+        {
+            wR_AnimeTimer += deltaTime;
+            while (wR_AnimeTimer >= wR_FrameTime)
+            {
+                wR_AnimeTimer -= wR_FrameTime;
+                wR_AnimeFrame = (wR_AnimeFrame + 1) % wR_Sprite->Frames();
+                wR_Sprite->SetFrame(wR_AnimeFrame);
+            } 
+            break;
+        }
         case state::up:
         case state::down:
         default:
