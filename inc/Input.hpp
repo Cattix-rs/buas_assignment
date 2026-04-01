@@ -1,5 +1,4 @@
 #pragma once
-#include <ranges>
 #include <SDL.h>
 
 namespace Tmpl8
@@ -17,21 +16,25 @@ namespace Tmpl8
 			keys[scancode] = false;
 		}
 
-		static bool IsDown(int scancode)
-		{
-			return keys[scancode];
-		}
+		
         static void Update() {
             for (int i = 0; i < SDL_NUM_SCANCODES; i++) {
                 prevKeys[i] = keys[i];
             }
         }
+        //holdable for x movement
+        static bool Left() { return IsDown(SDL_SCANCODE_LEFT); }
+        static bool Right() { return IsDown(SDL_SCANCODE_RIGHT); }
 
-        static bool IsPressed(int scancode) {
-            return keys[scancode] && !prevKeys[scancode];
-        }
+        // misalanious keys that are needed
+        static bool BackSpace() { return IsPressed(SDL_SCANCODE_BACKSPACE); }
+        static bool End() { return IsPressed(SDL_SCANCODE_END); }
+        static bool Enter() { return IsPressed(SDL_SCANCODE_RETURN); }
+        static bool Space() { return IsPressed(SDL_SCANCODE_SPACE); }
+        // for naming
+        static bool A()  { return IsPressed(SDL_SCANCODE_A); } 
 
-        
+
         static bool AnyKeyDown() {
             for (int i = 0; i < SDL_NUM_SCANCODES; i++) 
             {
@@ -43,6 +46,16 @@ namespace Tmpl8
     private:
         static bool keys[SDL_NUM_SCANCODES];
         static bool prevKeys[SDL_NUM_SCANCODES];
+
+        static bool IsDown(int scancode)
+        {
+            return keys[scancode];
+        }
+
+        static bool IsPressed(int scancode)
+		{
+            return keys[scancode] && !prevKeys[scancode];
+        }
 
 	};
 }
