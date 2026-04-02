@@ -31,8 +31,6 @@ namespace Tmpl8
                 prevKeys[i] = keys[i];
             }
         }
-        
-
 
         static bool AnyKeyDown() {
             for (int i = 0; i < SDL_NUM_SCANCODES; i++) 

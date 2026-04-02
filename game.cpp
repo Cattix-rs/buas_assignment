@@ -8,6 +8,7 @@
 #include <fstream>
 #include <iostream>
 #include <ostream>
+#include <SDL.h>
 
 
 #include "Input.hpp"
@@ -164,7 +165,7 @@ namespace Tmpl8
 	{
 		int len = strlen(m_CurrentName);
 
-		if (Input::BackSpace() && len > 0)
+		if (Input::IsPressed(SDL_SCANCODE_BACKSPACE) && len > 0)
 		{
 			m_CurrentName[len - 1] = '\0';
 		}
@@ -182,7 +183,7 @@ namespace Tmpl8
 				}
 			}
 		}
-		if (Input::Enter() && strlen(m_CurrentName) > 1) {
+		if (Input::IsPressed(SDL_SCANCODE_RETURN) && strlen(m_CurrentName) > 1) {
 			SavePlayerData(m_CurrentName, playerScore);
 			CurrentState = SHOW_SCORES;
 		}
@@ -200,7 +201,8 @@ namespace Tmpl8
 
 		if (CurrentState == PLAYING)
 		{
-			Input::Update();
+			//Input::Update();
+			
 			msAccumulator += deltaTime;
 			while (msAccumulator >= Tick_Rate_100ms)
 			{
@@ -223,11 +225,12 @@ namespace Tmpl8
 			}
 
 #ifdef _DEBUG
-			if (Input::End())
+			if (Input::IsPressed(SDL_SCANCODE_END))
 			{
 				Shutdown();
 			}
 #endif
+			
 			
 			player.Update(deltaTime);
 
@@ -276,6 +279,7 @@ namespace Tmpl8
 		else if (CurrentState == NAMING)
 		{
 			screen->Clear(0);
+			Draw();
 			HandleTyping();
 		}
 		else if (CurrentState == SHOW_SCORES)
@@ -283,7 +287,7 @@ namespace Tmpl8
 			DrawScores();
 			screen->Print("PRESS R TO TRY AGAIN", 300, 400, 0x00FF00);
 
-			if (Input::R())
+			if (Input::IsPressed(SDL_SCANCODE_R))
 			{
 				Restart();
 			}
@@ -321,9 +325,9 @@ namespace Tmpl8
 
 			}
 
-			if ((player.IsDead() && CurrentState == TUTORIAL) || (score == 0))
+			if ((player.IsDead() && CurrentState == TUTORIAL) || (score == 360))
 			{
-				Input::Update();
+				//Input::Update();
 				int score = player.GetScore();
 				m_CurrentName[0] = '\0';
 				this->playerScore = score;
@@ -339,10 +343,12 @@ namespace Tmpl8
 
 				screen->Print("PRESS ENTER TO Load Into THE GAME, You can move till you Run out of Energy", 300, 400, 0x00FF00);
 
-				if (Input::Enter())
+   				if (Input::IsPressed(SDL_SCANCODE_RETURN))
 				{
 					Restart();
 				}
+
+				
 			}
 			player.Draw(screen);
 			theSprite.Draw(screen, player.GetX(), player.GetY());

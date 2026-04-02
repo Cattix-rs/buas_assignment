@@ -376,7 +376,7 @@ int main( int argc, char **argv )
 				{
 					exitapp = 1;
 				}
-				game->KeyDown( event.key.keysym.scancode );
+ 				game->KeyDown( event.key.keysym.scancode );
 				break;
 			case SDL_KEYUP:
 				game->KeyUp( event.key.keysym.scancode );

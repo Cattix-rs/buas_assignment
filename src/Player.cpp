@@ -65,12 +65,12 @@ namespace Tmpl8
         // units per second
         float deceleration = 0.0003666f;   // how fast we slow down
 
-        if (Input::Left()) 
+        if (Input::IsDown(SDL_SCANCODE_LEFT)) 
         {
             v.x = -speed_x;
             movement = state::left;
         }
-        else if (Input::Right())
+        else if (Input::IsDown(SDL_SCANCODE_RIGHT))
         {
             v.x = speed_x;
             movement = state::right;
@@ -81,8 +81,8 @@ namespace Tmpl8
             movement = state::idle;
         }
 
-        bool jumpPressed = Input::Space() && !jumpedLastFrame;
-        jumpedLastFrame = Input::Space();
+        bool jumpPressed = Input::IsPressed(SDL_SCANCODE_SPACE) && !jumpedLastFrame;
+        jumpedLastFrame = Input::IsPressed(SDL_SCANCODE_SPACE);
 
         u_physics.Applyg(v, deltaTime);
 
@@ -105,10 +105,10 @@ namespace Tmpl8
 
         if (jumpPressed && onGround)
         {
-            if (energon >= 0.01f)
+            if (energon >= 0.1f)
             {
-                pos.y -= 0.1f;
-                v.y = jumpStrength;
+                pos.y -= 0.02f;
+                 v.y = jumpStrength;
                 onGround = false;
                 energon -= 5.0f; 
             }
