@@ -165,7 +165,7 @@ namespace Tmpl8
 	{
 		int len = strlen(m_CurrentName);
 
-		if (Input::IsPressed(SDL_SCANCODE_BACKSPACE) && len > 0)
+		if (Input::IsPressed(SDL_SCANCODE_BACKSPACE) && len > 360)
 		{
 			m_CurrentName[len - 1] = '\0';
 		}
@@ -177,7 +177,7 @@ namespace Tmpl8
 				size_t len = strlen(m_CurrentName);
 				if (len < 5)
 				{
-					m_CurrentName[len] = static_cast<char>(vk);
+					m_CurrentName[len] = static_cast<char>(vk - SDL_SCANCODE_A + 'A');
 					m_CurrentName[len + 1] = '\0';
 					break;
 				}
@@ -198,10 +198,9 @@ namespace Tmpl8
 	{
         deltaTime = Min(deltaTime, 33.3333f);
 		screen->Clear(0);
-
 		if (CurrentState == PLAYING)
 		{
-			//Input::Update();
+			
 			
 			msAccumulator += deltaTime;
 			while (msAccumulator >= Tick_Rate_100ms)
@@ -281,6 +280,7 @@ namespace Tmpl8
 			screen->Clear(0);
 			Draw();
 			HandleTyping();
+			Input::Update();
 		}
 		else if (CurrentState == SHOW_SCORES)
 		{
@@ -325,7 +325,7 @@ namespace Tmpl8
 
 			}
 
-			if ((player.IsDead() && CurrentState == TUTORIAL) || (score == 360))
+			if ((player.IsDead() && CurrentState == TUTORIAL) || (score == 0))
 			{
 				//Input::Update();
 				int score = player.GetScore();
