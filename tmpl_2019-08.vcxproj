@@ -88,6 +88,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="game.cpp" />
+    <ClCompile Include="inc\SpriteSheet.cpp" />
     <ClCompile Include="src\AABB.cpp" />
     <ClCompile Include="src\BlendMode.cpp" />
     <ClCompile Include="src\Color.cpp" />
@@ -111,6 +112,7 @@
     <ClInclude Include="inc\BlendMode.hpp" />
     <ClInclude Include="inc\Color.hpp" />
     <ClInclude Include="inc\Enums.hpp" />
+    <ClInclude Include="inc\hash.hpp" />
     <ClInclude Include="inc\Image.hpp" />
     <ClInclude Include="inc\Input.hpp" />
     <ClInclude Include="inc\Level.hpp" />
@@ -118,6 +120,7 @@
     <ClInclude Include="inc\SamplerState.hpp" />
     <ClInclude Include="inc\Sprite.hpp" />
     <ClInclude Include="inc\physics.hpp" />
+    <ClInclude Include="inc\SpriteSheet.hpp" />
     <ClInclude Include="inc\stb_image.hpp" />
     <ClInclude Include="inc\stb_image_write.hpp" />
     <ClInclude Include="inc\Timer.hpp" />

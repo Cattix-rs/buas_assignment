@@ -6,7 +6,7 @@
 #include "image.hpp"
 #include "BlendMode.hpp"
 #include "Color.hpp"
-#include "../surface.h"
+#include "../template.h"
 #include "physics.hpp"
 
 namespace Atlas
@@ -16,14 +16,43 @@ namespace Atlas
 	public:
 		Sprite() = default;
 		explicit Sprite(const std::filesystem::path& fileName, const Tmpl8::RectI& rect, const BlendMode& blendMode = BlendMode{});
-		explicit Sprite(std::shared_ptr<Image> image, const Tmpl8::RectI& rect, const BlendMode& blendMode = BlendMode {}) noexcept; // 
+		explicit Sprite(std::shared_ptr<Image> image, const Tmpl8::RectI& rect, const BlendMode& blendMode = BlendMode {}) noexcept
+			: m_Image {std::move(image)}
+		, m_Rect{ rect }
+		, m_BlendMode{blendMode}
+		{}
 		explicit Sprite(const std::filesystem::path& fileName, const BlendMode& blendMode = BlendMode{});
-		explicit Sprite(std::shared_ptr<Image> image, const BlendMode& blendMode = BlendMode{}) noexcept; // 
+		explicit Sprite(std::shared_ptr<Image> image, const BlendMode& blendMode = BlendMode{}) noexcept
+			: m_Image{ std::move(image) }
+			, m_Rect{ 0, 0, m_Image->getWidth(), m_Image->getHeight() }
+			, m_BlendMode{ blendMode }
+		{}
+
+		glm::ivec2 GetUV() const noexcept
+		{
+			return { m_Rect.left, m_Rect.top };
+		}
+
+		glm::ivec2 GetSize() const noexcept
+		{
+			return { m_Rect.width, m_Rect.height };
+		}
+
+		int getWidth() const noexcept
+		{
+			return m_Rect.width;
+		}
+
+		int getHeight() const noexcept
+		{
+			return m_Rect.height;
+		}
 
 		const Tmpl8::RectI& GetRect() const noexcept
 		{
 			return m_Rect;
 		}
+
 		std::shared_ptr<Image> GetImage() const noexcept
 		{
 			return m_Image;
@@ -32,24 +61,36 @@ namespace Atlas
 		{
 			return m_Color;
 		}
+
+		void SetColor(const Color& color) noexcept
+		{
+			m_Color = color;
+		}
+
 		const BlendMode& GetBlendMode() const noexcept
 		{
 			return m_BlendMode;
 		}
+
+		void SetBlendMode(const BlendMode& blendMode) noexcept
+		{
+			m_BlendMode = blendMode;
+		}
+
+		explicit operator bool() const noexcept
+		{
+			return m_Image != nullptr;
+		}
+
 	private:
 		std::shared_ptr<Image> m_Image;
+
 		Tmpl8::RectI m_Rect;
+
+		Color m_Color{ Color::White };
+
 		BlendMode m_BlendMode;
 	};
 
-	class SpriteSheet
-	{
-		SpriteSheet() = default;
-		SpriteSheet(const std::filesystem::path& filePath, std::span<const Tmpl8::RectI> rects, const BlendMode& blendMode = BlendMode{});
-		SpriteSheet(const std::shared_ptr<Image>& image, std::span<const Tmpl8::RectI> rects, const BlendMode& blendMode = BlendMode{});
-		SpriteSheet(const std::shared_ptr<Image>& image, std::optional<int> _spriteWidth, std::optional<int> _spriteHeight, int padding, int margin, const BlendMode& blendMode) {} dont know if its here or in cpp?
-		
-			
-		
-	};
+	
 }
