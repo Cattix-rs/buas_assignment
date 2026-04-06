@@ -1,6 +1,8 @@
 #pragma once
 #include "AABB.hpp"
 #include "Level.hpp"
+#include "SpriteSheet.hpp"
+#include <memory>
 #include "../surface.h"
 #include "../template.h"
 
@@ -42,7 +44,6 @@ namespace Tmpl8
 
         bool IsDead() const { return isDead; }
 
-
         void SetSizeFromSprite() noexcept;
 
         vec2f size() const noexcept;
@@ -61,7 +62,9 @@ namespace Tmpl8
         uint32_t score = 0;
         bool isDead = false;
 
-        
+        std::shared_ptr<Atlas::SpriteSheet> m_sheet;
+        int m_legsFrame = 7;
+        int m_TorsoFrame = 13;
 
         float Delta_x;
 
@@ -78,7 +81,7 @@ namespace Tmpl8
         AABB aabb;
 
         float wR_AnimeTimer = 0.0f;
-        static constexpr float wR_FrameTime = 60.5f; // seconds per frame
+        static constexpr float wR_FrameTime = 150.0f; 
         unsigned int wR_AnimeFrame = 0;
 
         //tick based fields

@@ -1,7 +1,9 @@
 #include <resourceManager.hpp>
 #include <hash.hpp>
-
+#include <fstream>
+#include <sstream>
 #include <unordered_map>
+#include <algorithm>
 
     struct FontKey
     {
@@ -89,3 +91,34 @@
 
     */
 
+    std::shared_ptr<Atlas::SpriteSheet> Atlas::ResourceManager::loadSpriteSheetFromTxt(
+        const std::string& txtPath,
+        const std::string& imagePath,
+        Atlas::BlendMode mode)
+    {
+        auto texture = loadImage(imagePath);
+        if (!texture) return nullptr;
+
+        // 2. Parse the .txt file into a temp vector of Rects
+        std::vector<Tmpl8::RectI> rects;
+        std::ifstream file(txtPath);
+        std::string line;
+
+        if (!file.is_open()) return nullptr;
+
+        while (std::getline(file, line))
+        {
+            std::replace(line.begin(), line.end(), ',', ' ');
+            std::stringstream ss(line);
+            std::string junk;
+            int x, y, w, h;
+            if (ss >> junk >> x >> y >> w >> h)
+            {
+                rects.push_back({ x,y,w,h });
+            }
+            
+        }
+
+       //returns sprite objs
+        return std::make_shared<Atlas::SpriteSheet>(texture, rects, mode);
+    }

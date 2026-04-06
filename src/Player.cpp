@@ -3,6 +3,8 @@
 #include <Input.hpp>
 #include <physics.hpp>
 
+#include "resourceManager.hpp"
+
 //#include <cstdio>
 
 namespace Tmpl8
@@ -31,6 +33,11 @@ namespace Tmpl8
             width = height = 0.0f;
         }
 
+        m_sheet = Atlas::ResourceManager::loadSpriteSheetFromTxt(
+            "assets/sprites.txt",
+            "assets/optimus.png",
+            Atlas::BlendMode::AlphaBlend
+        );
 
 
         wR_AnimeTimer = 100.0f;
@@ -58,7 +65,7 @@ namespace Tmpl8
 
         if (isDead) return;
 
-        
+        const int walkSequence[4] = {15,22,21,14};
 
         const float jumpStrength = -0.35f; // tuned for ms system 325 good
         const float speed_x = 0.2f;

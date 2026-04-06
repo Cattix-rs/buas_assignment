@@ -7,6 +7,7 @@
 #include "BlendMode.hpp"
 #include "Color.hpp"
 #include "../template.h"
+#include "../surface.h"
 #include "physics.hpp"
 
 namespace Atlas
@@ -27,6 +28,8 @@ namespace Atlas
 			, m_Rect{ 0, 0, m_Image->getWidth(), m_Image->getHeight() }
 			, m_BlendMode{ blendMode }
 		{}
+
+		void Draw(Tmpl8::vec2f pos, Tmpl8::Surface* target, bool flipped = false) const;
 
 		glm::ivec2 GetUV() const noexcept
 		{
