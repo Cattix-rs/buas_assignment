@@ -95,8 +95,11 @@
     <ClCompile Include="src\Input.cpp" />
     <ClCompile Include="src\Level.cpp" />
     <ClCompile Include="src\Player.cpp" />
+    <ClCompile Include="src\SamplerState.cpp" />
     <ClCompile Include="src\Sprite.cpp" />
     <ClCompile Include="src\physics.cpp" />
+    <ClCompile Include="src\stb_image.cpp" />
+    <ClCompile Include="src\stb_image_write.cpp" />
     <ClCompile Include="src\Timer.cpp" />
     <ClCompile Include="surface.cpp" />
     <ClCompile Include="template.cpp" />
@@ -104,14 +107,19 @@
   <ItemGroup>
     <ClInclude Include="game.h" />
     <ClInclude Include="inc\AABB.hpp" />
+    <ClInclude Include="inc\aligned_unique_ptr.hpp" />
     <ClInclude Include="inc\BlendMode.hpp" />
     <ClInclude Include="inc\Color.hpp" />
+    <ClInclude Include="inc\Enums.hpp" />
     <ClInclude Include="inc\Image.hpp" />
     <ClInclude Include="inc\Input.hpp" />
     <ClInclude Include="inc\Level.hpp" />
     <ClInclude Include="inc\Player.hpp" />
+    <ClInclude Include="inc\SamplerState.hpp" />
     <ClInclude Include="inc\Sprite.hpp" />
     <ClInclude Include="inc\physics.hpp" />
+    <ClInclude Include="inc\stb_image.hpp" />
+    <ClInclude Include="inc\stb_image_write.hpp" />
     <ClInclude Include="inc\Timer.hpp" />
     <ClInclude Include="surface.h" />
     <ClInclude Include="template.h" />

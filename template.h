@@ -2,6 +2,7 @@
 // IGAD/BUAS(NHTV)/UU - Jacco Bikker - 2006-2020
 
 #pragma once
+#include <glm/glm.hpp>
 #include <glm/detail/type_vec3.hpp>
 #if defined _M_IX86
 #pragma comment(linker, "/manifestdependency:\"name='dlls_x86' version='1.0.0.0' type='win32'\"")
@@ -294,4 +295,14 @@ inline bool BadFloat(float x)
 	return ((*reinterpret_cast<uint*>(&x) & 0x7f000000) == 0x7f000000);
 }
 	
+
+inline glm::vec2 toGLM(const vec2f& v) { return { v.x, v.y }; }
+
+// Convert vec2f to glm vec2 
+inline glm::ivec2 toGLMi(const vec2f& v) {
+	return { static_cast<int>(v.x), static_cast<int>(v.y) };
+}
+
+// Convert GLM back to Tmpl8 specific code
+inline vec2f toTmpl(const glm::vec2& v) { return { v.x, v.y }; }
 }; // namespace Tmpl8

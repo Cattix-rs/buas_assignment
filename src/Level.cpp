@@ -5,7 +5,7 @@ namespace Tmpl8
 
 	namespace
 	{
-		Surface tiles("assets/blocks-n-bushes-v2.png");
+		Surface tiles("assets/Blocks_n_Bushes_v3.png");
 		Sprite pickupSpriteNormal(new Surface("assets/energon_pickup_48x48.png"), 1);
 		Sprite pickupSpriteBig(new Surface("assets/mineral_pickup_48x48.png"), 1);
 	}
@@ -78,7 +78,7 @@ namespace Tmpl8
 		Pickup{650.0f,16.0f, 48,phase_switch_lvl::lvl_1Set3,PickupType::big}
 	};
 
-	int Tilemap_with = 192;
+	int Tilemap_with = 288;
 
 	void DrawTile(int tx, int ty, Surface* screen, int x, int y)
 	{

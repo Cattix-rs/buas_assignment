@@ -3,6 +3,8 @@
 #include <memory>
 #include <span>
 #include <vector>
+#include "image.hpp"
+#include "BlendMode.hpp"
 #include "Color.hpp"
 #include "../surface.h"
 #include "physics.hpp"
@@ -45,7 +47,7 @@ namespace Atlas
 		SpriteSheet() = default;
 		SpriteSheet(const std::filesystem::path& filePath, std::span<const Tmpl8::RectI> rects, const BlendMode& blendMode = BlendMode{});
 		SpriteSheet(const std::shared_ptr<Image>& image, std::span<const Tmpl8::RectI> rects, const BlendMode& blendMode = BlendMode{});
-		//SpriteSheet(const std::shared_ptr<Image>& image, std::optional<int> _spriteWidth, std::optional<int> _spriteHeight, int padding, int margin, const BlendMode& blendMode) {} dont know if its here or in cpp?
+		SpriteSheet(const std::shared_ptr<Image>& image, std::optional<int> _spriteWidth, std::optional<int> _spriteHeight, int padding, int margin, const BlendMode& blendMode) {} dont know if its here or in cpp?
 		
 			
 		

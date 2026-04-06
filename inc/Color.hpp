@@ -326,4 +326,153 @@ namespace Atlas
         return operator*=(rhs);
     }
 
+    constexpr Color Color::withAlpha(uint8_t alpha) const noexcept
+    {
+        return { channels.r, channels.g, channels.b, alpha };
+    }
+
+    constexpr Color Color::withAlpha(float alpha) const noexcept
+    {
+        return withAlpha(static_cast<uint8_t>(Tmpl8::Clamp(alpha * 255.0f, 0.0f, 255.0f)));
+    }
+
+    constexpr Color Color::fromFloats(float r, float g, float b, float a) noexcept
+    {
+        const auto red = static_cast<uint8_t>(Tmpl8::Clamp(r * 255.0f, 0.0f, 255.0f));
+        const auto green = static_cast<uint8_t>(Tmpl8::Clamp(g * 255.0f, 0.0f, 255.0f));
+        const auto blue = static_cast<uint8_t>(Tmpl8::Clamp(b * 255.0f, 0.0f, 255.0f));
+        const auto alpha = static_cast<uint8_t>(Tmpl8::Clamp(a * 255.0f, 0.0f, 255.0f));
+
+        return { red, green, blue, alpha };
+    }
+
+    constexpr Color Color::fromHex(uint32_t color) noexcept
+    {
+        const auto r = static_cast<uint8_t>((color & RedMask) >> RedShift);
+        const auto g = static_cast<uint8_t>((color & GreenMask) >> GreenShift);
+        const auto b = static_cast<uint8_t>((color & BlueMask) >> BlueShift);
+        const auto a = static_cast<uint8_t>((color & AlphaMask) >> AlphaShift);
+
+        return { r, g, b, a };
+    }
+
+    Color Color::fromHSV(float H, float S, float V) noexcept
+    {
+        // Ensure H is within [0, 360)
+        H = fmodf(H, 360.0f);
+        if (H < 0)
+            H += 360.0f;
+
+        S = Tmpl8::Clamp(S, 0.0f, 1.0f);
+        V = Tmpl8::Clamp(V, 0.0f, 1.0f);
+
+        float C = V * S;
+        float m = V - C;
+        float H2 = H / 60.0f;
+        float X = C * (1.0f - fabsf(fmodf(H2, 2.0f) - 1.0f));
+
+        float r = 0, g = 0, b = 0;
+
+        switch (static_cast<int>(H2))
+        {
+        case 0:
+            r = C;
+            g = X;
+            b = 0;
+            break;
+        case 1:
+            r = X;
+            g = C;
+            b = 0;
+            break;
+        case 2:
+            r = 0;
+            g = C;
+            b = X;
+            break;
+        case 3:
+            r = 0;
+            g = X;
+            b = C;
+            break;
+        case 4:
+            r = X;
+            g = 0;
+            b = C;
+            break;
+        case 5:
+            r = C;
+            g = 0;
+            b = X;
+            break;
+        default:
+            r = 0;
+            g = 0;
+            b = 0;
+            break;
+        }
+
+        r += m;
+        g += m;
+        b += m;
+
+        return fromFloats(r, g, b);
+    }
+
+    inline Color operator*(float lhs, const Color& rhs)
+    {
+        return rhs * lhs;
+    }
+
+ 
+    inline Color min(const Color& c1, const Color& c2)
+    {
+        const auto r = Tmpl8::Min(c1.channels.r, c2.channels.r);
+        const auto g = Tmpl8::Min(c1.channels.g, c2.channels.g);
+        const auto b = Tmpl8::Min(c1.channels.b, c2.channels.b);
+        const auto a = Tmpl8::Min(c1.channels.a, c2.channels.a);
+
+        return { r, g, b, a };
+    }
+
+
+    inline Color max(const Color& c1, const Color& c2)
+    {
+        const auto r = Tmpl8::Max(c1.channels.r, c2.channels.r);
+        const auto g = Tmpl8::Max(c1.channels.g, c2.channels.g);
+        const auto b = Tmpl8::Max(c1.channels.b, c2.channels.b);
+        const auto a = Tmpl8::Max(c1.channels.a, c2.channels.a);
+
+        return { r, g, b, a };
+    }
+
+    inline Color interpolate(const Color& c0, const Color& c1, const Color& c2, const glm::vec3& bc)
+    {
+        // c = c0 * bc.x
+        float r = static_cast<float>(c0.channels.r) * bc.x;
+        float g = static_cast<float>(c0.channels.g) * bc.x;
+        float b = static_cast<float>(c0.channels.b) * bc.x;
+        float a = static_cast<float>(c0.channels.a) * bc.x;
+
+        // c += c1 * bc.y
+        r = std::fma<float>(c1.channels.r, bc.y, r);
+        g = std::fma<float>(c1.channels.g, bc.y, g);
+        b = std::fma<float>(c1.channels.b, bc.y, b);
+        a = std::fma<float>(c1.channels.a, bc.y, a);
+
+        // c += c2 * bc.z
+        r = std::fma<float>(c2.channels.r, bc.z, r);
+        g = std::fma<float>(c2.channels.g, bc.z, g);
+        b = std::fma<float>(c2.channels.b, bc.z, b);
+        a = std::fma<float>(c2.channels.a, bc.z, a);
+
+        return {
+            static_cast<uint8_t>(r),
+            static_cast<uint8_t>(g),
+            static_cast<uint8_t>(b),
+            static_cast<uint8_t>(a)
+        };
+    }
+
+    static_assert(sizeof(Color) == sizeof(uint32_t));
 }
