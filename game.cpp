@@ -165,7 +165,7 @@ namespace Tmpl8
 	{
 		int len = strlen(m_CurrentName);
 
-		if (Input::IsPressed(SDL_SCANCODE_BACKSPACE) && len > 360)
+		if (Input::IsPressed(SDL_SCANCODE_BACKSPACE) && len > 0)
 		{
 			m_CurrentName[len - 1] = '\0';
 		}
@@ -325,7 +325,7 @@ namespace Tmpl8
 
 			}
 
-			if ((player.IsDead() && CurrentState == TUTORIAL) || (score == 0))
+			if ((player.IsDead() && CurrentState == TUTORIAL) || (score == 360))
 			{
 				//Input::Update();
 				int score = player.GetScore();
