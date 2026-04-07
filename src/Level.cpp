@@ -21,7 +21,7 @@ namespace Tmpl8
 		"cb ad bd cd ad bd cd ad bd cd ad bd cd ad bd cd bd cd ad bd ad bd cd ad cb",
 		"cb ad bd cd ad bd cd ad bd cd ad bd cd ad bd cd bd cd ad bd ad bd cd ad cb",
 		"cb ad bd cd ad bd cd ad bd cd ad bd cd ad bd cd bd cd ad bd ad bd cd ad cb",
-		"cb ad bd cd ad bd cd ad bd eb ad bd cd ad bd cd bd cd ad bd ad bd cd ad cb",
+		"cb ad bd cd ad bd cd ad bd gb ad bd cd ad bd cd bd cd ad bd ad bd cd ad cb",
 		"cb ad bd cd ad bd cd ad bd cd ad bd cd ad bd cd bd cd ad bd ad bd cd ad cb",
 		"cb ad bd cd ad bd cd ad bd cd ad bd cd ad bd cd bd cd ad bd ad bd cd ad cb",
 		"cb ad bd cd ad bd cd ad bd cd ad bd cd ad bd cd bd cd ad bd ad bd cd ad cb",

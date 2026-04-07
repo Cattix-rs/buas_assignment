@@ -63,8 +63,7 @@ namespace Tmpl8
         bool isDead = false;
 
         std::shared_ptr<Atlas::SpriteSheet> m_sheet;
-        int m_legsFrame = 7;
-        int m_TorsoFrame = 13;
+      
 
         float Delta_x;
 

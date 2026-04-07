@@ -18,7 +18,7 @@ namespace Atlas
 	    int startX = static_cast<int>(pos.x);
 	    int startY = static_cast<int>(pos.y);
 
-		Tmpl8::Pixel* srcBuffer = m_Image->getBuffer();
+		Tmpl8::Pixel* srcBuffer = m_Image->GetBuffer();
 
 	    for (int y = 0; y < m_Rect.height; y++)
 	    {
@@ -39,7 +39,7 @@ namespace Atlas
 	        }
 	    }
         
-    }
+    } 
 
     Sprite::Sprite(const std::filesystem::path& fileName, const Tmpl8::RectI& rect, const BlendMode& blendMode)
         : m_Image{ ResourceManager::loadImage(fileName) }

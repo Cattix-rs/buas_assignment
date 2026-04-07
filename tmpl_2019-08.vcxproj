@@ -96,6 +96,7 @@
     <ClCompile Include="src\Input.cpp" />
     <ClCompile Include="src\Level.cpp" />
     <ClCompile Include="src\Player.cpp" />
+    <ClCompile Include="src\Rect.cpp" />
     <ClCompile Include="src\resoureceManager.cpp" />
     <ClCompile Include="src\SamplerState.cpp" />
     <ClCompile Include="src\Sprite.cpp" />
@@ -118,6 +119,7 @@
     <ClInclude Include="inc\Input.hpp" />
     <ClInclude Include="inc\Level.hpp" />
     <ClInclude Include="inc\Player.hpp" />
+    <ClInclude Include="inc\Rect.hpp" />
     <ClInclude Include="inc\resourceManager.hpp" />
     <ClInclude Include="inc\SamplerState.hpp" />
     <ClInclude Include="inc\Sprite.hpp" />

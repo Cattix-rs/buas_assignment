@@ -4,7 +4,7 @@
 
 #include "BlendMode.hpp"
 #include "Image.hpp"
-#include "physics.hpp"
+#include "Rect.hpp"
 #include "Sprite.hpp"
 
 namespace Atlas
