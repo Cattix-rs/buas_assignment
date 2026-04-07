@@ -15,7 +15,7 @@ namespace Tmpl8
     public:
         Player() = default;
         // Initialize movement/animation system with the sprite and position pointers.
-        void Init(Sprite* sprite, int px = 0, int py = 0);
+        void Init(Atlas::Sprite* sprite, int px = 0, int py = 0);
 
         // Called each frame to handle input, movement and animation timing.
         void Update(float deltaTime);
@@ -65,11 +65,10 @@ namespace Tmpl8
         bool isDead = false;
 
         std::shared_ptr<Atlas::SpriteSheet> m_sheet;
-      
 
         float Delta_x;
 
-        Sprite* wR_Sprite = nullptr;
+       const Atlas::Sprite* m_Sprite = nullptr;
         vec2f pos{ 0.0f, 0.0f };
         float width = 0.0f;
         float height = 0.0f;
@@ -81,9 +80,9 @@ namespace Tmpl8
 
         AABB aabb;
 
-        float wR_AnimeTimer = 0.0f;
-        static constexpr float wR_FrameTime = 150.0f; 
-        unsigned int wR_AnimeFrame = 0;
+        float m_AnimeTimer = 0.0f;
+        static constexpr float m_FrameTime = 150.0f; 
+        unsigned int m_AnimeFrame = 0;
 
         //tick based fields
         int tickCounter = 0;

@@ -43,12 +43,12 @@ namespace Atlas
 			return { m_Rect.width, m_Rect.height };
 		}
 
-		int getWidth() const noexcept
+		int GetWidth() const noexcept
 		{
 			return m_Rect.width;
 		}
 
-		int getHeight() const noexcept
+		int GetHeight() const noexcept
 		{
 			return m_Rect.height;
 		}

@@ -9,20 +9,29 @@
 
 namespace Tmpl8
 {
-
     Physics u_physics;
-    void Player::Init(Sprite* sprite, int px, int py)
+
+    void Player::Init(Atlas::Sprite* sprite, int px, int py)
     {
-        wR_Sprite = sprite;
+       
         pos.x = static_cast<float>(px);
         pos.y = static_cast<float>(py);
 
+        m_sheet = Atlas::ResourceManager::loadSpriteSheetFromTxt(
+            "assets/sprites.txt",
+            "assets/optimus.png",
+            Atlas::BlendMode::AlphaBlend
+        );
+
         // ensure stored size is taken from the sprite when available
-        if (wR_Sprite)
+        if (m_sheet)
         {
-            width = static_cast<float>(wR_Sprite->GetWidth());
-            height = static_cast<float>(wR_Sprite->GetHeight());
-            wR_Sprite->SetFrame(0);
+            m_Sprite = &m_sheet->getSprite(0);
+
+            // Now that m_Sprite is set, we can get width/height
+            width = static_cast<float>(m_Sprite->GetWidth());
+            height = static_cast<float>(m_Sprite->GetHeight());
+
             aabb.min.x = 22.0f;
             aabb.max.x = width - 22.0f;
             aabb.min.y = 23.0f;
@@ -33,15 +42,8 @@ namespace Tmpl8
             width = height = 0.0f;
         }
 
-        m_sheet = Atlas::ResourceManager::loadSpriteSheetFromTxt(
-            "assets/sprites.txt",
-            "assets/optimus.png",
-            Atlas::BlendMode::AlphaBlend
-        );
-
-
-        wR_AnimeTimer = 100.0f;
-        wR_AnimeFrame = 0;
+        m_AnimeTimer = 100.0f;
+        m_AnimeFrame = 0;
         prevMovement = movement = state::idle;
         tickCounter = 0;
 
@@ -61,7 +63,7 @@ namespace Tmpl8
 
     void Player::Update(float deltaTime)
     {
-        if (!wR_Sprite) return;
+        if (!m_Sprite) return;
 
         if (isDead) return;
 
@@ -135,8 +137,7 @@ namespace Tmpl8
         if (movement != prevMovement)
         {
             tickCounter = 0;
-            wR_AnimeFrame = 0;
-            if (wR_Sprite) wR_Sprite->SetFrame(0);
+            m_AnimeFrame = 0;
             prevMovement = movement;
         }
 
@@ -148,24 +149,36 @@ namespace Tmpl8
         {
         case state::right:
         {
-            wR_AnimeTimer += deltaTime; // add elapsed seconds
+            m_AnimeTimer += deltaTime; // add elapsed seconds
 
-            while (wR_AnimeTimer >= wR_FrameTime) // seconds per frame
+            while (m_AnimeTimer >= m_FrameTime) // seconds per frame
             {
-                wR_AnimeTimer -= wR_FrameTime;
-                wR_AnimeFrame = (wR_AnimeFrame + 1) % wR_Sprite->Frames();
-                wR_Sprite->SetFrame(wR_AnimeFrame);
+                m_AnimeTimer -= m_FrameTime;
+                m_AnimeFrame = (m_AnimeFrame + 1) % 4;
+
+                int actualFrame = walkSequence[m_AnimeFrame];
+
+                if (m_sheet)
+                {
+                    m_Sprite = &m_sheet->getSprite(actualFrame);
+                }
             }
             break;
         }
         case state::left:
         {
-            wR_AnimeTimer += deltaTime;
-            while (wR_AnimeTimer >= wR_FrameTime)
+            m_AnimeTimer += deltaTime;
+            while (m_AnimeTimer >= m_FrameTime)
             {
-                wR_AnimeTimer -= wR_FrameTime;
-                wR_AnimeFrame = (wR_AnimeFrame + 1) % wR_Sprite->Frames();
-                wR_Sprite->SetFrame(wR_AnimeFrame);
+                m_AnimeTimer -= m_FrameTime;
+                m_AnimeFrame = (m_AnimeFrame + 1) % 4;
+
+                int actualFrame = walkSequence[m_AnimeFrame];
+
+                if (m_sheet)
+                {
+                    m_Sprite = &m_sheet->getSprite(actualFrame);
+                }
             } 
             break;
         }
@@ -174,8 +187,8 @@ namespace Tmpl8
         default:
             //reset when no movement
             tickCounter = 0;
-            wR_AnimeFrame = 0;
-            wR_Sprite->SetFrame(0);
+            m_AnimeFrame = 0;
+       
 
         }
     }
@@ -230,7 +243,7 @@ namespace Tmpl8
 
 
 
-    void Player::Draw(Surface* screen)//needs to be be in game or ui class
+    void Player::Draw(Surface* screen)
     {
         int barWidth = static_cast<int>((GetEnergon() / 100.0f) * 100);
         int barHeight = 10;
@@ -260,17 +273,17 @@ namespace Tmpl8
 
     void Player::SetSizeFromSprite() noexcept
     {
-        if (wR_Sprite)
+        if (m_Sprite)
         {
-            width = static_cast<float>(wR_Sprite->GetWidth());
-            height = static_cast<float>(wR_Sprite->GetHeight());
+            width = static_cast<float>(m_Sprite->GetWidth());
+            height = static_cast<float>(m_Sprite->GetHeight());
         }
     }
 
     vec2f Player::size() const noexcept
     {
-        if (!wR_Sprite) return vec2f{ 0.0f, 0.0f };
-        return vec2f{ static_cast<float>(wR_Sprite->GetWidth()), static_cast<float>(wR_Sprite->GetHeight()) };
+        if (!m_Sprite) return vec2f{ 0.0f, 0.0f };
+        return vec2f{ static_cast<float>(m_Sprite->GetWidth()), static_cast<float>(m_Sprite->GetHeight()) };
     }
 
 

@@ -37,18 +37,18 @@ namespace Atlas
             return m_Sprites.size();
         }
 
-        int getSpriteWidth(size_t spriteId = 0) const noexcept
+        int GetSpriteWidth(size_t spriteId = 0) const noexcept
         {
             if (spriteId < m_Sprites.size())
-                return m_Sprites[spriteId].getWidth();
+                return m_Sprites[spriteId].GetWidth();
 
             return 0;
         }
 
-        int getSpriteHeight(size_t spriteId = 0) const noexcept
+        int GetSpriteHeight(size_t spriteId = 0) const noexcept
         {
             if (spriteId < m_Sprites.size())
-                return m_Sprites[spriteId].getHeight();
+                return m_Sprites[spriteId].GetHeight();
 
             return 0;
         }

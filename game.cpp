@@ -20,7 +20,7 @@ namespace Tmpl8
 	// -----------------------------------------------------------
 	namespace
 	{
-		Sprite theSprite(new Surface("assets/WALK.PNG"), 8);
+		
 
 
 		Player player;
@@ -31,7 +31,7 @@ namespace Tmpl8
 		CurrentState = TUTORIAL;
 		
 		level.Init();
-		player.Init(&theSprite, 0, 400);
+		
 		LoadScores();
 		
 		player.SetSizeFromSprite();
@@ -153,7 +153,7 @@ namespace Tmpl8
 		msAccumulator = 0.0f;
 		TickCounter = 318;
 		player.Reset();
-		player.Init(&theSprite, 0, 400);
+		
 		
 		m_CurrentName[0] = '\0';
 	}
@@ -257,7 +257,7 @@ namespace Tmpl8
 			}
 
 			player.Draw(screen);
-			theSprite.Draw(screen, player.GetX(), player.GetY());
+			
 
 			screen->Box(player.GetAABB(), 0xffffffff);
 
@@ -351,7 +351,7 @@ namespace Tmpl8
 				
 			}
 			player.Draw(screen);
-			theSprite.Draw(screen, player.GetX(), player.GetY());
+			
 
 			screen->Box(player.GetAABB(), 0xffffffff);
 		}
