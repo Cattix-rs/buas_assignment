@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Color.hpp"
+
 #include <algorithm>
 
 namespace Atlas

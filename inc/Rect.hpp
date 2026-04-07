@@ -1,5 +1,6 @@
 #pragma once
-#include "../template.h"
+
+#include <cstdint>
 
 namespace Tmpl8
 {

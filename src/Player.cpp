@@ -1,9 +1,9 @@
 #include <Player.hpp>
-#include <../surface.h>
 #include <Input.hpp>
 #include <physics.hpp>
+#include <resourceManager.hpp>
 
-#include "resourceManager.hpp"
+#include <../surface.h>
 
 //#include <cstdio>
 

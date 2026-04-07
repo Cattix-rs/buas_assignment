@@ -1,51 +1,48 @@
-#include <resourceManager.hpp>
+
 #include <SpriteSheet.hpp>
-#include <utility>
 
+#include <resourceManager.hpp>
 
+namespace
+{
 
-
-
-    namespace
+    /// <summary>
+    /// Calculates the size of a single sprite in a sprite sheet.
+    /// </summary>
+    /// <param name="imageSize">The total width or height of the sprite sheet image in pixels.</param>
+    /// <param name="numSprites">The number of sprites along that dimension (rows or columns).</param>
+    /// <param name="padding">The space between adjacent sprites in pixels.</param>
+    /// <param name="margin">The space between the edge of the image and the first/last sprite in pixels.</param>
+    /// <returns>The calculated size (width or height) of a single sprite in pixels.</returns>
+    /// <remarks>
+    /// This function accounts for the margins on both edges of the image and the padding between sprites.
+    /// </remarks>
+    constexpr int getSpriteSize(int imageSize, int numSprites, int padding, int margin)
     {
-        
-        /// <summary>
-        /// Calculates the size of a single sprite in a sprite sheet.
-        /// </summary>
-        /// <param name="imageSize">The total width or height of the sprite sheet image in pixels.</param>
-        /// <param name="numSprites">The number of sprites along that dimension (rows or columns).</param>
-        /// <param name="padding">The space between adjacent sprites in pixels.</param>
-        /// <param name="margin">The space between the edge of the image and the first/last sprite in pixels.</param>
-        /// <returns>The calculated size (width or height) of a single sprite in pixels.</returns>
-        /// <remarks>
-        /// This function accounts for the margins on both edges of the image and the padding between sprites.
-        /// </remarks>
-        constexpr int getSpriteSize(int imageSize, int numSprites, int padding, int margin)
-        {
-            return (imageSize - 2 * margin - (numSprites - 1) * padding) / numSprites;
-        }
+        return (imageSize - 2 * margin - (numSprites - 1) * padding) / numSprites;
+    }
 
-        /// <summary>
-        /// Helper function to compute the number of sprites in a specific dimension of the sprite sheet.
-        /// </summary>
-        /// <param name="imageSize">The size of the sprite sheet image.</param>
-        /// <param name="spriteSize">The size of a single sprite.</param>
-        /// <param name="padding">The padding between each sprite in the image.</param>
-        /// <param name="margin">The spacing around the sprite atlas.</param>
-        /// <returns></returns>
-        constexpr int getNumSprites(int imageSize, int spriteSize, int padding, int margin)
-        {
-            return (imageSize + padding - 2 * margin) / (padding + spriteSize);
-        }
-
-    }  // namespace
-
-    namespace Atlas
+    /// <summary>
+    /// Helper function to compute the number of sprites in a specific dimension of the sprite sheet.
+    /// </summary>
+    /// <param name="imageSize">The size of the sprite sheet image.</param>
+    /// <param name="spriteSize">The size of a single sprite.</param>
+    /// <param name="padding">The padding between each sprite in the image.</param>
+    /// <param name="margin">The spacing around the sprite atlas.</param>
+    /// <returns></returns>
+    constexpr int getNumSprites(int imageSize, int spriteSize, int padding, int margin)
     {
+        return (imageSize + padding - 2 * margin) / (padding + spriteSize);
+    }
 
+}  // namespace
+
+namespace Atlas
+{
     SpriteSheet::SpriteSheet(const std::filesystem::path& filePath, std::optional<int> spriteWidth, std::optional<int> spriteHeight, int padding, int margin, const BlendMode& blendMode)
         : SpriteSheet(ResourceManager::loadImage(filePath), spriteWidth, spriteHeight, padding, margin, blendMode)
-    {}
+    {
+    }
 
     SpriteSheet::SpriteSheet(const std::shared_ptr<Image>& image, std::optional<int> _spriteWidth, std::optional<int> _spriteHeight, int padding, int margin, const BlendMode& blendMode)
     {
@@ -82,7 +79,8 @@
 
     SpriteSheet::SpriteSheet(const std::filesystem::path& filePath, std::span<const Tmpl8::RectI> rects, const BlendMode& blendMode)
         : SpriteSheet(ResourceManager::loadImage(filePath), rects, blendMode)
-    {}
+    {
+    }
 
     SpriteSheet::SpriteSheet(const std::shared_ptr<Image>& image, std::span<const Tmpl8::RectI> rects, const BlendMode& blendMode)
     {

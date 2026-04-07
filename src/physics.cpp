@@ -1,9 +1,8 @@
-#include <physics.hpp>
-#include "../game.h"
 #include <Level.hpp>
+#include <physics.hpp>
+#include <Player.hpp>
+
 #include "../template.h"
-
-
 
 namespace Tmpl8
 {

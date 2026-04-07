@@ -1,15 +1,16 @@
 #pragma once
-#include <filesystem>
-#include <memory>
-#include <span>
-#include <vector>
-#include "physics.hpp"
-#include "image.hpp"
+
+#include "Image.hpp"
 #include "BlendMode.hpp"
 #include "Color.hpp"
+#include "Rect.hpp"
+
 #include "../template.h"
 #include "../surface.h"
 
+#include <filesystem>
+#include <memory>
+#include <span>
 
 namespace Atlas
 {
