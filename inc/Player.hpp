@@ -1,10 +1,12 @@
 #pragma once
+
 #include "AABB.hpp"
-#include "Level.hpp"
 #include "SpriteSheet.hpp"
-#include <memory>
+
 #include "../surface.h"
 #include "../template.h"
+
+#include <memory>
 
 namespace Tmpl8
 {

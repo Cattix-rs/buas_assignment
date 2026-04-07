@@ -1,13 +1,14 @@
 #pragma once
-#include "player.hpp"
-#include "../template.h"
 
+#include "../template.h"
 
 namespace Tmpl8
 {
 	class Game;
 	class Level;
-	/// all small letters have their reasoning form physics 
+	class Player;
+
+    /// all small letters have their reasoning form physics 
 	class Physics
 	{
 	public:

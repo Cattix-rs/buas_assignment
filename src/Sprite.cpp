@@ -14,11 +14,11 @@ namespace Atlas
 
     void Sprite::Draw(Tmpl8::vec2f pos, Tmpl8::Surface* target, bool flipped) const
     {
-		if (!m_Image || !m_Image->GetSurface()) return;
+		if (!m_Image || !m_Image->data()) return;
 	    int startX = static_cast<int>(pos.x);
 	    int startY = static_cast<int>(pos.y);
 
-		Tmpl8::Pixel* srcBuffer = m_Image->GetBuffer();
+		Color* srcBuffer = m_Image->data();
 
 	    for (int y = 0; y < m_Rect.height; y++)
 	    {
@@ -29,12 +29,12 @@ namespace Atlas
 	            int sourceX = flipped ? (m_Rect.width - 1 - x) : x;
 
 	            // Get the pixel from the source image
-	            Tmpl8::Pixel p = m_Image->GetBuffer()[(m_Rect.x + sourceX) + (m_Rect.y + y) * m_Image->getWidth()];
+	            Color p = srcBuffer[(m_Rect.left + sourceX) + (m_Rect.top + y) * m_Image->getWidth()];
 
 	            // Only draw if not transparent (AlphaBlend logic)
-	            if ((p & 0xff000000) != 0)
+	            if ((p.rgba & 0xff000000) != 0)
 	            {
-	                target->Plot(startX + x, startY + y, p);
+	                target->Plot(startX + x, startY + y, p.rgba);
 	            }
 	        }
 	    }

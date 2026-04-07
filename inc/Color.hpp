@@ -1,10 +1,12 @@
 #pragma once
+
+#include <glm/vec3.hpp>
+
+#include <algorithm>
 #include <cassert>
+#include <cmath>
 #include <cstdint>
 #include <string_view>
-
-#include "AABB.hpp"
-
 
 namespace Atlas
 {
@@ -246,10 +248,10 @@ namespace Atlas
     }
     inline Color Color::operator+(const Color& rhs) const noexcept
     {
-        const auto red = static_cast<uint8_t>(Tmpl8::Min(channels.r + rhs.channels.r, 255));
-        const auto green = static_cast<uint8_t>(Tmpl8::Min(channels.g + rhs.channels.g, 255));
-        const auto blue = static_cast<uint8_t>(Tmpl8::Min(channels.b + rhs.channels.b, 255));
-        const auto alpha = static_cast<uint8_t>(Tmpl8::Min(channels.a + rhs.channels.a, 255));
+        const auto red = static_cast<uint8_t>(std::min(channels.r + rhs.channels.r, 255));
+        const auto green = static_cast<uint8_t>(std::min(channels.g + rhs.channels.g, 255));
+        const auto blue = static_cast<uint8_t>(std::min(channels.b + rhs.channels.b, 255));
+        const auto alpha = static_cast<uint8_t>(std::min(channels.a + rhs.channels.a, 255));
 
         return { red, green, blue, alpha };
     }
@@ -262,10 +264,10 @@ namespace Atlas
 
     inline Color Color::operator-(const Color& rhs) const noexcept
     {
-        const auto red = static_cast<uint8_t>(Tmpl8::Max(channels.r - rhs.channels.r, 0));
-        const auto green = static_cast<uint8_t>(Tmpl8::Max(channels.g - rhs.channels.g, 0));
-        const auto blue = static_cast<uint8_t>(Tmpl8::Max(channels.b - rhs.channels.b, 0));
-        const auto alpha = static_cast<uint8_t>(Tmpl8::Max(channels.a - rhs.channels.a, 0));
+        const auto red = static_cast<uint8_t>(std::min(channels.r - rhs.channels.r, 0));
+        const auto green = static_cast<uint8_t>(std::min(channels.g - rhs.channels.g, 0));
+        const auto blue = static_cast<uint8_t>(std::min(channels.b - rhs.channels.b, 0));
+        const auto alpha = static_cast<uint8_t>(std::min(channels.a - rhs.channels.a, 0));
 
         return { red, green, blue, alpha };
     }
@@ -294,10 +296,10 @@ namespace Atlas
 
     inline Color Color::operator*(float rhs) const noexcept
     {
-        const auto red = static_cast<uint8_t>(Tmpl8::Clamp(static_cast<float>(channels.r) * rhs, 0.0f, 255.0f));
-        const auto green = static_cast<uint8_t>(Tmpl8::Clamp(static_cast<float>(channels.g) * rhs, 0.0f, 255.0f));
-        const auto blue = static_cast<uint8_t>(Tmpl8::Clamp(static_cast<float>(channels.b) * rhs, 0.0f, 255.0f));
-        const auto alpha = static_cast<uint8_t>(Tmpl8::Clamp(static_cast<float>(channels.a) * rhs, 0.0f, 255.0f));
+        const auto red = static_cast<uint8_t>(std::clamp(static_cast<float>(channels.r) * rhs, 0.0f, 255.0f));
+        const auto green = static_cast<uint8_t>(std::clamp(static_cast<float>(channels.g) * rhs, 0.0f, 255.0f));
+        const auto blue = static_cast<uint8_t>(std::clamp(static_cast<float>(channels.b) * rhs, 0.0f, 255.0f));
+        const auto alpha = static_cast<uint8_t>(std::clamp(static_cast<float>(channels.a) * rhs, 0.0f, 255.0f));
 
         return { red, green, blue, alpha };
     }
@@ -333,15 +335,15 @@ namespace Atlas
 
     constexpr Color Color::withAlpha(float alpha) const noexcept
     {
-        return withAlpha(static_cast<uint8_t>(Tmpl8::Clamp(alpha * 255.0f, 0.0f, 255.0f)));
+        return withAlpha(static_cast<uint8_t>(std::clamp(alpha * 255.0f, 0.0f, 255.0f)));
     }
 
     constexpr Color Color::fromFloats(float r, float g, float b, float a) noexcept
     {
-        const auto red = static_cast<uint8_t>(Tmpl8::Clamp(r * 255.0f, 0.0f, 255.0f));
-        const auto green = static_cast<uint8_t>(Tmpl8::Clamp(g * 255.0f, 0.0f, 255.0f));
-        const auto blue = static_cast<uint8_t>(Tmpl8::Clamp(b * 255.0f, 0.0f, 255.0f));
-        const auto alpha = static_cast<uint8_t>(Tmpl8::Clamp(a * 255.0f, 0.0f, 255.0f));
+        const auto red = static_cast<uint8_t>(std::clamp(r * 255.0f, 0.0f, 255.0f));
+        const auto green = static_cast<uint8_t>(std::clamp(g * 255.0f, 0.0f, 255.0f));
+        const auto blue = static_cast<uint8_t>(std::clamp(b * 255.0f, 0.0f, 255.0f));
+        const auto alpha = static_cast<uint8_t>(std::clamp(a * 255.0f, 0.0f, 255.0f));
 
         return { red, green, blue, alpha };
     }
@@ -363,8 +365,8 @@ namespace Atlas
         if (H < 0)
             H += 360.0f;
 
-        S = Tmpl8::Clamp(S, 0.0f, 1.0f);
-        V = Tmpl8::Clamp(V, 0.0f, 1.0f);
+        S = std::clamp(S, 0.0f, 1.0f);
+        V = std::clamp(V, 0.0f, 1.0f);
 
         float C = V * S;
         float m = V - C;
@@ -427,10 +429,10 @@ namespace Atlas
  
     inline Color min(const Color& c1, const Color& c2)
     {
-        const auto r = Tmpl8::Min(c1.channels.r, c2.channels.r);
-        const auto g = Tmpl8::Min(c1.channels.g, c2.channels.g);
-        const auto b = Tmpl8::Min(c1.channels.b, c2.channels.b);
-        const auto a = Tmpl8::Min(c1.channels.a, c2.channels.a);
+        const auto r = std::min(c1.channels.r, c2.channels.r);
+        const auto g = std::min(c1.channels.g, c2.channels.g);
+        const auto b = std::min(c1.channels.b, c2.channels.b);
+        const auto a = std::min(c1.channels.a, c2.channels.a);
 
         return { r, g, b, a };
     }
@@ -438,10 +440,10 @@ namespace Atlas
 
     inline Color max(const Color& c1, const Color& c2)
     {
-        const auto r = Tmpl8::Max(c1.channels.r, c2.channels.r);
-        const auto g = Tmpl8::Max(c1.channels.g, c2.channels.g);
-        const auto b = Tmpl8::Max(c1.channels.b, c2.channels.b);
-        const auto a = Tmpl8::Max(c1.channels.a, c2.channels.a);
+        const auto r = std::max(c1.channels.r, c2.channels.r);
+        const auto g = std::max(c1.channels.g, c2.channels.g);
+        const auto b = std::max(c1.channels.b, c2.channels.b);
+        const auto a = std::max(c1.channels.a, c2.channels.a);
 
         return { r, g, b, a };
     }
