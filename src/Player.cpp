@@ -11,7 +11,7 @@ namespace Tmpl8
 {
     Physics u_physics;
 
-    void Player::Init(Atlas::Sprite* sprite, int px, int py)
+    void Player::Init(int px, int py)
     {
        
         pos.x = static_cast<float>(px);
@@ -26,16 +26,16 @@ namespace Tmpl8
         // ensure stored size is taken from the sprite when available
         if (m_sheet)
         {
-            m_Sprite = &m_sheet->getSprite(0);
+            m_Sprite = &m_sheet->getSprite(15);
 
             // Now that m_Sprite is set, we can get width/height
             width = static_cast<float>(m_Sprite->GetWidth());
             height = static_cast<float>(m_Sprite->GetHeight());
 
-            aabb.min.x = 22.0f;
-            aabb.max.x = width - 22.0f;
-            aabb.min.y = 23.0f;
-            aabb.max.y = height - 23.0f;
+            aabb.min.x = 0.0f;
+            aabb.max.x = width + 16.0f;
+            aabb.min.y = 0.0f;
+            aabb.max.y = height + 0.0f;
         }
         else
         {
@@ -250,7 +250,7 @@ namespace Tmpl8
         int barX = 10;
         int barY = 10;
 
-        
+        m_Sprite->Draw(pos, screen, v.x < 0.01f );
 
        
         screen->Box(barX + barWidth, barY, barX + 200, barY + barHeight, 0x333333);

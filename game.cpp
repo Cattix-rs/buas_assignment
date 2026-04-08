@@ -31,7 +31,7 @@ namespace Tmpl8
 		CurrentState = TUTORIAL;
 		
 		level.Init();
-		
+		player.Init(0,450);
 		LoadScores();
 		
 		player.SetSizeFromSprite();
@@ -153,6 +153,7 @@ namespace Tmpl8
 		msAccumulator = 0.0f;
 		TickCounter = 318;
 		player.Reset();
+		player.Init(0, 450);
 		
 		
 		m_CurrentName[0] = '\0';
@@ -300,6 +301,7 @@ namespace Tmpl8
 			gamephysics.CheckPickupCollision(player, level);
 
 			level.Draw(screen, currentPhase);
+			player.clampToScreen();
 
 			const char* msg = "Try Hiting space Bar and you can use Arow keys for movement \n";
 			int msgX = 800 / 2 - 50;

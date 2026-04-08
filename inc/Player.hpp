@@ -15,7 +15,7 @@ namespace Tmpl8
     public:
         Player() = default;
         // Initialize movement/animation system with the sprite and position pointers.
-        void Init(Atlas::Sprite* sprite, int px = 0, int py = 0);
+        void Init( int px = 0, int py = 0);
 
         // Called each frame to handle input, movement and animation timing.
         void Update(float deltaTime);
