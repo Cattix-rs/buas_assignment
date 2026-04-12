@@ -26,7 +26,8 @@ namespace Tmpl8
         // ensure stored size is taken from the sprite when available
         if (m_sheet)
         {
-            m_Sprite = &m_sheet->getSprite(15);
+            m_Sprite = &m_sheet->getSprite(14);
+            m_TorsoSprite = &m_sheet->getSprite(10);
 
             // Now that m_Sprite is set, we can get width/height
             width = static_cast<float>(m_Sprite->GetWidth());
@@ -34,7 +35,7 @@ namespace Tmpl8
 
             aabb.min.x = 0.0f;
             aabb.max.x = width + 16.0f;
-            aabb.min.y = 0.0f;
+            aabb.min.y = -20.0f;
             aabb.max.y = height + 0.0f;
         }
         else
@@ -67,7 +68,8 @@ namespace Tmpl8
 
         if (isDead) return;
 
-        const int walkSequence[4] = {15,22,21,14};
+        const int walkSequence[4] = {14,21,20,13};
+        const int torsoSequene[4] = {10,6,7,11};
 
         const float jumpStrength = -0.35f; // tuned for ms system 325 good
         const float speed_x = 0.2f;
@@ -107,7 +109,7 @@ namespace Tmpl8
             const float pixelsPerEnergon = 10.0f;
             while (walkAccumulator >= pixelsPerEnergon)
             {
-                if (energon > 0.0f) energon -= 0.02f * deltaTime; 
+                if (energon > 0.0f) energon -= 0.02f * deltaTime;
                 walkAccumulator -= pixelsPerEnergon;
             }
         }
@@ -119,7 +121,7 @@ namespace Tmpl8
                 pos.y -= 0.02f;
                  v.y = jumpStrength;
                 onGround = false;
-                energon -= 5.0f; 
+                energon -= 5.0f;
             }
         }
 
@@ -157,10 +159,12 @@ namespace Tmpl8
                 m_AnimeFrame = (m_AnimeFrame + 1) % 4;
 
                 int actualFrame = walkSequence[m_AnimeFrame];
+                int actualFrame_T = torsoSequene[m_AnimeFrame];
 
                 if (m_sheet)
                 {
                     m_Sprite = &m_sheet->getSprite(actualFrame);
+                    m_TorsoSprite = &m_sheet->getSprite(actualFrame_T);
                 }
             }
             break;
@@ -174,10 +178,12 @@ namespace Tmpl8
                 m_AnimeFrame = (m_AnimeFrame + 1) % 4;
 
                 int actualFrame = walkSequence[m_AnimeFrame];
+                int actualFrame_T = torsoSequene[m_AnimeFrame];
 
                 if (m_sheet)
                 {
                     m_Sprite = &m_sheet->getSprite(actualFrame);
+                    m_TorsoSprite = &m_sheet->getSprite(actualFrame_T);
                 }
             } 
             break;
@@ -249,8 +255,17 @@ namespace Tmpl8
         int barHeight = 10;
         int barX = 10;
         int barY = 10;
+        if (m_Sprite)
+        {
+            m_Sprite->Draw(pos, screen, v.x < 0.01f);
+        }
+     
+        if (m_TorsoSprite)
+        {
+            vec2f TorsoPos = {pos.x, pos.y - m_Sprite->GetHeight() + 15.0f};
+            m_TorsoSprite->Draw(TorsoPos, screen, v.x < 0.01f);
+        }
 
-        m_Sprite->Draw(pos, screen, v.x < 0.01f );
 
        
         screen->Box(barX + barWidth, barY, barX + 200, barY + barHeight, 0x333333);

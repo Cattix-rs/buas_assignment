@@ -69,6 +69,7 @@ namespace Tmpl8
         float Delta_x;
 
        const Atlas::Sprite* m_Sprite = nullptr;
+       const Atlas::Sprite* m_TorsoSprite = nullptr;
         vec2f pos{ 0.0f, 0.0f };
         float width = 0.0f;
         float height = 0.0f;
