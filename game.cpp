@@ -239,28 +239,7 @@ namespace Tmpl8
 
 			level.Draw(screen, currentPhase);
 
-			for (const auto& c : level.GetColliders())
-			{
-				bool isAny = (c.ps_type == phase_switch_lvl::any);
-				bool isMatch = (static_cast<int>(c.ps_type) == currentPhase);
-				if (isAny || isMatch)
-				{
-					if (c.type == ColliderType::Solid)
-						screen->Box(c.box, 0xFF0000FF);
-					else if (c.type == ColliderType::OneWay)
-					{
-						screen->Box(c.box, 0xFF2E8B57);
-					}
-					else if (c.type == ColliderType::Floor)
-						screen->Box(c.box, 0x00000000);
-				}
-
-			}
-
 			player.Draw(screen);
-			
-
-			screen->Box(player.GetAABB(), 0xffffffff);
 
 			if (player.IsDead() && CurrentState == PLAYING)
 			{
@@ -309,23 +288,6 @@ namespace Tmpl8
 			screen->Print(msg, msgX, msgY, 0x000000);
 
 			currentPhase = 1;
-			/*for (const auto& c : level.GetColliders())
-			{
-				bool isAny = (c.ps_type == phase_switch_lvl::any);
-				bool isMatch = (static_cast<int>(c.ps_type) == currentPhase);
-				if (isAny || isMatch)
-				{
-					if (c.type == ColliderType::Solid)
-						screen->Box(c.box, 0xFF0000FF);
-					else if (c.type == ColliderType::OneWay)
-					{
-						screen->Box(c.box, 0xFF2E8B57);
-					}
-					else if (c.type == ColliderType::Floor)
-						screen->Box(c.box, 0x00000000);
-				}
-
-			}*/
 
 			if ((player.IsDead() && CurrentState == TUTORIAL) || (score == 360))
 			{
@@ -353,9 +315,6 @@ namespace Tmpl8
 				
 			}
 			player.Draw(screen);
-			
-
-			screen->Box(player.GetAABB(), 0xffffffff);
 		}
 		Draw();
 	}
