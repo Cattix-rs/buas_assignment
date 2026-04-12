@@ -72,6 +72,12 @@ namespace Tmpl8
 		}
 	};
 
+	struct PhaseTileMap
+	{
+		const char (*data)[75];
+		phase_switch_lvl phase;
+	};
+
 	class Level
 	{
 	public:

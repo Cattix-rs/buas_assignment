@@ -13,7 +13,8 @@ namespace Tmpl8
 
 
 
-	const char Level_1[16][75] = {
+	const char Level_1[16][75] = 
+	{
 		"cb cb cb cb cb cb cb cb cb cb cb cb cb cb cb cb cb cb cb cb cb cb cb cb cb",
 		"cb ad bd cd ad bd cd ad bd cd ad bd cd ad bd cd bd cd ad bd ad bd cd ad cb",
 		"cb ad bd cd ad bd cd ad bd cd ad bd cd ad bd cd bd cd ad bd ad bd cd ad cb",
@@ -32,12 +33,79 @@ namespace Tmpl8
 		"bc bc bc bc bc bc bc bc bc bc bc bc bc bc bc bc bc bc bc bc bc bc bc bc bc"
 	};
 
+	const char Level_1_Set1[16][75] = 
+	{
+		"zb zb zb zb zb zb zb zb zb zb zb zb zb zb zb zb zb zb zb zb zb zb zb zb zb",
+		"zb zd zd zd zd zd zd zd zd zb zd zd zd zd zd zd zd zd zd zd zd zd zd zd zb",
+		"hb hb zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd ha ha ha ha",
+		"zb zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zb",
+		"zb zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zb",
+		"zb zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zb",
+		"zb zd zd zd zd zd zd zd zd zd zd zz zd zd zd zd zd zd zd zd zd zd zd zd zb",
+		"zd za zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zb",
+		"ha ha ha ha ha ha ha ha ha ha ha ha zd zd zd zd zd zd zd zd zd zd zd zd zb",
+		"zb zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zc zd hb hb hb hb hb hb",
+		"zb zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd hb hb hb hb hb hb",
+		"zb zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zb",
+		"zb zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zb",
+		"zb zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zb",
+		"zb zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zb",
+		"zb zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zb"
+	};
+
+	const char Level_1_Set2[16][75] =
+	{
+		"zb zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zb",
+		"zb zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zb",
+		"zb zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zb",
+		"zb zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zb",
+		"zb zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zb",
+		"zb zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zb",
+		"zb zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zb",
+		"zb zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zb",
+		"zb zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zb",
+		"zb zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zb",
+		"zb zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zb",
+		"zb zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zb",
+		"zb zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zb",
+		"zb zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zb",
+		"zb zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zb",
+		"zb zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zb",
+	};
+
+	const char Level_1_Set3[16][75] =
+	{
+		"zb zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zb",
+		"zb zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zb",
+		"zb zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zb",
+		"zb zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zb",
+		"zb zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zb",
+		"zb zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zb",
+		"zb zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zb",
+		"zb zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zb",
+		"zb zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zb",
+		"zb zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zb",
+		"zb zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zb",
+		"zb zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zb",
+		"zb zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zb",
+		"zb zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zb",
+		"zb zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zb",
+		"zb zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zb",
+	};
+
+	const PhaseTileMap overlays_1[] =
+	{
+		{Level_1_Set1, phase_switch_lvl::lvl_1Set1 },
+		{Level_1_Set2, phase_switch_lvl::lvl_1Set2 },
+		{Level_1_Set3, phase_switch_lvl::lvl_1Set3 }
+	};
+
 	const Collider colliders_1[] =
 	{
-		Collider{{0.0f, 200.0f},{400.0f,232.0f},ColliderType::OneWay,phase_switch_lvl::lvl_1Set1},
-		Collider{{0.0f, 80.0f},{80.0f,123.0f},ColliderType::Solid,phase_switch_lvl::lvl_1Set1},
-		Collider{{625.0f, 45.0f},{800.0f,65.0f},ColliderType::OneWay,phase_switch_lvl::lvl_1Set1},
-		Collider{{580.0f, 290.0f},{800.0f,370.0f},ColliderType::Solid,phase_switch_lvl::lvl_1Set1},
+		Collider{{0.0f, 256.0f},{384.0f,260.0f},ColliderType::OneWay,phase_switch_lvl::lvl_1Set1},
+		Collider{{0.0f, 64.0f},{63.0f,95.0f},ColliderType::Solid,phase_switch_lvl::lvl_1Set1},
+		Collider{{672.0f, 64.0f},{800.0f,68.0f},ColliderType::OneWay,phase_switch_lvl::lvl_1Set1},
+		Collider{{608.0f, 288.0f},{800.0f, 352.0f},ColliderType::Solid,phase_switch_lvl::lvl_1Set1},
 		Collider{{110.0f, 140.0f},{250.0f,175.0f},ColliderType::Solid,phase_switch_lvl::lvl_1Set2},
 		Collider{{315.0f, 70.0f},{440.0f,90.0f},ColliderType::Solid,phase_switch_lvl::lvl_1Set2},
 		Collider{{505.0f, 10.0f},{510.0f,140.0f},ColliderType::Solid,phase_switch_lvl::lvl_1Set2},
@@ -173,6 +241,7 @@ namespace Tmpl8
 	void Level::Draw(Surface* screen, int activePhase)
 	{
 		for (int y = 0; y < 16; y++)
+		{
 			for (int x = 0; x < 25; x++)
 			{
 				int tx = Level_1[y][x * 3] - 'a';
@@ -180,6 +249,33 @@ namespace Tmpl8
 				DrawTile(tx, ty, screen, x * 32, y * 32);
 
 			}
+		}
+
+		for (const auto& map : overlays_1)
+		{
+			if(static_cast<int>(map.phase) == activePhase)
+			{
+				for (int y = 0; y < 16; y++)
+				{
+					for (int x = 0; x < 25; x++)
+					{
+						char c1 = map.data[y][x * 3];
+						char c2 = map.data[y][x * 3 + 1];
+
+						if (c1 == 'z') continue;
+
+						int tx = c1 - 'a';
+						int ty = c2 - 'a';
+
+						if (tx >= 0 && tx < 9 && ty >= 0 && ty < 4)
+						{
+							DrawTile(tx, ty, screen, x * 32, y * 32);
+						}
+					}
+				}
+				break;
+			}
+		}
 
 		for (int i = 0; i < pickupCount; i++)
 		{
