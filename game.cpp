@@ -308,8 +308,8 @@ namespace Tmpl8
 			int msgY = 400 / 2 - 10;
 			screen->Print(msg, msgX, msgY, 0x000000);
 
-			currentPhase = 3;
-			for (const auto& c : level.GetColliders())
+			currentPhase = 1;
+			/*for (const auto& c : level.GetColliders())
 			{
 				bool isAny = (c.ps_type == phase_switch_lvl::any);
 				bool isMatch = (static_cast<int>(c.ps_type) == currentPhase);
@@ -325,7 +325,7 @@ namespace Tmpl8
 						screen->Box(c.box, 0x00000000);
 				}
 
-			}
+			}*/
 
 			if ((player.IsDead() && CurrentState == TUTORIAL) || (score == 360))
 			{

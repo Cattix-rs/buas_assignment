@@ -97,7 +97,7 @@ namespace Tmpl8
 
         u_physics.Applyg(v, deltaTime);
 
-        bool isWalking = std::abs(v.x) > 0.01f;
+        bool isWalking = std::abs(v.x) > 0.1f;
 
         if (v.x == 0.0f)   walkAccumulator = 0.0f;
 
