@@ -218,6 +218,7 @@ namespace Tmpl8
 					level.SwichPhase(currentPhase);
 
 					player.AddScore(6);
+					player.Init(0, 450);
 
 					printf("Swapped to Phase %d: Pickups Reactivated!\n", currentPhase);
 				}
