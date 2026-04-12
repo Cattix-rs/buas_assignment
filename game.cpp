@@ -308,7 +308,7 @@ namespace Tmpl8
 			int msgY = 400 / 2 - 10;
 			screen->Print(msg, msgX, msgY, 0x000000);
 
-			currentPhase = 1;
+			currentPhase = 3;
 			for (const auto& c : level.GetColliders())
 			{
 				bool isAny = (c.ps_type == phase_switch_lvl::any);
