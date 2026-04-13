@@ -125,7 +125,7 @@ namespace Tmpl8
 			snprintf(finalScore,32, "Final Score: %u", score);
 			screen->Print(finalScore, 285, 120, 0xFFFF00);
 
-			screen->Print("Enter a Short Name (5characters max)", 275, 160, 0xFFFFFF);
+			screen->Print("Enter a Short Name ( 5 characters max)", 275, 160, 0xFFFFFF);
 
 			char nameDisplay[16];
 			if (strlen(m_CurrentName) == 0) snprintf(nameDisplay,16, "_____");

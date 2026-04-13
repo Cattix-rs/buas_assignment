@@ -70,7 +70,7 @@ private:
 	Level level;
 	Physics gamephysics;
 	float msAccumulator = 0.0f;
-	const float Tick_Rate_100ms = 100.0f;
+	const float Tick_Rate_100ms = 100.0f; // a timer and
 	int TickCounter;
 	
 };
