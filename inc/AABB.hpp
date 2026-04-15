@@ -5,7 +5,8 @@
 #include <optional>
 
 /// <summary>
-///  Code was coppied form Jpvanoostens udemy course
+///  Code was coppied form Jpvanoostens udemy course c++23 and me;
+///  but it was changed to take Min and max functions of Template by me as well as that This is my first project
 /// </summary>
 
 namespace Tmpl8
@@ -13,12 +14,13 @@ namespace Tmpl8
 	class AABB
 	{
 	public:
+		///default constructor 
 		AABB() = default;
 
 		vec2f min{ std::numeric_limits<float>::max() };
 		vec2f max{ std::numeric_limits<float>::lowest() };
 
-		AABB(const vec2f& a, const vec2f& b) noexcept
+		AABB(const vec2f& a, const vec2f& b) noexcept// paramatised constructor
 		{
 			min = Min(a, b);
 			max = Max(a, b);
@@ -133,7 +135,7 @@ namespace Tmpl8
 			return (min + max) * 0.5f;
 		}
 
-		std::optional<vec2f> overlap(const AABB& aabb) const noexcept
+		std::optional<vec2f> overlap(const AABB& aabb) const noexcept// caculates a positive value = to the overlap
 		{
 			vec2f overlap = Min(max, aabb.max) - Max(min, aabb.min);
 			if (overlap.x > 0.0f && overlap.y > 0.0f)
