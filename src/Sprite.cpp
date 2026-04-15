@@ -1,7 +1,7 @@
 #include <Sprite.hpp>
 #include <resourceManager.hpp>
 
-namespace Atlas
+namespace Atlas///most code in this namespace is from jpvanoostens cpp23++ course
 {
 
     Sprite::Sprite(const std::filesystem::path& fileName, const BlendMode& blendMode)

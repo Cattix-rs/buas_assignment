@@ -4,6 +4,10 @@
 #include <limits>
 #include <optional>
 
+/// <summary>
+///  Code was coppied form Jpvanoostens udemy course
+/// </summary>
+
 namespace Tmpl8
 {
 	class AABB

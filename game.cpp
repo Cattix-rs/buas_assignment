@@ -1,12 +1,10 @@
 #include "game.h"
 #include <algorithm>
 #include "surface.h"
-#include <timer.hpp>
 #include <physics.hpp>
 #include <Player.hpp>
 #include <cstdio> 
 #include <fstream>
-#include <iostream>
 #include <ostream>
 #include <SDL.h>
 
@@ -20,9 +18,6 @@ namespace Tmpl8
 	// -----------------------------------------------------------
 	namespace
 	{
-		
-
-
 		Player player;
 	}
 	void Game::Init()
