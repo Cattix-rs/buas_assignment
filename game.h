@@ -2,11 +2,11 @@
 #include <Level.hpp>
 #include <Timer.hpp>
 #include <physics.hpp>
-
+/// this file has AI genarated code.
 #include "Input.hpp"
 
 namespace Tmpl8 {
-
+	// Highscore components
 	struct HighScoreEntry
 	{
 		char name[6];
@@ -23,7 +23,7 @@ namespace Tmpl8 {
 		}
 	};
 
-	enum GameState
+	enum GameState//actual state of the game
 	{
 		PLAYING,
 		NAMING,
@@ -47,16 +47,16 @@ public:
 	void KeyDown(int key) { Input::SendKeyDown(key); }
 	void Draw();
 
-	void Restart();
+	void Restart();//restart without need for tutorial
 	void HandleTyping();
 
-	int GetCurrentPhase() const { return currentPhase; }
+	int GetCurrentPhase() const { return currentPhase; }//phase is a thing used for Collider and pickup rotating in sets
 	
 	void SavePlayerData(const char* name, uint32_t score);
 	void LoadScores();
 	void DrawScores();
 	
-	int currentPhase = 0;
+	int currentPhase = 0;//initialized currentphase
 private:
 	std::string playerName = "";
 	std::vector<HighScoreEntry> m_HighScores;

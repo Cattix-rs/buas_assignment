@@ -1,4 +1,4 @@
-form here rubens change log
+
 zc:strictStiring error resolved
 fatal error removed
 
@@ -38,7 +38,11 @@ Press enter to save
 then you see highscore list and this shows up
 PRESS R TO TRY AGAIN
 
-
+credits ussed
+AI 1 chatgpt 5.0 or copilot form vs 2026 gpt 4.5
+AI 2 Gemini version is Gemini 1.5 and 3 flash developer is google and usage period is early all other ai will have ///AI in hpp or cpp files informt of it
+Tileset CrazyWingman form discord 
+spritesheet sprite resourse .com 
 
 
 

@@ -1,11 +1,12 @@
 #pragma once
-/// this full tile was 
+/// this full file form Jeramiahs course Repository got permission to do this but it will be inside one of the labs of the 23and me c++ course.
+/// can note what this file does not what its components are doing with certainty.
 #include <memory>
 #include <new>  // For std::bad_alloc
 #include <type_traits>
 
 #ifdef _MSC_VER
-#define aligned_malloc( size, alignment ) _aligned_malloc( ( size ), ( alignment ) )
+#define aligned_malloc( size, alignment ) _aligned_malloc( ( size ), ( alignment ) )// vs or windows diffrence
 #define aligned_free                      _aligned_free
 #else
 #include <cstdlib>
