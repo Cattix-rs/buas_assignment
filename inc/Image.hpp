@@ -1,4 +1,5 @@
 #pragma once
+///this Code likewise came form C++ 23 and me course repository
 
 #include "BlendMode.hpp"
 #include "Color.hpp"
@@ -32,6 +33,7 @@ namespace Atlas
         /// </summary>
         /// <param name="other">The image to move from.</param>
         Image(Image&& other) noexcept;
+        //uses A R Value Reference to an image
 
         /// <summary>
         /// Load an image from a file.

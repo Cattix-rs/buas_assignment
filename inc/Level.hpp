@@ -2,19 +2,18 @@
 #include <array>
 #include "../surface.h"
 #include <span>
-
+// this file has AI1 And AI2 where used
 namespace Tmpl8
 {
-	enum class phase_switch_lvl
+	enum class phase_switch_lvl// currentphase checks if that phase is == to one of these 4 phaseds
 	{
 		any,
 		lvl_1Set1,
 		lvl_1Set2,
 		lvl_1Set3,
-		lvl_2set1 // not implemented 
 	};
 	
-	enum class PickupType
+	enum class PickupType//refers to what sprite to use and its value not its Size.
 	{
 		normal,
 		big
@@ -62,20 +61,23 @@ namespace Tmpl8
 	struct Collider
 	{
 		
-		AABB box;
-		phase_switch_lvl ps_type = phase_switch_lvl::any;
+		AABB box;//all AABB are made from vec2f
 		ColliderType type = ColliderType::Solid;
+		phase_switch_lvl ps_type = phase_switch_lvl::any;
 		Collider() = default;
 		Collider(vec2f min, vec2f max, ColliderType type, phase_switch_lvl ps_type) :box{ min,max }, type{type}, ps_type{ ps_type }
 		{
 			
 		}
 	};
-
+	/// <summary>
+	/// // () is for that it doesn't create 75 pointer but 1 to a 75 character array that helps with memory things 
+	/// /// AI generated cant find any of the date of anything 
+	/// </summary>
 	struct PhaseTileMap
 	{
-		const char (*data)[75];// () is for that it doesn't create 75 pointer but 1 to a 75 character array that helps with memory things ///AI
-		/// AI generated cant find any of the dates but 
+		const char (*data)[75];
+		
 		phase_switch_lvl phase;
 	};
 
@@ -84,7 +86,7 @@ namespace Tmpl8
 	public:
 		void Init();
 
-		void Draw(Surface* screen, int activePhase);
+		void Draw(Surface* screen, int activePhase);// draws The Colliders and The background
 
 		
 		std::span<const Collider> GetColliders() const;
@@ -101,7 +103,6 @@ namespace Tmpl8
 		void RegeneratePickups(int activePhase);
 	private:
 		static constexpr int MaxColliders = 32;
-		//AABB colliders[MaxColliders];
 		std::array<Collider, MaxColliders> colliders{};
 		int colliderCount = 0; // track how many are actually used
 		static constexpr int MaxPickups = 32;
@@ -109,7 +110,5 @@ namespace Tmpl8
 		int pickupCount = 0; //track how many pickups are in use
 		Sprite* pickupSpriteNormal = nullptr;
 		Sprite* pickupSpriteBig = nullptr;
-		
-	
 	};
 }

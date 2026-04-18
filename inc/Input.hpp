@@ -1,5 +1,6 @@
 #pragma once
 #include <SDL.h>
+//AI2 Gemini was used in the creation of this code
 
 namespace Tmpl8
 {

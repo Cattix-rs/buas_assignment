@@ -59,7 +59,7 @@ public:
 	int currentPhase = 0;//initialized currentphase
 private:
 	std::string playerName = "";
-	std::vector<HighScoreEntry> m_HighScores;
+	std::vector<HighScoreEntry> m_HighScores;// a Vector of all highscores that get saved in runtime needed cause truncation
 	uint32_t playerScore = 0;
 
 

@@ -1,7 +1,6 @@
 #pragma once
-
+///this Code likewise came form C++ 23 and me course repository
 #include "Image.hpp"
-// #include "Font.hpp"
 #include "SpriteSheet.hpp"
 
 #include <filesystem>  // For std::filesystem::path
@@ -20,9 +19,6 @@ namespace Atlas
 
 
         std::shared_ptr<SpriteSheet> loadSpriteSheet(const std::filesystem::path& filePath, std::span<const Tmpl8::RectI> rects, const BlendMode& blendMode = BlendMode{});
-
-
-        // std::shared_ptr<Font> loadFont( const std::filesystem::path& filePath, float size = 12.0f );
 
         std::shared_ptr<Atlas::SpriteSheet> loadSpriteSheetFromTxt(
             const std::string& txtPath,

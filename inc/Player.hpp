@@ -1,5 +1,5 @@
 #pragma once
-
+//This file was partly made with AI
 #include "AABB.hpp"
 #include "SpriteSheet.hpp"
 
@@ -44,7 +44,7 @@ namespace Tmpl8
 
         void Draw(Surface* screen);
 
-        bool IsDead() const { return isDead; }
+        bool IsDead() const { return isDead; }//The player is Dead when he reaches zero Energon
 
         void SetSizeFromSprite() noexcept;
 
@@ -56,7 +56,7 @@ namespace Tmpl8
         int GetScore() const noexcept { return score; }
         void AddScore(uint32_t points) { score += points; }
         void Reset() { score = 0; energon = 100; isDead = false; }
-        void debugShutdown() { energon -= maxEnergon; }
+        void debugShutdown() { energon -= maxEnergon; }//Is used by End key in Debug mode to trigger the IsDead Boolean
     private:
         float energon = 100.0f;          // current energon
         const float maxEnergon = 400.0f; // maximum energon
@@ -68,8 +68,8 @@ namespace Tmpl8
 
         float Delta_x;
 
-       const Atlas::Sprite* m_Sprite = nullptr;
-       const Atlas::Sprite* m_TorsoSprite = nullptr;
+       const Atlas::Sprite* m_Sprite = nullptr;// The Legs and the sprite The Player AABB is derived from together with torso dimensions
+       const Atlas::Sprite* m_TorsoSprite = nullptr;//Torso doesn't actually have a AABB
         vec2f pos{ 0.0f, 0.0f };
         float width = 0.0f;
         float height = 0.0f;
@@ -87,14 +87,11 @@ namespace Tmpl8
 
         //tick based fields
         int tickCounter = 0;
-        static constexpr int ticksPerFrame = 7;
 
         // movement/animation state changer 
         enum state { idle = 0, right = 1, left = 2, up = 3, down = 4 };
         state movement = idle;
 
         state prevMovement = idle;
-
-
     };
 }
