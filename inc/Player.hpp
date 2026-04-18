@@ -1,5 +1,5 @@
 #pragma once
-//This file was partly made with AI
+//This file was partly made with AI Gemini
 #include "AABB.hpp"
 #include "SpriteSheet.hpp"
 

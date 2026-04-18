@@ -25,6 +25,5 @@ namespace Atlas
             const std::string& imagePath,
             Atlas::BlendMode mode = Atlas::BlendMode::AlphaBlend
         );
-
     }  // namespace ResourceManager
 }

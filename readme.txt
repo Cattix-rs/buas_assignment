@@ -1,7 +1,4 @@
 
-zc:strictStiring error resolved
-fatal error removed
-
 start of instructions 
 
 Ruben_Stolwijk.slnx to boot vs 2026 and hit F5 to start the game
@@ -20,7 +17,9 @@ standard keys you are forced to use qwerty lay out because of my use of Scancode
 in Debug End You can use the end key to commit suicide in game       
 R is used to restart name after you see score screen
 enter is used for going to next screen in multiple ocations 
-The text size is 5x5 px so here is all text in a list you could see 
+
+
+The text size is 5x5 px so here is all text in a list so its readable
 starting in tutorial after F5 is pressed:
 Try Hitting space Bar and you can use Arow keys for movement
 
@@ -38,9 +37,9 @@ Press enter to save
 then you see highscore list and this shows up
 PRESS R TO TRY AGAIN
 
-credits ussed
+credits used
 AI 1 chatgpt 5.0 or copilot form vs 2026 gpt 4.5
-AI 2 Gemini version is Gemini 1.5 and 3 flash developer is google and usage period is early all other ai will have ///AI in hpp or cpp files informt of it
+AI 2 Gemini version is Gemini 1.5 and 3 flash developer is google and usage period is early all other ai will have If AI Was used in a file it will be commented at the top of that file.
 Tileset CrazyWingman form discord 
 spritesheet sprite resourse .com 
 

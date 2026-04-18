@@ -2,7 +2,7 @@
 #include <array>
 #include "../surface.h"
 #include <span>
-// this file has AI1 And AI2 where used
+// this file has AI1 And AI2 where used Gemini
 namespace Tmpl8
 {
 	enum class phase_switch_lvl// currentphase checks if that phase is == to one of these 4 phaseds
