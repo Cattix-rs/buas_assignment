@@ -122,7 +122,7 @@ namespace Tmpl8
 				max.y >= aabb.min.y;
 		}
 
-		bool contains(const vec2f p) const noexcept
+		bool contains(const vec2f p) const noexcept // checks if p is contained in a vec2f it seems
 		{
 			return p.x >= min.x &&
 				p.y >= min.y &&

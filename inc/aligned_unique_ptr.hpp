@@ -6,7 +6,7 @@
 #include <type_traits>
 
 #ifdef _MSC_VER
-#define aligned_malloc( size, alignment ) _aligned_malloc( ( size ), ( alignment ) )// vs or windows diffrence
+#define aligned_malloc( size, alignment ) _aligned_malloc( ( size ), ( alignment ) )
 #define aligned_free                      _aligned_free
 #else
 #include <cstdlib>

@@ -75,7 +75,7 @@ namespace Tmpl8
 	struct PhaseTileMap
 	{
 		const char (*data)[75];// () is for that it doesn't create 75 pointer but 1 to a 75 character array that helps with memory things ///AI
-		/// AI generated cant find any of the dates but version is Gemini 1.5 and 3 flash developer is google and usage period is early all other ai will have ///Ai informt of it
+		/// AI generated cant find any of the dates but 
 		phase_switch_lvl phase;
 	};
 
