@@ -7,10 +7,8 @@
 #include <fstream>
 #include <ostream>
 #include <SDL.h>
-
-
 #include "Input.hpp"
-
+// this file was made partially using AI Ps I never Blindly copied and pasted code.
 namespace Tmpl8
 {
 	// -----------------------------------------------------------
@@ -307,20 +305,9 @@ namespace Tmpl8
 				{
 					Restart();
 				}
-
-				
 			}
 			player.Draw(screen);
 		}
 		Draw();
 	}
-
-	
-};/// making sure it renders and compiles
-// input class
-//correct sprite
-///when i geth them proper collder bg
-///sound
-
-
-//tiled https://discord.com/channels/515453022097244160/1407719742541922374/1467979701610877102 https://discord.com/channels/515453022097244160/1407719742541922374/1467979756602527921
+};

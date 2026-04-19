@@ -1,5 +1,5 @@
 #include <BlendMode.hpp>
-
+///this Code likewise came form C++ 23 and me course resources
 namespace Atlas
 {
 	const BlendMode BlendMode::Disable{ false };

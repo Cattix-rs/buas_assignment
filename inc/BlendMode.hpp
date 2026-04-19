@@ -4,7 +4,7 @@
 
 #include <algorithm>
 
-///this Code likewise came form C++ 23 and me course repository
+///this Code likewise came form C++ 23 and me course resources
 namespace Atlas
 {
     enum class BlendOperation : uint8_t

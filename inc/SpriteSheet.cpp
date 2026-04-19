@@ -1,8 +1,6 @@
-
 #include <SpriteSheet.hpp>
-
 #include <resourceManager.hpp>
-
+///this Code likewise came form C++ 23 and me course resources
 namespace
 {
 

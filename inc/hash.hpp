@@ -3,7 +3,7 @@
 #include <cstddef>
 #include <cstdint>
 #include <functional>
-///this Code likewise came form C++ 23 and me course repository
+///this Code likewise came form C++ 23 and me course resources
 // This is stolen from boost.
 template<std::size_t Bits>
 struct hash_mix_impl;

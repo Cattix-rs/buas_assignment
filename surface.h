@@ -1,6 +1,3 @@
-// Template, BUAS version https://www.buas.nl/games
-// IGAD/BUAS(NHTV)/UU - Jacco Bikker - 2006-2020
-
 #pragma once
 #include <AABB.hpp>
 

@@ -1,7 +1,5 @@
-
-
+///this Code likewise came form C++ 23 and me course resources
 #include "Color.hpp"
-
 #include <algorithm>
 #include <cctype>
 #include <regex>

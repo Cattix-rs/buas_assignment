@@ -1,5 +1,5 @@
 #pragma once
-///this Code likewise came form C++ 23 and me course repository
+///this Code likewise came form C++ 23 and me course resources
 #include <glm/vec3.hpp>
 
 #include <algorithm>

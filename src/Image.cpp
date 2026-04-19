@@ -1,11 +1,8 @@
 #include <Image.hpp>
 #include <iostream>
-
 #include <stb_image.hpp>
 #include <stb_image_write.hpp>
-
-#include <climits>  // For INT_MAX
-#include <cstring>  // For std::memcpy
+///this Code likewise came form C++ 23 and me course resources
 
 namespace Atlas 
 {

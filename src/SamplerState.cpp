@@ -1,5 +1,5 @@
 #include <SamplerState.hpp>
-
+///this Code likewise came form C++ 23 and me course resources
 namespace Atlas
 {
 	const SamplerState SamplerState::WrapUnnormalized{ AddressMode::Wrap, Color { 0xff000000 }, false };

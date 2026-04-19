@@ -4,9 +4,7 @@
 #include <resourceManager.hpp>
 
 #include <../surface.h>
-
-//#include <cstdio>
-
+// contains AI 1 generated code
 namespace Tmpl8
 {
     Physics u_physics;
@@ -29,7 +27,6 @@ namespace Tmpl8
             m_Sprite = &m_sheet->getSprite(14);
             m_TorsoSprite = &m_sheet->getSprite(10);
 
-            // Now that m_Sprite is set, we can get width/height
             width = static_cast<float>(m_Sprite->GetWidth());
             height = static_cast<float>(m_Sprite->GetHeight());
 
@@ -52,8 +49,6 @@ namespace Tmpl8
         v = vec2f{ 0.0f,0.0f };
     }
 
-
-
     float approach(float current, float target, float maxDelta)
     {
         float diff = target - current;
@@ -71,10 +66,10 @@ namespace Tmpl8
         const int walkSequence[4] = {14,21,20,13};
         const int torsoSequene[4] = {10,6,7,11};
 
-        const float jumpStrength = -0.35f; // tuned for ms system 325 good
+        const float jumpStrength = -0.325f;
         const float speed_x = 0.2f;
-        // units per second
-        float deceleration = 0.0003666f;   // how fast we slow down
+        // units per ms
+        float deceleration = 0.0003666f;
 
         if (Input::IsDown(SDL_SCANCODE_LEFT)) 
         {
@@ -97,7 +92,7 @@ namespace Tmpl8
 
         u_physics.Applyg(v, deltaTime);
 
-        bool isWalking = std::abs(v.x) > 0.1f;
+        bool isWalking = std::abs(v.x) > 0.1f;///calculates absolute value
 
         if (v.x == 0.0f)   walkAccumulator = 0.0f;
 
@@ -132,8 +127,6 @@ namespace Tmpl8
         else if (v.x < -0.01f) 
             newState = state::left;
 
-
-
         movement = newState;
 
         if (movement != prevMovement)
@@ -142,10 +135,6 @@ namespace Tmpl8
             m_AnimeFrame = 0;
             prevMovement = movement;
         }
-
-
-
-        //animation advance when moving right. tick based animation
 
         switch (movement)
         {
@@ -199,7 +188,6 @@ namespace Tmpl8
         }
     }
 
-
     vec2f Player::IntegratePosition(float deltaTime)
     {
         pos += v * deltaTime;
@@ -247,8 +235,6 @@ namespace Tmpl8
         }
     }
 
-
-
     void Player::Draw(Surface* screen)
     {
         int barWidth = static_cast<int>((GetEnergon() / 100.0f) * 100);
@@ -266,8 +252,6 @@ namespace Tmpl8
             m_TorsoSprite->Draw(TorsoPos, screen, v.x < 0.01f);
         }
 
-
-       
         screen->Box(barX + barWidth, barY, barX + 200, barY + barHeight, 0x333333);
         if (!isDead)
         {
@@ -300,6 +284,4 @@ namespace Tmpl8
         if (!m_Sprite) return vec2f{ 0.0f, 0.0f };
         return vec2f{ static_cast<float>(m_Sprite->GetWidth()), static_cast<float>(m_Sprite->GetHeight()) };
     }
-
-
 }

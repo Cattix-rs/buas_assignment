@@ -197,7 +197,7 @@ void Surface::Box( int x1, int y1, int x2, int y2, Pixel c )
 	Line( (float)x1, (float)y1, (float)x1, (float)y2, c );
 }
 
-void Surface::Box(const AABB& a, Pixel c)
+void Surface::Box(const AABB& a, Pixel c)//this code was added by when I was debugging to show me the player AABB
 {
 	Box(static_cast<int>(a.min.x), static_cast<int>(a.min.y), static_cast<int>(a.max.x), static_cast<int>(a.max.y), c);
 }

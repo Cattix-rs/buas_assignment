@@ -1,5 +1,5 @@
 #include <Level.hpp>
-
+// this file contains AI 1 And AI 2 generated code
 namespace Tmpl8
 {
 
@@ -13,7 +13,7 @@ namespace Tmpl8
 
 
 
-	const char Level_1[16][75] = 
+	const char Level_1[16][75] = ///bg Tilemap
 	{
 		"cb cb cb cb cb cb cb cb cb cb cb cb cb cb cb cb cb cb cb cb cb cb cb cb cb",
 		"cb ad bd cd ad bd cd ad bd cd ad bd cd ad bd cd bd cd ad bd ad bd cd ad cb",
@@ -33,7 +33,7 @@ namespace Tmpl8
 		"bc bc bc bc bc bc bc bc bc bc bc bc bc bc bc bc bc bc bc bc bc bc bc bc bc"
 	};
 
-	const char Level_1_Set1[16][75] = 
+	const char Level_1_Set1[16][75] = ///first collider indicator Tilemap
 	{
 		"zb zb zb zb zb zb zb zb zb zb zb zb zb zb zb zb zb zb zb zb zb zb zb zb zb",
 		"zb zd zd zd zd zd zd zd zd zb zd zd zd zd zd zd zd zd zd zd zd zd zd zd zb",
@@ -53,7 +53,7 @@ namespace Tmpl8
 		"zb zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zb"
 	};
 
-	const char Level_1_Set2[16][75] =
+	const char Level_1_Set2[16][75] =///second collider indicator Tilemap
 	{
 		"zb zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zb",
 		"zb zd zd zd zd zd zd zd zd zd zd zd zd zd id zd zd zd zd zd zd zd zd zd zb",
@@ -73,7 +73,7 @@ namespace Tmpl8
 		"zb zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zb",
 	};
 
-	const char Level_1_Set3[16][75] =
+	const char Level_1_Set3[16][75] =///third collider indicator Tilemap
 	{
 		"zb zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zb",
 		"zb zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zd zb",

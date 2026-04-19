@@ -1,5 +1,5 @@
 #pragma once
-/// this full file form Jeramiahs course Repository got permission to do this but it will be inside one of the labs of the 23and me c++ course.
+///this Code came form C++ 23 and me course resources
 /// can note what this file does not what its components are doing with certainty.
 #include <memory>
 #include <new>  // For std::bad_alloc

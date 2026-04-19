@@ -1,5 +1,5 @@
 #pragma once
-
+///I recieved The Timer files form Jeramiah to use not in use anymore but they were used for checking if it was frame rate independent 
 #include <chrono>
 #include <functional>
 
