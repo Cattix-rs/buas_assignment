@@ -1,5 +1,5 @@
 #pragma once
-///this Code came form C++ 23 and me course resources
+///this Code came form C++ for games course resources
 /// can note what this file does not what its components are doing with certainty.
 #include <memory>
 #include <new>  // For std::bad_alloc

@@ -2,7 +2,7 @@
 #include <iostream>
 #include <stb_image.hpp>
 #include <stb_image_write.hpp>
-///this Code likewise came form C++ 23 and me course resources
+///this Code likewise came form C++ for games course resources
 
 namespace Atlas 
 {

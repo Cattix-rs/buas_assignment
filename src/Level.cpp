@@ -114,7 +114,7 @@ namespace Tmpl8
 		Collider{{608.0f, 174.0f},{703.0f,178.0f},ColliderType::Solid,phase_switch_lvl::lvl_1Set2},
 		Collider{{320.0f, 416.0f},{384.0f, 449.0f},ColliderType::Solid,phase_switch_lvl::lvl_1Set2},
 		Collider{{672.0f, 320.0f},{767, 352},ColliderType::Solid,phase_switch_lvl::lvl_1Set2},
-		Collider{{576.0f, 416},{608.0f, 448.0f},ColliderType::Solid,phase_switch_lvl::lvl_1Set2},
+		Collider{{576.0f, 416.0f},{608.0f, 448.0f},ColliderType::Solid,phase_switch_lvl::lvl_1Set2},
 		Collider{{0.0f, 64.0f},{64.0f,68.2f},ColliderType::OneWay,phase_switch_lvl::lvl_1Set3},
 		Collider{{0.0f, 206.0f},{64.0f,210.0f},ColliderType::Solid,phase_switch_lvl::lvl_1Set3},
 		Collider{{32.0f, 384.0f},{96.0f,448.0f},ColliderType::Solid,phase_switch_lvl::lvl_1Set3},

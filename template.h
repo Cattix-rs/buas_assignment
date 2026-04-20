@@ -87,6 +87,7 @@ public:
 	vec2f() {}
 	vec2f( float v ) : x( v ), y( v ) {}
 	vec2f( float x, float y ) : x( x ), y( y ) {}
+	vec2f(int x, int y) : x(static_cast<float>(x)), y(static_cast<float>(y)) {}
 	vec2f operator - () const { return vec2f( -x, -y ); }
 	vec2f operator + ( const vec2f& addOperand ) const { return vec2f( x + addOperand.x, y + addOperand.y ); }
 	vec2f operator - ( const vec2f& operand ) const { return vec2f( x - operand.x, y - operand.y ); }

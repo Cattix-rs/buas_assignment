@@ -311,3 +311,4 @@ namespace Tmpl8
 		Draw();
 	}
 };
+// other than read me remove .txt and pdb age.git and.vs shouldn't be zipped should be 7 mb
