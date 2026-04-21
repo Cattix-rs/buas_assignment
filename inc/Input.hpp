@@ -1,6 +1,6 @@
 #pragma once
 #include <SDL.h>
-//AI2 Gemini was used in the creation of this code
+/// this file is partially made with AI generated code example Gemini, chatgpt
 
 namespace Tmpl8
 {

@@ -12,6 +12,9 @@ namespace Atlas///this Code likewise came form C++ for games course resources
             m_Rect = Tmpl8::RectI{ 0, 0, m_Image->getWidth(), m_Image->getHeight() };
     }
 
+    /// <summary>
+    /// this function was made with hte help with AI
+    /// </summary>
     void Sprite::Draw(Tmpl8::vec2f pos, Tmpl8::Surface* target, bool flipped) const
     {
 		if (!m_Image || !m_Image->data()) return;

@@ -2,7 +2,7 @@
 #include <Level.hpp>
 #include <Timer.hpp>
 #include <physics.hpp>
-/// this file has AI generated code example Gemini.
+/// this file is partially made with AI generated code example Gemini.
 #include "Input.hpp"
 
 namespace Tmpl8 {

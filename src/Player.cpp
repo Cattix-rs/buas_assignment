@@ -4,7 +4,8 @@
 #include <resourceManager.hpp>
 
 #include <../surface.h>
-// contains AI 1 generated code
+/// this file is partially made with AI generated code example ChatGPT
+
 namespace Tmpl8
 {
     Physics u_physics;

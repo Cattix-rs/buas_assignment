@@ -1,5 +1,6 @@
 #include <Level.hpp>
-// this file contains AI 1 And AI 2 generated code
+/// this file is partially made with AI generated code example Gemini, and CHATGPT
+
 namespace Tmpl8
 {
 
